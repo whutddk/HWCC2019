@@ -1,8 +1,16 @@
+# @File Name: CodeCraft-2019.py
+# @File Path: K:\work\dark+PRJ\HWCC2019\SDK\CodeCraft-2019\src\CodeCraft-2019.py
+# @Author: 29505
+# @Date:   2019-03-17 23:16:45
+# @Last Modified by:   29505
+# @Last Modified time: 2019-03-17 23:24:01
+# @Email: 295054118@whut.edu.cn
+
 import logging
 import sys
 
 logging.basicConfig(level=logging.DEBUG,
-                    filename='../logs/CodeCraft-2019.log',
+                    filename='../../logs/CodeCraft-2019.log',
                     format='[%(asctime)s] %(levelname)s [%(funcName)s: %(filename)s, %(lineno)d] %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
                     filemode='a')
