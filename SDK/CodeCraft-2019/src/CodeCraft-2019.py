@@ -3,7 +3,7 @@
 # @Author: 29505
 # @Date:   2019-03-17 23:16:45
 # @Last Modified by:   29505
-# @Last Modified time: 2019-03-18 00:07:29
+# @Last Modified time: 2019-03-18 23:35:38
 # @Email: 295054118@whut.edu.cn
 
 import logging
@@ -136,7 +136,13 @@ def load_data():
 			# print (doubleBool)
 
 			crossData.append([crossID,roadID1,roadID2,roadID3,roadID4])
-		print (crossData)
+		# print (crossData)
+
+
+def answer_init():
+	for data in carData:
+		finalAnswer.append([data[0],data[4],data[1]])
+	print (finalAnswer)
 
 
 def save_result():
@@ -198,6 +204,6 @@ def save_result():
 if __name__ == "__main__":
     # main()
 	load_data()
-
+	answer_init()
 
 
