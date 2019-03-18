@@ -3,7 +3,7 @@
 # @Author: 29505
 # @Date:   2019-03-17 23:16:45
 # @Last Modified by:   29505
-# @Last Modified time: 2019-03-18 23:35:38
+# @Last Modified time: 2019-03-19 00:05:15
 # @Email: 295054118@whut.edu.cn
 
 import logging
@@ -15,7 +15,10 @@ road_path = '../config/road.txt'
 cross_path = '../config/cross.txt'
 answer_path = '../config/answer.txt'
 
-
+global carData
+global roadData
+global crossData
+global finalAnswer
 carData = []
 roadData = []
 crossData = []
@@ -48,23 +51,23 @@ def load_data():
 
 			string = data
 			po = string.find(',')
-			carID = string[1:po]
+			carID = int(string[1:po])
 
 			string = string[po+2:]
 			po = string.find(',')
-			startPos = string[:po]
+			startPos = int(string[:po])
 
 			string = string[po+2:]
 			po = string.find(',')
-			endPos = string[:po]
+			endPos = int(string[:po])
 
 			string = string[po+2:]
 			po = string.find(',')
-			maxSpeed = string[:po]
+			maxSpeed = int(string[:po])
 
 			string = string[po+2:]
 			po = string.find(')')
-			takeoffTime = string[:po]
+			takeoffTime = int(string[:po])
 			# print (takeoffTime)
 
 			carData.append([carID,startPos,endPos,maxSpeed,takeoffTime])
@@ -79,31 +82,31 @@ def load_data():
 
 			string = data
 			po = string.find(',')
-			roadID = string[1:po]
+			roadID = int(string[1:po])
 
 			string = string[po+2:]
 			po = string.find(',')
-			roadLength = string[:po]
+			roadLength = int(string[:po])
 
 			string = string[po+2:]
 			po = string.find(',')
-			maxSpeed = string[:po]
+			maxSpeed = int(string[:po])
 
 			string = string[po+2:]
 			po = string.find(',')
-			chnNum = string[:po]
+			chnNum = int(string[:po])
 
 			string = string[po+2:]
 			po = string.find(',')
-			startID = string[:po]
+			startID = int(string[:po])
 
 			string = string[po+2:]
 			po = string.find(',')
-			endID = string[:po]
+			endID = int(string[:po])
 
 			string = string[po+2:]
 			po = string.find(')')
-			doubleBool = string[:po]
+			doubleBool = int(string[:po])
 			# print (doubleBool)
 
 			roadData.append([roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool])
@@ -116,23 +119,23 @@ def load_data():
 
 			string = data
 			po = string.find(',')
-			crossID = string[1:po]
+			crossID = int(string[1:po])
 
 			string = string[po+2:]
 			po = string.find(',')
-			roadID1 = string[:po]
+			roadID1 = int(string[:po])
 
 			string = string[po+2:]
 			po = string.find(',')
-			roadID2 = string[:po]
+			roadID2 = int(string[:po])
 
 			string = string[po+2:]
 			po = string.find(',')
-			roadID3 = string[:po]
+			roadID3 = int(string[:po])
 
 			string = string[po+2:]
 			po = string.find(')')
-			roadID4 = string[:po]
+			roadID4 = int(string[:po])
 			# print (doubleBool)
 
 			crossData.append([crossID,roadID1,roadID2,roadID3,roadID4])
@@ -140,9 +143,13 @@ def load_data():
 
 
 def answer_init():
-	for data in carData:
-		finalAnswer.append([data[0],data[4],data[1]])
-	print (finalAnswer)
+	global finalAnswer
+	finalAnswer = carData
+
+
+	# 出发时间排序
+	finalAnswer.sort(key=lambda x:x[4])
+	# print (finalAnswer)
 
 
 def save_result():
@@ -154,16 +161,42 @@ def save_result():
 	# 	ttFile.write(data)
 
 
+def simpleShortestWay(startPos,endPos):
+	pass
+	return []
+
+
+
+
+def createAnswer():
+
+	# [carID,startPos,endPos,maxSpeed,takeoffTime]
+	# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
+	# [crossID,roadID1,roadID2,roadID3,roadID4]
+	global finalAnswer
+
+	answer = finalAnswer
+	finalAnswer = []
+
+	for data in answer:
+		oneCar = [data[0],data[4]]
+		roadLine = simpleShortestWay(data[1],data[2])
+		for road in roadLine:
+			oneCar.append(road)
+		
+		finalAnswer.append(oneCar)
+	pass
 
 
 
 
 
 
+# 车辆出发时间排序
+# 遍历车辆出发路口，A*寻找最短路径，作为结果
 
 
-
-
+	
 
 
 
@@ -206,4 +239,4 @@ if __name__ == "__main__":
 	load_data()
 	answer_init()
 
-
+	createAnswer()
