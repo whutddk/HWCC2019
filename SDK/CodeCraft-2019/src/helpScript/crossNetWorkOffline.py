@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 17:40:36
+# @Last Modified time: 2019-03-19 17:52:58
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -124,8 +124,7 @@ def checkroadVaild(startCross,roadId):
 
 	for vaildCross in crossCollection:
 		if (result == vaildCross[0]):
-			# print ( "checkroadVaild=Return" ,result)
-			# del crossCollection[result-1]
+			print ( "checkroadVaild=Return" ,result)
 			crossCollection.remove(vaildCross)
 			return result
 
@@ -137,7 +136,7 @@ def checkroadVaild(startCross,roadId):
 
 def findNextCrossId(crossId):
 	crossInfo = crossData[crossId-1]
-	# print ("crossInfo=",crossInfo)
+	print ("crossInfo=",crossInfo)
 
 # 检查路标
 	nextCross1 = checkroadVaild(crossInfo[0],crossInfo[1])
@@ -171,7 +170,9 @@ def simpleShortestWay(input):
 		lastLever = roadList[len(roadList)-1]
 
 		for root in lastLever:
+			print ("root=",root)
 			for crossId in root:
+				print ("crossId=",crossId)
 				# print ("crossId=",crossId)
 				if ( crossId == -1 ):
 					cross1,cross2,cross3,cross4 = -1,-1,-1,-1
@@ -189,7 +190,8 @@ def simpleShortestWay(input):
 					if ( cross4 != -1 ):	
 						leavesCheck.append(cross4)
 
-			OneCrossLever.append(leavesCheck)
+					if ( len(leavesCheck) != 0 ):
+						OneCrossLever.append(leavesCheck)
 
 
 		
@@ -227,16 +229,16 @@ def createNetwork():
 
 
 
-	for i in range(0,64):
+	for i in range(1,65):
 
 		print ( "Sort i= ",i )
 
 
-		output = (simpleShortestWay(i))
+		output.append(simpleShortestWay(i))
 
-		with open( "./network"+str(i)+".json",'w') as networkFile:
-			data = json.dumps(output)
-			networkFile.write(data)
+	with open( "./network.json",'w') as networkFile:
+		data = json.dumps(output)
+		networkFile.write(data)
 
 
 
