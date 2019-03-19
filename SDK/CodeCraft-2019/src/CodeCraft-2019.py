@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 20:23:43
+# @Last Modified time: 2019-03-19 21:09:19
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -19,7 +19,7 @@ cross_path = '../config/cross.txt'
 answer_path = '../config/answer.txt'
 
 global carData
-
+global crossNetworkData
 global crossData
 global finalAnswer
 
@@ -37,7 +37,7 @@ finalAnswer = []
 
 def load_data():
 	global carData
-
+	global crossNetworkData
 	global crossData
 
 	with open(car_path,'r') as carFile:
@@ -69,9 +69,37 @@ def load_data():
 			carData.append([carID,startPos,endPos,maxSpeed,takeoffTime])
 		# print (carData)
 
-	with open("./helpScript/network.json",'r') as crossFile:
-		data = crossFile.read()
-		crossData = json.loads(data)
+	with open("./helpScript/crossNetwork.json",'r') as crossNetworkFile:
+		data = crossNetworkFile.read()
+		crossNetworkData = json.loads(data)
+
+	with open(cross_path,'r') as crossFile:
+		for data in crossFile.readlines():
+			if data[0] == '#':
+				continue
+
+			string = data
+			po = string.find(',')
+			crossID = int(string[1:po])
+
+			string = string[po+2:]
+			po = string.find(',')
+			roadID1 = int(string[:po])
+
+			string = string[po+2:]
+			po = string.find(',')
+			roadID2 = int(string[:po])
+
+			string = string[po+2:]
+			po = string.find(',')
+			roadID3 = int(string[:po])
+
+			string = string[po+2:]
+			po = string.find(')')
+			roadID4 = int(string[:po])
+			# print (doubleBool)
+
+			crossData.append([crossID,roadID1,roadID2,roadID3,roadID4])
 
 	# print (crossData)
 
@@ -150,7 +178,7 @@ def findEndPos(crossTree,endPos):
 def simpleShortestWay(startPos,endPos):
 
 	# 加载对应树
-	crossTree = crossData[startPos-1]
+	crossTree = crossNetworkData[startPos-1]
 
 	eleCnt,lever = findEndPos(crossTree,endPos)
 
@@ -160,6 +188,33 @@ def simpleShortestWay(startPos,endPos):
 
 	return roadline
 
+
+
+
+def cross2road(crossLine):
+
+	# print("crossLine=",crossLine)
+	roadLine = []
+	index = len(crossLine)
+	for i in range (0,index-1):
+		# print ( crossLine[i],crossLine[i+1] )
+		startCross = crossData[crossLine[i]-1]
+		endCross = crossData[crossLine[i+1]-1]
+
+		if ( (startCross[1] == endCross[1] or startCross[1] == endCross[2] or startCross[1] == endCross[3] or startCross[1] == endCross[4]) and (startCross[1] != -1) ):
+			roadLine.append( startCross[1] )
+		elif ( (startCross[2] == endCross[1] or startCross[2] == endCross[2] or startCross[2] == endCross[3] or startCross[2] == endCross[4]) and (startCross[2] != -1)):
+			roadLine.append( startCross[2] )
+		elif ( (startCross[3] == endCross[1] or startCross[3] == endCross[2] or startCross[3] == endCross[3] or startCross[3] == endCross[4]) and (startCross[3] != -1)):
+			roadLine.append( startCross[3] )
+		elif ( (startCross[4] == endCross[1] or startCross[4] == endCross[2] or startCross[4] == endCross[3] or startCross[4] == endCross[4]) and (startCross[4] != -1)):
+			roadLine.append( startCross[4] )
+		# else:
+		# print("warning",startCross,endCross)
+
+
+	# print ("roadLine=",roadLine)
+	return roadLine
 
 
 
@@ -180,14 +235,16 @@ def createAnswer():
 	
 		for data in answer:
 			oneCar = [data[0],data[4]]
-			print ( "Sort from ",data[1],"to",data[2] )
+			# print ( "Sort from ",data[1],"to",data[2] )
 
 
-			roadLine = simpleShortestWay(data[1],data[2])
+			crossLine = simpleShortestWay(data[1],data[2])
+
+			roadLine = cross2road(crossLine)
 
 			oneCar.extend(roadLine)
 			
-			print ( "oneCar=",oneCar )
+			# print ( "oneCar=",oneCar )
 
 			writeResult = "(" 
 			for data in oneCar:
