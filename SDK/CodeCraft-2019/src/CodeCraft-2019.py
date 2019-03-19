@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 15:15:50
+# @Last Modified time: 2019-03-19 15:19:50
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: CodeCraft-2019.py
@@ -192,20 +192,20 @@ def checkroadVaild(startCross,roadId):
 
 	for vaildCross in crossCollection:
 		if (result == vaildCross[0]):
-			print ( "checkroadVaild=Return" ,result)
+			# print ( "checkroadVaild=Return" ,result)
 			# del crossCollection[result-1]
 			crossCollection.remove(vaildCross)
 			return result
 
 
-	print ( "checkroadVaild=Return" ,-1)
+	# print ( "checkroadVaild=Return" ,-1)
 	return -1
 
 
 
 def findNextCrossId(crossId):
 	crossInfo = crossData[crossId-1]
-	print ("crossInfo=",crossInfo)
+	# print ("crossInfo=",crossInfo)
 
 # 检查路标
 	nextCross1 = checkroadVaild(crossInfo[0],crossInfo[1])
@@ -270,11 +270,12 @@ def simpleShortestWay(startPos,endPos):
 					crossCnt = crossCnt // 4
 					# print ("-1Pos=",searchLever[crossCnt])
 					roadLine.insert(0,searchLever[crossCnt])
-				print ("roadLine=",roadLine)
-				while(1):
-					pass
+				# print ("roadLine=",roadLine)
+				# while(1):
+				# 	pass
 
 				return roadLine
+
 			crossCnt = crossCnt + 1
 
 		roadList.append(OneCrossLever)
@@ -300,12 +301,13 @@ def createAnswer():
 		print ( "Sort from ",data[1],"to",data[2] )
 		roadLine = simpleShortestWay(data[1],data[2])
 
-
-
-
-		for road in roadLine:
-			oneCar.append(road)
+		oneCar.extend(roadLine)
 		
+		print ( "oneCar=",oneCar )
+
+		# while(1):
+		# 	pass
+
 		finalAnswer.append(oneCar)
 	pass
 
