@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 17:52:58
+# @Last Modified time: 2019-03-19 19:32:32
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -190,8 +190,8 @@ def simpleShortestWay(input):
 					if ( cross4 != -1 ):	
 						leavesCheck.append(cross4)
 
-					if ( len(leavesCheck) != 0 ):
-						OneCrossLever.append(leavesCheck)
+					
+					OneCrossLever.append(leavesCheck)
 
 
 		
