@@ -39,15 +39,6 @@ finalAnswer = []
 
 
 
-
-logging.basicConfig(level=logging.DEBUG,
-                    filename='../../logs/CodeCraft-2019.log',
-                    format='[%(asctime)s] %(levelname)s [%(funcName)s: %(filename)s, %(lineno)d] %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S',
-                    filemode='a')
-
-
-
 def load_data():
 	global carData
 	global roadData
@@ -350,9 +341,7 @@ def main():
 	global cross_path
 	global answer_path
 
-	if len(sys.argv) != 5:
-		logging.info('please input args: car_path, road_path, cross_path, answerPath')
-		exit(1)
+
 
 	car_path = sys.argv[1]
 	road_path = sys.argv[2]
