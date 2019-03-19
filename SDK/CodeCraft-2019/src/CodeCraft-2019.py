@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 14:17:55
+# @Last Modified time: 2019-03-19 14:26:28
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: CodeCraft-2019.py
@@ -179,8 +179,8 @@ def checkroadVaild(startCross,roadId):
 		return -1
 
 	# 默认路就是5000开始的
-	oneRoad = roadData[roadId-5001] 
-	print ("oneRoad=",oneRoad)
+	oneRoad = roadData[roadId-5000] 
+	# print ("oneRoad=",oneRoad)
 	if ( oneRoad[4] == startCross ):
 		return oneRoad[5]
 
@@ -240,6 +240,8 @@ def simpleShortestWay(startPos,endPos):
 
 		if ( cross1 == endPos or cross2 == endPos or cross3 == endPos or cross4 == endPos):
 			print ("done!")
+			while(1):
+				pass
 			# 找到了，但暂时不解析
 			break
 
@@ -262,7 +264,12 @@ def createAnswer():
 
 	for data in answer:
 		oneCar = [data[0],data[4]]
+		print ( "Sort from ",data[1],"to",data[2] )
 		roadLine = simpleShortestWay(data[1],data[2])
+
+
+
+
 		for road in roadLine:
 			oneCar.append(road)
 		
