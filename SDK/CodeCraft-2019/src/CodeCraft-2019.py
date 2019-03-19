@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # @File Name: CodeCraft-2019.py
-# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK\CodeCraft-2019\src\CodeCraft-2019.py
+# @File Path: K:\work\dark+PRJ\HWCC2019\SDK\CodeCraft-2019\src\CodeCraft-2019.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
-# @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 21:31:05
+# @Last Modified by:   29505
+# @Last Modified time: 2019-03-19 23:45:15
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -36,6 +36,7 @@ crossData = []
 
 finalAnswer = []
 
+roadData = []
 
 
 
@@ -51,25 +52,10 @@ logging.basicConfig(level=logging.DEBUG,
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def load_data():
 	global carData
-	global crossNetworkData
 	global crossData
+
 	global answer_path
 	global car_path
 	global road_path
@@ -105,9 +91,6 @@ def load_data():
 			carData.append([carID,startPos,endPos,maxSpeed,takeoffTime])
 		# print (carData)
 
-	with open("./src/helpScript/crossNetwork.json",'r') as crossNetworkFile:
-		data = crossNetworkFile.read()
-		crossNetworkData = json.loads(data)
 
 	with open(cross_path,'r') as crossFile:
 		for data in crossFile.readlines():
@@ -139,7 +122,42 @@ def load_data():
 
 	# print (crossData)
 
+	with open(road_path,'r') as roadFile:
+		for data in roadFile.readlines():
+			if data[0] == '#':
+				continue
 
+			string = data
+			po = string.find(',')
+			roadID = int(string[1:po])
+
+			string = string[po+2:]
+			po = string.find(',')
+			roadLength = int(string[:po])
+
+			string = string[po+2:]
+			po = string.find(',')
+			maxSpeed = int(string[:po])
+
+			string = string[po+2:]
+			po = string.find(',')
+			chnNum = int(string[:po])
+
+			string = string[po+2:]
+			po = string.find(',')
+			startID = int(string[:po])
+
+			string = string[po+2:]
+			po = string.find(',')
+			endID = int(string[:po])
+
+			string = string[po+2:]
+			po = string.find(')')
+			doubleBool = int(string[:po])
+			# print (doubleBool)
+
+			roadData.append([roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool])
+		# print (roadData)
 
 
 def answer_init():
@@ -147,82 +165,12 @@ def answer_init():
 	finalAnswer = carData
 
 	# 出发时间排序
+	finalAnswer.sort(key=lambda x:x[3])
 	finalAnswer.sort(key=lambda x:x[4])
 	# print (finalAnswer)
 
 
 
-
-def find_roadLine(crossTree,lever,lastEleCnt):
-
-	# 产生roadline
-	flag_break = 0
-	roadLine = []
-
-	idAim = lastEleCnt
-	while(lever != 0):
-		lever = lever - 1
-
-		upEleCnt = 0;
-		idCnt = 0
-
-		# print ("crossTree[lever]=",crossTree[lever])
-		for ele in crossTree[lever]:
-			# print ("ele=",ele)
-			for crossID in ele:
-
-				if (idCnt == lastEleCnt):
-					roadLine.insert(0,crossID)
-					idAim = upEleCnt
-					flag_break = 1
-					break
-
-				idCnt = idCnt + 1;
-
-			if (flag_break == 1):
-				flag_break = 0
-				break
-
-			upEleCnt = upEleCnt + 1
-
-		lastEleCnt = upEleCnt
-
-
-	return roadLine
-
-
-def findEndPos(crossTree,endPos):
-
-	lever = len(crossTree)
-	aimID = endPos
-
-	# 找endPos
-	while(lever != 0):
-		lever = lever - 1
-		eleCnt = 0;
-		for ele in crossTree[lever]:
-			
-			for crossID in ele:
-				if (crossID == endPos):
-					return eleCnt,lever
-
-			eleCnt = eleCnt + 1
-
-
-
-
-def simpleShortestWay(startPos,endPos):
-
-	# 加载对应树
-	crossTree = crossNetworkData[startPos-1]
-
-	eleCnt,lever = findEndPos(crossTree,endPos)
-
-	roadline = find_roadLine(crossTree,lever,eleCnt)
-
-	roadline.append(endPos)
-
-	return roadline
 
 
 
