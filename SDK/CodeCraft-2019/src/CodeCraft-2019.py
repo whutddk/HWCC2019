@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 21:09:19
+# @Last Modified time: 2019-03-19 21:31:05
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -13,15 +13,21 @@ import sys
 import json
 
 
-car_path = '../config/car.txt'
-road_path = '../config/road.txt'
-cross_path = '../config/cross.txt'
-answer_path = '../config/answer.txt'
+# car_path = '../config/car.txt'
+# road_path = '../config/road.txt'
+# cross_path = '../config/cross.txt'
+# answer_path = '../config/answer.txt'
 
 global carData
 global crossNetworkData
 global crossData
 global finalAnswer
+
+global answer_path
+global car_path
+global road_path
+global cross_path
+
 
 
 carData = []
@@ -34,11 +40,41 @@ finalAnswer = []
 
 
 
+logging.basicConfig(level=logging.DEBUG,
+                    filename='../logs/CodeCraft-2019.log',
+                    format='[%(asctime)s] %(levelname)s [%(funcName)s: %(filename)s, %(lineno)d] %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filemode='a')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def load_data():
 	global carData
 	global crossNetworkData
 	global crossData
+	global answer_path
+	global car_path
+	global road_path
+	global cross_path
+
 
 	with open(car_path,'r') as carFile:
 		for data in carFile.readlines():
@@ -69,7 +105,7 @@ def load_data():
 			carData.append([carID,startPos,endPos,maxSpeed,takeoffTime])
 		# print (carData)
 
-	with open("./helpScript/crossNetwork.json",'r') as crossNetworkFile:
+	with open("./src/helpScript/crossNetwork.json",'r') as crossNetworkFile:
 		data = crossNetworkFile.read()
 		crossNetworkData = json.loads(data)
 
@@ -226,6 +262,10 @@ def createAnswer():
 	# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
 	# [crossID,roadID1,roadID2,roadID3,roadID4]
 	global finalAnswer
+	global answer_path
+	global car_path
+	global road_path
+	global cross_path
 
 	answer = finalAnswer.copy()
 	finalAnswer = []
@@ -287,33 +327,34 @@ def createAnswer():
 
 
 
-
 def main():
+	global answer_path
 	global car_path
 	global road_path
 	global cross_path
-	global answer_path
 
 
+	if len(sys.argv) != 5:
+		logging.info('please input args: car_path, road_path, cross_path, answerPath')
+		exit(1)
 
 	car_path = sys.argv[1]
 	road_path = sys.argv[2]
 	cross_path = sys.argv[3]
 	answer_path = sys.argv[4]
 
-#     logging.info("car_path is %s" % (car_path))
-#     logging.info("road_path is %s" % (road_path))
-#     logging.info("cross_path is %s" % (cross_path))
-#     logging.info("answer_path is %s" % (answer_path))
-
-# to read input file
-# process
-# to write output file
+	logging.info("car_path is %s" % (car_path))
+	logging.info("road_path is %s" % (road_path))
+	logging.info("cross_path is %s" % (cross_path))
+	logging.info("answer_path is %s" % (answer_path))
 
 
-if __name__ == "__main__":
-	# main()
 	load_data()
 	answer_init()
 
 	createAnswer()
+
+
+if __name__ == "__main__":
+	main()
+
