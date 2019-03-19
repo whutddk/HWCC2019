@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 11:47:09
+# @Last Modified time: 2019-03-19 11:58:36
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: CodeCraft-2019.py
@@ -171,8 +171,9 @@ def save_result():
 
 
 def findNextCrossId(crossId):
-
-
+	crossInfo = crossData[crossId-1]
+	print ("crossInfo=",crossInfo)
+	return -1,-1,-1,-1
 
 
 def simpleShortestWay(startPos,endPos):
@@ -187,18 +188,22 @@ def simpleShortestWay(startPos,endPos):
 	while(1):
 		OneCrossLever = []
 		for crossId in roadList[len(roadList)-1]:
+			print ("crossId=",crossId)
 			cross1,cross2,cross3,cross4 = findNextCrossId(crossId)
 
-			OneCrossLever.append = [cross1,cross2,cross3,cross4]
+			OneCrossLever.append(cross1)
+			OneCrossLever.append(cross2)
+			OneCrossLever.append(cross3)
+			OneCrossLever.append(cross4)
 			del crossCollection[cross1-1]
 			del crossCollection[cross2-1]
 			del crossCollection[cross3-1]
 			del crossCollection[cross4-1]
 
-			roadList.insert(0,[OneCrossLever])
+		roadList.append(OneCrossLever)
 
 		if ( cross1 == endPos or cross2 == endPos or cross3 == endPos or cross4 == endPos):
-			print (done!)
+			print ("done!")
 			# 找到了，但暂时不解析
 			break
 
