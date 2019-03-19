@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 20:11:53
+# @Last Modified time: 2019-03-19 20:20:21
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -92,30 +92,38 @@ def answer_init():
 def find_roadLine(crossTree,lever,lastEleCnt):
 
 	# 产生roadline
-
+	flag_break = 0
 	roadLine = []
 
 	idAim = lastEleCnt
 	while(lever != 0):
 		lever = lever - 1
+
 		upEleCnt = 0;
 		idCnt = 0
 
 		print ("crossTree[lever]=",crossTree[lever])
 		for ele in crossTree[lever]:
+			# print ("ele=",ele)
 			for crossID in ele:
+
 				if (idCnt == lastEleCnt):
 					roadLine.insert(0,crossID)
 					idAim = upEleCnt
+					flag_break = 1
 					break
 
 				idCnt = idCnt + 1;
 
-			if (idAim == upEleCnt):
+			if (flag_break == 1):
+				flag_break = 0
 				break
 
 			upEleCnt = upEleCnt + 1
-			
+
+		lastEleCnt = upEleCnt
+
+
 	print ("roadLine=",roadLine)
 
 
