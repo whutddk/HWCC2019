@@ -274,10 +274,10 @@ def createAnswer():
 	with open( answer_path,'w') as answerFile:
 		
 
-		# additionalTime = 0
+		additionalTime = 0
 		for data in answer:
 
-			oneCar = [data[0],data[4]*2]
+			oneCar = [data[0],data[4]+additionalTime]
 			# print ( "Sort from ",data[1],"to",data[2] )
 
 
@@ -297,7 +297,7 @@ def createAnswer():
 					
 			answerFile.write(writeResult)
 
-			# additionalTime = additionalTime + 1 
+			additionalTime = additionalTime + 1 
 		# 	
 		# 	
 		# while(1):
