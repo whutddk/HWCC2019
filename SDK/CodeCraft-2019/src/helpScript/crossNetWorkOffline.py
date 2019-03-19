@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 19:32:32
+# @Last Modified time: 2019-03-19 20:31:17
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -236,7 +236,7 @@ def createNetwork():
 
 		output.append(simpleShortestWay(i))
 
-	with open( "./network.json",'w') as networkFile:
+	with open( "./crossNetwork.json",'w') as networkFile:
 		data = json.dumps(output)
 		networkFile.write(data)
 
