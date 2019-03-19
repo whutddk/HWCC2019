@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 21:08:16
+# @Last Modified time: 2019-03-19 21:09:19
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -193,7 +193,7 @@ def simpleShortestWay(startPos,endPos):
 
 def cross2road(crossLine):
 
-	print("crossLine=",crossLine)
+	# print("crossLine=",crossLine)
 	roadLine = []
 	index = len(crossLine)
 	for i in range (0,index-1):
@@ -213,7 +213,7 @@ def cross2road(crossLine):
 		# print("warning",startCross,endCross)
 
 
-	print ("roadLine=",roadLine)
+	# print ("roadLine=",roadLine)
 	return roadLine
 
 
@@ -235,7 +235,7 @@ def createAnswer():
 	
 		for data in answer:
 			oneCar = [data[0],data[4]]
-			print ( "Sort from ",data[1],"to",data[2] )
+			# print ( "Sort from ",data[1],"to",data[2] )
 
 
 			crossLine = simpleShortestWay(data[1],data[2])
@@ -244,7 +244,7 @@ def createAnswer():
 
 			oneCar.extend(roadLine)
 			
-			print ( "oneCar=",oneCar )
+			# print ( "oneCar=",oneCar )
 
 			writeResult = "(" 
 			for data in oneCar:
