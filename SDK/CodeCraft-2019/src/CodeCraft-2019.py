@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 15:45:29
+# @Last Modified time: 2019-03-19 15:51:11
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: CodeCraft-2019.py
@@ -344,15 +344,20 @@ def createAnswer():
 
 
 
-# def main():
-#     if len(sys.argv) != 5:
-#         logging.info('please input args: car_path, road_path, cross_path, answerPath')
-#         exit(1)
+def main():
+	global car_path
+	global road_path
+	global cross_path
+	global answer_path
 
-#     car_path = sys.argv[1]
-#     road_path = sys.argv[2]
-#     cross_path = sys.argv[3]
-#     answer_path = sys.argv[4]
+	if len(sys.argv) != 5:
+		logging.info('please input args: car_path, road_path, cross_path, answerPath')
+		exit(1)
+
+	car_path = sys.argv[1]
+	road_path = sys.argv[2]
+	cross_path = sys.argv[3]
+	answer_path = sys.argv[4]
 
 #     logging.info("car_path is %s" % (car_path))
 #     logging.info("road_path is %s" % (road_path))
@@ -365,7 +370,7 @@ def createAnswer():
 
 
 if __name__ == "__main__":
-    # main()
+	main()
 	load_data()
 	answer_init()
 
