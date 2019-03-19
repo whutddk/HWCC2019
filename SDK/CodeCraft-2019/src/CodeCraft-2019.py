@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 15:19:50
+# @Last Modified time: 2019-03-19 15:45:29
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: CodeCraft-2019.py
@@ -160,13 +160,7 @@ def answer_init():
 	# print (finalAnswer)
 
 
-def save_result():
-	global finalAnswer
 
-	pass
-	# data = json.dumps(trueTable)
-	# with open( answer_path,'w') as ttFile:
-	# 	ttFile.write(data)
 
 
 crossCollection = []
@@ -296,19 +290,31 @@ def createAnswer():
 	answer = finalAnswer.copy()
 	finalAnswer = []
 
-	for data in answer:
-		oneCar = [data[0],data[4]]
-		print ( "Sort from ",data[1],"to",data[2] )
-		roadLine = simpleShortestWay(data[1],data[2])
 
-		oneCar.extend(roadLine)
-		
-		print ( "oneCar=",oneCar )
+	with open( answer_path,'w') as answerFile:
+	
+		for data in answer:
+			oneCar = [data[0],data[4]]
+			print ( "Sort from ",data[1],"to",data[2] )
+			roadLine = simpleShortestWay(data[1],data[2])
 
-		# while(1):
-		# 	pass
+			oneCar.extend(roadLine)
+			
+			print ( "oneCar=",oneCar )
 
-		finalAnswer.append(oneCar)
+			writeResult = "(" 
+			for data in oneCar:
+				writeResult = writeResult + str(data) + ','
+
+			writeResult = writeResult[:-1]+")\n"
+					
+			answerFile.write(writeResult)
+			# 	
+			# 	
+			# while(1):
+			# 	pass
+
+
 	pass
 
 
