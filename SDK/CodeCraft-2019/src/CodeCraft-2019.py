@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 14:26:28
+# @Last Modified time: 2019-03-19 15:13:50
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: CodeCraft-2019.py
@@ -169,25 +169,37 @@ def save_result():
 	# 	ttFile.write(data)
 
 
-# crossCollection = []
+crossCollection = []
 
 def checkroadVaild(startCross,roadId):
-	# global crossCollection
+	global crossCollection
+	result = -1
 	# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
 	
 	if ( roadId == -1 ):
-		return -1
+		return result
 
 	# 默认路就是5000开始的
 	oneRoad = roadData[roadId-5000] 
 	# print ("oneRoad=",oneRoad)
 	if ( oneRoad[4] == startCross ):
-		return oneRoad[5]
+		result = oneRoad[5]
 
-	if ( oneRoad[5] == startCross and oneRoad[6] == 1 ):
-		return oneRoad[4]
+	elif ( oneRoad[5] == startCross and oneRoad[6] == 1 ):
+		result = oneRoad[4]
 	else:
-		return -1
+		pass
+
+	for vaildCross in crossCollection:
+		if (result == vaildCross[0]):
+			print ( "checkroadVaild=Return" ,result)
+			# del crossCollection[result-1]
+			crossCollection.remove(vaildCross)
+			return result
+
+
+	print ( "checkroadVaild=Return" ,-1)
+	return -1
 
 
 
@@ -208,12 +220,12 @@ def findNextCrossId(crossId):
 
 
 def simpleShortestWay(startPos,endPos):
-	# global crossCollection
+	global crossCollection
 	crossCollection = crossData.copy()
 	roadList = []
 
 	roadList.append([startPos])
-	# del crossCollection[startPos-1]
+	del crossCollection[startPos-1]
 
 
 	# print (roadList[0])
@@ -225,29 +237,48 @@ def simpleShortestWay(startPos,endPos):
 				cross1,cross2,cross3,cross4 = -1,-1,-1,-1
 			else:
 				cross1,cross2,cross3,cross4 = findNextCrossId(crossId)
+				# if ( cross1 != -1):
+				# 	del crossCollection[cross1-1]
+				# if ( cross2 != -1):
+				# 	del crossCollection[cross2-1]
+				# if ( cross3 != -1):
+				# 	del crossCollection[cross3-1]
+				# if ( cross4 != -1):
+				# 	del crossCollection[cross4-1]
 
 			OneCrossLever.append(cross1)
 			OneCrossLever.append(cross2)
 			OneCrossLever.append(cross3)
 			OneCrossLever.append(cross4)
-			# del crossCollection[cross1-1]
-			# del crossCollection[cross2-1]
-			# del crossCollection[cross3-1]
-			# del crossCollection[cross4-1]
+
+
+		
+		# print ( "路口集合=",crossCollection )
+		crossCnt = 0
+		for cross in OneCrossLever:
+			if ( cross == endPos):
+				print ("done!",crossCnt)
+
+				lever = len(roadList)
+				print ( "len of roadList",lever)
+				print ("endPos=",OneCrossLever[crossCnt])
+
+				while( lever !=0 ):
+					lever = lever -1 
+					searchLever = roadList[lever]
+					crossCnt = crossCnt // 4
+					print ("-1Pos=",searchLever[crossCnt])
+
+				while(1):
+					pass
+
+				return
+			crossCnt = crossCnt + 1
 
 		roadList.append(OneCrossLever)
-		# print ( "路口集合=",crossCollection )
-
-		if ( cross1 == endPos or cross2 == endPos or cross3 == endPos or cross4 == endPos):
-			print ("done!")
-			while(1):
-				pass
-			# 找到了，但暂时不解析
-			break
-
 
 	pass
-	return []
+
 
 
 
