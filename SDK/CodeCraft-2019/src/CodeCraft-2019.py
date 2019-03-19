@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 15:13:50
+# @Last Modified time: 2019-03-19 15:15:50
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: CodeCraft-2019.py
@@ -257,22 +257,24 @@ def simpleShortestWay(startPos,endPos):
 		crossCnt = 0
 		for cross in OneCrossLever:
 			if ( cross == endPos):
-				print ("done!",crossCnt)
-
+				# print ("done!",crossCnt)
+				roadLine = []
 				lever = len(roadList)
-				print ( "len of roadList",lever)
-				print ("endPos=",OneCrossLever[crossCnt])
+				# print ( "len of roadList",lever)
+				# print ("endPos=",OneCrossLever[crossCnt])
+				roadLine.insert(0,OneCrossLever[crossCnt])
 
-				while( lever !=0 ):
+				while( lever != 0 ):
 					lever = lever -1 
 					searchLever = roadList[lever]
 					crossCnt = crossCnt // 4
-					print ("-1Pos=",searchLever[crossCnt])
-
+					# print ("-1Pos=",searchLever[crossCnt])
+					roadLine.insert(0,searchLever[crossCnt])
+				print ("roadLine=",roadLine)
 				while(1):
 					pass
 
-				return
+				return roadLine
 			crossCnt = crossCnt + 1
 
 		roadList.append(OneCrossLever)
