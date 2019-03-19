@@ -1,5 +1,14 @@
+# -*- coding: utf-8 -*-
 # @File Name: CodeCraft-2019.py
-# @File Path: K:\work\dark+PRJ\HWCC2019\SDK\CodeCraft-2019\src\CodeCraft-2019.py
+# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK\CodeCraft-2019\src\CodeCraft-2019.py
+# @Author: Ruige_Lee
+# @Date:   2019-03-19 11:00:06
+# @Last Modified by:   Ruige_Lee
+# @Last Modified time: 2019-03-19 11:47:09
+# @Email: 295054118@whut.edu.cn"
+
+# @File Name: CodeCraft-2019.py
+# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK\CodeCraft-2019\src\CodeCraft-2019.py
 # @Author: 29505
 # @Date:   2019-03-17 23:16:45
 # @Last Modified by:   29505
@@ -146,7 +155,6 @@ def answer_init():
 	global finalAnswer
 	finalAnswer = carData
 
-
 	# 出发时间排序
 	finalAnswer.sort(key=lambda x:x[4])
 	# print (finalAnswer)
@@ -161,7 +169,40 @@ def save_result():
 	# 	ttFile.write(data)
 
 
+
+def findNextCrossId(crossId):
+
+
+
+
 def simpleShortestWay(startPos,endPos):
+	crossCollection = crossData
+	roadList = []
+
+	roadList.append([startPos])
+	del crossCollection[startPos-1]
+
+
+	# print (roadList[0])
+	while(1):
+		OneCrossLever = []
+		for crossId in roadList[len(roadList)-1]:
+			cross1,cross2,cross3,cross4 = findNextCrossId(crossId)
+
+			OneCrossLever.append = [cross1,cross2,cross3,cross4]
+			del crossCollection[cross1-1]
+			del crossCollection[cross2-1]
+			del crossCollection[cross3-1]
+			del crossCollection[cross4-1]
+
+			roadList.insert(0,[OneCrossLever])
+
+		if ( cross1 == endPos or cross2 == endPos or cross3 == endPos or cross4 == endPos):
+			print (done!)
+			# 找到了，但暂时不解析
+			break
+
+
 	pass
 	return []
 
