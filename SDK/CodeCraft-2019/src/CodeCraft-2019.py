@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 20:20:21
+# @Last Modified time: 2019-03-19 20:23:43
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -102,7 +102,7 @@ def find_roadLine(crossTree,lever,lastEleCnt):
 		upEleCnt = 0;
 		idCnt = 0
 
-		print ("crossTree[lever]=",crossTree[lever])
+		# print ("crossTree[lever]=",crossTree[lever])
 		for ele in crossTree[lever]:
 			# print ("ele=",ele)
 			for crossID in ele:
@@ -124,7 +124,7 @@ def find_roadLine(crossTree,lever,lastEleCnt):
 		lastEleCnt = upEleCnt
 
 
-	print ("roadLine=",roadLine)
+	return roadLine
 
 
 def findEndPos(crossTree,endPos):
@@ -154,11 +154,11 @@ def simpleShortestWay(startPos,endPos):
 
 	eleCnt,lever = findEndPos(crossTree,endPos)
 
-	find_roadLine(crossTree,lever,eleCnt)
+	roadline = find_roadLine(crossTree,lever,eleCnt)
 
+	roadline.append(endPos)
 
-
-	pass
+	return roadline
 
 
 
@@ -176,26 +176,26 @@ def createAnswer():
 	finalAnswer = []
 
 
+	with open( answer_path,'w') as answerFile:
 	
-	
-	for data in answer:
-		oneCar = [data[0],data[4]]
-		print ( "Sort from ",data[1],"to",data[2] )
+		for data in answer:
+			oneCar = [data[0],data[4]]
+			print ( "Sort from ",data[1],"to",data[2] )
 
 
-		roadLine = simpleShortestWay(data[1],data[2])
+			roadLine = simpleShortestWay(data[1],data[2])
 
-		# oneCar.extend(roadLine)
-		
-		# print ( "oneCar=",oneCar )
+			oneCar.extend(roadLine)
+			
+			print ( "oneCar=",oneCar )
 
-		# writeResult = "(" 
-		# for data in oneCar:
-		# 	writeResult = writeResult + str(data) + ','
+			writeResult = "(" 
+			for data in oneCar:
+				writeResult = writeResult + str(data) + ','
 
-		# writeResult = writeResult[:-1]+")\n"
-				
-		# answerFile.write(writeResult)
+			writeResult = writeResult[:-1]+")\n"
+					
+			answerFile.write(writeResult)
 		# 	
 		# 	
 		# while(1):
