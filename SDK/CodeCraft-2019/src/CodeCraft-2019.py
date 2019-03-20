@@ -276,8 +276,10 @@ def createAnswer():
 
 		additionalTime = 0
 		for data in answer:
-
-			oneCar = [data[0],data[4]+additionalTime//16]
+			if ( data[4] < additionalTime//16 ):
+				oneCar = [data[0],additionalTime//16]
+			else:
+				oneCar = [data[0],data[4]]
 			# print ( "Sort from ",data[1],"to",data[2] )
 
 
