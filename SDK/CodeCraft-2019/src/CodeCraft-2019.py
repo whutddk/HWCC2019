@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # @File Name: CodeCraft-2019.py
-# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK\CodeCraft-2019\src\CodeCraft-2019.py
+# @File Path: K:\work\dark+PRJ\HWCC2019\SDK\CodeCraft-2019\src\CodeCraft-2019.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
-# @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-19 21:31:05
+# @Last Modified by:   29505
+# @Last Modified time: 2019-03-20 00:03:48
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -147,7 +147,7 @@ def answer_init():
 	finalAnswer = carData
 
 	# 出发时间排序
-	finalAnswer.sort(key=lambda x:x[4])
+	finalAnswer.sort(key=lambda x:x[3])
 	# print (finalAnswer)
 
 
@@ -272,9 +272,14 @@ def createAnswer():
 
 
 	with open( answer_path,'w') as answerFile:
-	
+		
+
+		additionalTime = 0
 		for data in answer:
-			oneCar = [data[0],data[4]]
+			if ( data[4] < additionalTime//16 ):
+				oneCar = [data[0],additionalTime//16]
+			else:
+				oneCar = [data[0],data[4]]
 			# print ( "Sort from ",data[1],"to",data[2] )
 
 
@@ -293,6 +298,8 @@ def createAnswer():
 			writeResult = writeResult[:-1]+")\n"
 					
 			answerFile.write(writeResult)
+
+			additionalTime = additionalTime + 1 
 		# 	
 		# 	
 		# while(1):
