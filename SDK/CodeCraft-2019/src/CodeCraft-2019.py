@@ -4,39 +4,19 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   29505
-# @Last Modified time: 2019-03-20 23:34:51
+# @Last Modified time: 2019-03-20 23:47:06
 # @Email: 295054118@whut.edu.cn"
 
 
 import logging
 import sys
 import json
-
+import ol_fileSystem
 
 # car_path = '../config/car.txt'
 # road_path = '../config/road.txt'
 # cross_path = '../config/cross.txt'
 # answer_path = '../config/answer.txt'
-
-global carData
-global crossNetworkData
-global crossData
-global finalAnswer
-
-global answer_path
-global car_path
-global road_path
-global cross_path
-
-
-
-carData = []
-
-crossData = []
-
-finalAnswer = []
-
-
 
 
 
@@ -52,42 +32,12 @@ logging.basicConfig(level=logging.DEBUG,
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def load_data():
-	global carData
-	global crossNetworkData
-	global crossData
-	global answer_path
-	global car_path
-	global road_path
-	global cross_path
-
-
-	
-	# print (crossData)
-
-
-
-
 def answer_init():
-	global finalAnswer
-	finalAnswer = carData
+	
+	fS.finalAnswer = fS.carData
 
 	# 出发时间排序
-	finalAnswer.sort(key=lambda x:x[3])
+	fS.finalAnswer.sort(key=lambda x:x[3])
 	# print (finalAnswer)
 
 
@@ -201,14 +151,10 @@ def createAnswer():
 	# [carID,startPos,endPos,maxSpeed,takeoffTime]
 	# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
 	# [crossID,roadID1,roadID2,roadID3,roadID4]
-	global finalAnswer
-	global answer_path
-	global car_path
-	global road_path
-	global cross_path
 
-	answer = finalAnswer.copy()
-	finalAnswer = []
+
+	answer = fS.finalAnswer.copy()
+	fS.finalAnswer = []
 
 
 	
@@ -269,11 +215,6 @@ def createAnswer():
 
 
 def main():
-	global answer_path
-	global car_path
-	global road_path
-	global cross_path
-
 
 	if len(sys.argv) != 5:
 		logging.info('please input args: car_path, road_path, cross_path, answerPath')
@@ -289,11 +230,23 @@ def main():
 	logging.info("cross_path is %s" % (cross_path))
 	logging.info("answer_path is %s" % (answer_path))
 
+########################################
+	# fileSystem init
+	fS = fS() 
 
-	load_data()
+	fS.load_data(road_path,cross_path,car_path)
+
+
 	answer_init()
-
 	createAnswer()
+
+
+
+	fS.save_answer(answer_path)
+
+##########################################
+
+
 
 
 if __name__ == "__main__":

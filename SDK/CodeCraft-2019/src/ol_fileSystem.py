@@ -1,15 +1,20 @@
-# @File Name: fileSystem.py
-# @File Path: K:\work\dark+PRJ\HWCC2019\SDK\CodeCraft-2019\src\fileSystem.py
+# @File Name: ol_fileSystem.py
+# @File Path: K:\work\dark+PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_fileSystem.py
 # @Author: 29505
 # @Date:   2019-03-20 23:26:12
 # @Last Modified by:   29505
-# @Last Modified time: 2019-03-20 23:34:42
+# @Last Modified time: 2019-03-20 23:47:17
 # @Email: 295054118@whut.edu.cn
 
 
 import sys
 
-class fileSystem:
+class fS():
+	def __init__(self):
+		self.carData = []
+		self.roadData = []
+		self.crossData = []
+		self.finalAnswer = []
 
 	def load_data(self,road_path,cross_path,car_path):
 
@@ -47,8 +52,8 @@ class fileSystem:
 				doubleBool = int(string[:po])
 				# print (doubleBool)
 
-				roadData.append([roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool])
-			# print (roadData)
+				self.roadData.append([roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool])
+			# print (self.roadData)
 
 		with open(cross_path,'r') as crossFile:
 			for data in crossFile.readlines():
@@ -74,10 +79,9 @@ class fileSystem:
 				string = string[po+2:]
 				po = string.find(')')
 				roadID4 = int(string[:po])
-				# print (doubleBool)
 
-				crossData.append([crossID,roadID1,roadID2,roadID3,roadID4])
-			# print (crossData)
+				self.crossData.append([crossID,roadID1,roadID2,roadID3,roadID4])
+			# print (self.crossData)
 
 		with open(car_path,'r') as carFile:
 			for data in carFile.readlines():
@@ -105,14 +109,13 @@ class fileSystem:
 				takeoffTime = int(string[:po])
 				# print (takeoffTime)
 
-				carData.append([carID,startPos,endPos,maxSpeed,takeoffTime])
-			# print (carData)
+				self.carData.append([carID,startPos,endPos,maxSpeed,takeoffTime])
+			# print (self.carData)
 
-		return roadData,crossData,carData
 	
-	def save_answer(self,answer_path,finalAnswer):
+	def save_answer(self,answer_path):
 		with open( answer_path,'w') as answerFile:
-			for oneCar in finalAnswer:
+			for oneCar in self.finalAnswer:
 				writeResult = "(" 
 				for data in oneCar:
 					writeResult = writeResult + str(data) + ','
