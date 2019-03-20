@@ -147,7 +147,7 @@ def answer_init():
 	finalAnswer = carData
 
 	# 出发时间排序
-	finalAnswer.sort(key=lambda x:x[4])
+	finalAnswer.sort(key=lambda x:x[3])
 	# print (finalAnswer)
 
 
@@ -277,7 +277,7 @@ def createAnswer():
 		additionalTime = 0
 		for data in answer:
 
-			oneCar = [data[0],data[4]+additionalTime]
+			oneCar = [data[0],data[4]+additionalTime//16]
 			# print ( "Sort from ",data[1],"to",data[2] )
 
 
