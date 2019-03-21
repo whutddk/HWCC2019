@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 15:46:11
+# @Last Modified time: 2019-03-21 16:00:24
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -151,10 +151,15 @@ class crossNetwork():
 
 				if (idCnt == lastEleCnt):
 					self.crossLine.insert(0,crossID)
-					print ("upEleCnt=",upEleCnt)
+					# print ("upEleCnt=",upEleCnt)
 					return upEleCnt
 				idCnt = idCnt + 1;
 			upEleCnt = upEleCnt + 1
+
+		print ("error")
+		while(1):
+			pass
+
 
 
 	def bw_SortCross(self):
@@ -165,11 +170,11 @@ class crossNetwork():
 
 		# 最后一层多少元件，决定上层的枝干编号
 		# print ("lastLever=",self.crossTree[len(self.crossTree)-1])
-		eleCnt = len(self.crossTree[len(self.crossTree)-1])
+		eleCnt = len(self.crossTree[len(self.crossTree)-1])-1
 		# print ("eleCnt=",eleCnt)
 
 		# 产生crossline
-
+		lever = lever - 1
 		while(lever != 0):
 			lever = lever - 1
 			# print ("self.crossTree[lever]=",self.crossTree[lever])
