@@ -1,44 +1,26 @@
 # -*- coding: utf-8 -*-
 # @File Name: CodeCraft-2019.py
-# @File Path: K:\work\dark+PRJ\HWCC2019\SDK\CodeCraft-2019\src\CodeCraft-2019.py
+# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK\CodeCraft-2019\src\CodeCraft-2019.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
-# @Last Modified by:   29505
-# @Last Modified time: 2019-03-20 00:03:48
+# @Last Modified by:   Ruige_Lee
+# @Last Modified time: 2019-03-21 16:06:05
 # @Email: 295054118@whut.edu.cn"
 
 
 import logging
 import sys
 import json
-
+import ol_fileSystem 
+import ol_crossNetWorkOnline
 
 # car_path = '../config/car.txt'
 # road_path = '../config/road.txt'
 # cross_path = '../config/cross.txt'
 # answer_path = '../config/answer.txt'
 
-global carData
-global crossNetworkData
-global crossData
-global finalAnswer
-
-global answer_path
-global car_path
-global road_path
-global cross_path
-
-
-
-carData = []
-
-crossData = []
-
-finalAnswer = []
-
-
-
-
+fS = ol_fileSystem.fS() 
+CNW = ol_crossNetWorkOnline.crossNetwork()
 
 logging.basicConfig(level=logging.DEBUG,
                     filename='../logs/CodeCraft-2019.log',
@@ -52,178 +34,13 @@ logging.basicConfig(level=logging.DEBUG,
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def load_data():
-	global carData
-	global crossNetworkData
-	global crossData
-	global answer_path
-	global car_path
-	global road_path
-	global cross_path
-
-
-	with open(car_path,'r') as carFile:
-		for data in carFile.readlines():
-			if data[0] == '#':
-				continue
-
-			string = data
-			po = string.find(',')
-			carID = int(string[1:po])
-
-			string = string[po+2:]
-			po = string.find(',')
-			startPos = int(string[:po])
-
-			string = string[po+2:]
-			po = string.find(',')
-			endPos = int(string[:po])
-
-			string = string[po+2:]
-			po = string.find(',')
-			maxSpeed = int(string[:po])
-
-			string = string[po+2:]
-			po = string.find(')')
-			takeoffTime = int(string[:po])
-			# print (takeoffTime)
-
-			carData.append([carID,startPos,endPos,maxSpeed,takeoffTime])
-		# print (carData)
-
-	with open("./src/helpScript/crossNetwork.json",'r') as crossNetworkFile:
-		data = crossNetworkFile.read()
-		crossNetworkData = json.loads(data)
-
-	with open(cross_path,'r') as crossFile:
-		for data in crossFile.readlines():
-			if data[0] == '#':
-				continue
-
-			string = data
-			po = string.find(',')
-			crossID = int(string[1:po])
-
-			string = string[po+2:]
-			po = string.find(',')
-			roadID1 = int(string[:po])
-
-			string = string[po+2:]
-			po = string.find(',')
-			roadID2 = int(string[:po])
-
-			string = string[po+2:]
-			po = string.find(',')
-			roadID3 = int(string[:po])
-
-			string = string[po+2:]
-			po = string.find(')')
-			roadID4 = int(string[:po])
-			# print (doubleBool)
-
-			crossData.append([crossID,roadID1,roadID2,roadID3,roadID4])
-
-	# print (crossData)
-
-
-
-
 def answer_init():
-	global finalAnswer
-	finalAnswer = carData
+	
+	fS.finalAnswer = fS.carData
 
 	# 出发时间排序
-	finalAnswer.sort(key=lambda x:x[3])
+	fS.finalAnswer.sort(key=lambda x:x[3])
 	# print (finalAnswer)
-
-
-
-
-def find_roadLine(crossTree,lever,lastEleCnt):
-
-	# 产生roadline
-	flag_break = 0
-	roadLine = []
-
-	idAim = lastEleCnt
-	while(lever != 0):
-		lever = lever - 1
-
-		upEleCnt = 0;
-		idCnt = 0
-
-		# print ("crossTree[lever]=",crossTree[lever])
-		for ele in crossTree[lever]:
-			# print ("ele=",ele)
-			for crossID in ele:
-
-				if (idCnt == lastEleCnt):
-					roadLine.insert(0,crossID)
-					idAim = upEleCnt
-					flag_break = 1
-					break
-
-				idCnt = idCnt + 1;
-
-			if (flag_break == 1):
-				flag_break = 0
-				break
-
-			upEleCnt = upEleCnt + 1
-
-		lastEleCnt = upEleCnt
-
-
-	return roadLine
-
-
-def findEndPos(crossTree,endPos):
-
-	lever = len(crossTree)
-	aimID = endPos
-
-	# 找endPos
-	while(lever != 0):
-		lever = lever - 1
-		eleCnt = 0;
-		for ele in crossTree[lever]:
-			
-			for crossID in ele:
-				if (crossID == endPos):
-					return eleCnt,lever
-
-			eleCnt = eleCnt + 1
-
-
-
-
-def simpleShortestWay(startPos,endPos):
-
-	# 加载对应树
-	crossTree = crossNetworkData[startPos-1]
-
-	eleCnt,lever = findEndPos(crossTree,endPos)
-
-	roadline = find_roadLine(crossTree,lever,eleCnt)
-
-	roadline.append(endPos)
-
-	return roadline
-
 
 
 
@@ -234,8 +51,8 @@ def cross2road(crossLine):
 	index = len(crossLine)
 	for i in range (0,index-1):
 		# print ( crossLine[i],crossLine[i+1] )
-		startCross = crossData[crossLine[i]-1]
-		endCross = crossData[crossLine[i+1]-1]
+		startCross = fS.crossData[crossLine[i]-1]
+		endCross = fS.crossData[crossLine[i+1]-1]
 
 		if ( (startCross[1] == endCross[1] or startCross[1] == endCross[2] or startCross[1] == endCross[3] or startCross[1] == endCross[4]) and (startCross[1] != -1) ):
 			roadLine.append( startCross[1] )
@@ -261,45 +78,31 @@ def createAnswer():
 	# [carID,startPos,endPos,maxSpeed,takeoffTime]
 	# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
 	# [crossID,roadID1,roadID2,roadID3,roadID4]
-	global finalAnswer
-	global answer_path
-	global car_path
-	global road_path
-	global cross_path
-
-	answer = finalAnswer.copy()
-	finalAnswer = []
 
 
-	with open( answer_path,'w') as answerFile:
+	answer = fS.finalAnswer.copy()
+	fS.finalAnswer = []
+
+	additionalTime = 0
+	for data in answer:
+		if ( data[4] < additionalTime//16 ):
+			oneCar = [data[0],additionalTime//16]
+		else:
+			oneCar = [data[0],data[4]]
+		# print ( "Sort from ",data[1],"to",data[2] )
+
+
+		crossLine = CNW.createNetwork(fS.carData,fS.roadData,fS.crossData,data[1],data[2])
+
+		roadLine = cross2road(crossLine)
+
+		oneCar.extend(roadLine)
 		
+		print ( "oneCar=",oneCar )
 
-		additionalTime = 0
-		for data in answer:
-			if ( data[4] < additionalTime//16 ):
-				oneCar = [data[0],additionalTime//16]
-			else:
-				oneCar = [data[0],data[4]]
-			# print ( "Sort from ",data[1],"to",data[2] )
-
-
-			crossLine = simpleShortestWay(data[1],data[2])
-
-			roadLine = cross2road(crossLine)
-
-			oneCar.extend(roadLine)
-			
-			# print ( "oneCar=",oneCar )
-
-			writeResult = "(" 
-			for data in oneCar:
-				writeResult = writeResult + str(data) + ','
-
-			writeResult = writeResult[:-1]+")\n"
-					
-			answerFile.write(writeResult)
-
-			additionalTime = additionalTime + 1 
+		fS.finalAnswer.append(oneCar)
+		
+		additionalTime = additionalTime + 1 
 		# 	
 		# 	
 		# while(1):
@@ -310,36 +113,7 @@ def createAnswer():
 
 
 
-
-
-
-# 车辆出发时间排序
-# 遍历车辆出发路口，A*寻找最短路径，作为结果
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def main():
-	global answer_path
-	global car_path
-	global road_path
-	global cross_path
-
 
 	if len(sys.argv) != 5:
 		logging.info('please input args: car_path, road_path, cross_path, answerPath')
@@ -355,11 +129,24 @@ def main():
 	logging.info("cross_path is %s" % (cross_path))
 	logging.info("answer_path is %s" % (answer_path))
 
+########################################
+	# fileSystem init
 
-	load_data()
+
+
+	fS.load_data(road_path,cross_path,car_path)
+
+
 	answer_init()
-
 	createAnswer()
+
+
+
+	fS.save_answer(answer_path)
+
+##########################################
+
+
 
 
 if __name__ == "__main__":
