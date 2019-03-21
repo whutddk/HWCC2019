@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 16:06:05
+# @Last Modified time: 2019-03-21 16:59:52
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -98,7 +98,7 @@ def createAnswer():
 
 		oneCar.extend(roadLine)
 		
-		print ( "oneCar=",oneCar )
+		# print ( "oneCar=",oneCar )
 
 		fS.finalAnswer.append(oneCar)
 		
