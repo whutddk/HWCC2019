@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-21 20:25:35
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 21:05:49
+# @Last Modified time: 2019-03-21 21:12:28
 # @Email: 295054118@whut.edu.cn"
 
 # [carID,startPos,endPos,maxSpeed,takeoffTime]
@@ -58,8 +58,8 @@ class scheduler():
 			
 			additionalTime = additionalTime + 1 
 
-		for ans in self.preAnswer:
-			print (ans)
+		# for ans in self.preAnswer:
+		# 	print (ans)
 
 
 
