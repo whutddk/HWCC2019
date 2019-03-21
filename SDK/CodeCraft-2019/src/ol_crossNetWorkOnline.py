@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 17:24:20
+# @Last Modified time: 2019-03-21 21:11:00
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -22,6 +22,9 @@ class crossNetwork():
 		self.crossData = []
 		self.startCross = 1
 		self.endCross = 1
+		self.roadLine = []
+
+
 		self.RDV = ol_roadValueRisk.roadValue()
 		pass
 	
@@ -198,6 +201,33 @@ class crossNetwork():
 		return
 
 
+	def cross2road(self):
+
+		# print("crossLine=",crossLine)
+		self.roadLine = []
+		index = len(self.crossLine)
+		for i in range (0,index-1):
+			# print ( crossLine[i],crossLine[i+1] )
+			startCrossTemp = self.crossData[self.crossLine[i]-1]
+			endCrossTemp = self.crossData[self.crossLine[i+1]-1]
+
+			if ( (startCrossTemp[1] == endCrossTemp[1] or startCrossTemp[1] == endCrossTemp[2] or startCrossTemp[1] == endCrossTemp[3] or startCrossTemp[1] == endCrossTemp[4]) and (startCrossTemp[1] != -1) ):
+				self.roadLine.append( startCrossTemp[1] )
+			elif ( (startCrossTemp[2] == endCrossTemp[1] or startCrossTemp[2] == endCrossTemp[2] or startCrossTemp[2] == endCrossTemp[3] or startCrossTemp[2] == endCrossTemp[4]) and (startCrossTemp[2] != -1)):
+				self.roadLine.append( startCrossTemp[2] )
+			elif ( (startCrossTemp[3] == endCrossTemp[1] or startCrossTemp[3] == endCrossTemp[2] or startCrossTemp[3] == endCrossTemp[3] or startCrossTemp[3] == endCrossTemp[4]) and (startCrossTemp[3] != -1)):
+				self.roadLine.append( startCrossTemp[3] )
+			elif ( (startCrossTemp[4] == endCrossTemp[1] or startCrossTemp[4] == endCrossTemp[2] or startCrossTemp[4] == endCrossTemp[3] or startCrossTemp[4] == endCrossTemp[4]) and (startCrossTemp[4] != -1)):
+				self.roadLine.append( startCrossTemp[4] )
+			# else:
+			# print("warning",startCross,endCross)
+
+
+		# print ("roadLine=",roadLine)
+		return 
+
+
+
 
 	def createNetwork(self,carData,roadData,crossData,startCross,endCross):
 
@@ -215,6 +245,7 @@ class crossNetwork():
 		self.crossCollection = self.crossData.copy()
 		self.crossTree = []
 		self.crossLine = []
+		self.roadLine = []
 
 		# print ("forward")
 		# print ("sort from",self.startCross,'to',self.endCross)
@@ -224,7 +255,9 @@ class crossNetwork():
 
 		# print ("crossLine=",self.crossLine)
 
-		return self.crossLine
+		self.cross2road()
+
+		return self.roadLine
 
 
 
