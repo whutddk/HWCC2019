@@ -4,14 +4,12 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 16:03:11
+# @Last Modified time: 2019-03-21 16:12:10
 # @Email: 295054118@whut.edu.cn"
 
 
 
 import sys
-
-crossCollection = []
 
 
 class crossNetwork():
