@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 20:58:40
+# @Last Modified time: 2019-03-21 20:59:35
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -13,7 +13,7 @@ import sys
 import json
 import ol_fileSystem 
 import ol_crossNetWorkOnline
-import ol_cl_scheduler
+import ol_scheduler
 # car_path = '../config/car.txt'
 # road_path = '../config/road.txt'
 # cross_path = '../config/cross.txt'
@@ -21,7 +21,7 @@ import ol_cl_scheduler
 
 fS = ol_fileSystem.fS() 
 CNW = ol_crossNetWorkOnline.crossNetwork()
-sch = scheduler()
+sch = ol_scheduler.scheduler()
 
 
 logging.basicConfig(level=logging.DEBUG,

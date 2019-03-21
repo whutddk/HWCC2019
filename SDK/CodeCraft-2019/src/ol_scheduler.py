@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-21 20:25:35
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 20:58:36
+# @Last Modified time: 2019-03-21 21:05:49
 # @Email: 295054118@whut.edu.cn"
 
 # [carID,startPos,endPos,maxSpeed,takeoffTime]
@@ -44,34 +44,26 @@ class scheduler():
 
 		self.preAnswer = preAnswer
 
-		print("Bself.preAnswer=",self.preAnswer)
 		self.preAnswer.sort(key = lambda i:len(i)) 
-		print("Aself.preAnswer=",self.preAnswer)
-		# preAnserExtend = []
-		# print ("preAnserExtend=",preAnserExtend)
-
-		# for ans in self.preAnswer:
-		# 	ans.append(len(ans))
-		# 	preAnserExtend.append(ans)
-
-		# print( "preAnserExtend=",preAnserExtend )
-		# preAnserExtend.sort(key=lambda x:x[4])
 
 
-		# additionalTime = 0
+
+		additionalTime = 0
 		
-		# 	if ( data[4] < additionalTime//25 ):
-		# 		oneCar = [data[0],additionalTime//25]
-		# 	else:
-				
+		for ans in range(0,len(self.preAnswer)):
+			if ( self.preAnswer[ans][1] < additionalTime//25 ):
+				self.preAnswer[ans][1] = additionalTime//25
+			else:
+				pass
 			
-		# 	additionalTime = additionalTime + 1 
-		# 	# 	
-		# 	# 	
-		# 	# while(1):
-		# 	# 	pass
+			additionalTime = additionalTime + 1 
 
-		return finAnswer
+		for ans in self.preAnswer:
+			print (ans)
+
+
+
+		return self.preAnswer
 
 	
 	
