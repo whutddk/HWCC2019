@@ -44,7 +44,7 @@ class scheduler():
 
 		self.preAnswer = preAnswer
 
-		self.preAnswer.sort(key = lambda i:len(i)) 
+		# self.preAnswer.sort(key = lambda i:len(i)) 
 
 
 
