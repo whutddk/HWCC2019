@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 16:06:05
+# @Last Modified time: 2019-03-21 17:03:21
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -39,7 +39,8 @@ def answer_init():
 	fS.finalAnswer = fS.carData
 
 	# 出发时间排序
-	fS.finalAnswer.sort(key=lambda x:x[3])
+	fS.finalAnswer.sort(key=lambda x:x[4])
+	fS.finalAnswer.sort(key=lambda x:x[3],reverse=True)
 	# print (finalAnswer)
 
 
@@ -98,7 +99,7 @@ def createAnswer():
 
 		oneCar.extend(roadLine)
 		
-		print ( "oneCar=",oneCar )
+		# print ( "oneCar=",oneCar )
 
 		fS.finalAnswer.append(oneCar)
 		

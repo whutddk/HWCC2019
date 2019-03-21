@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 16:12:10
+# @Last Modified time: 2019-03-21 17:03:29
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -202,7 +202,7 @@ class crossNetwork():
 		self.crossLine = []
 
 		# print ("forward")
-		print ("sort from",self.startCross,'to',self.endCross)
+		# print ("sort from",self.startCross,'to',self.endCross)
 		self.fw_createcrossTree()
 		# print ("backward")
 		self.bw_SortCross()
