@@ -28,7 +28,7 @@ class roadValue():
 		# 默认长度是速度2~5倍
 		self.value = 0
 
-		self.value = rdSpeed / rdLength*3 * rdChnNum
+		self.value = rdSpeed*(0) - (rdLength*0) + (rdChnNum*0)
 
 		return self.value
 

@@ -39,7 +39,9 @@ def answer_init():
 	fS.finalAnswer = fS.carData
 
 	# 出发时间排序
-	fS.finalAnswer.sort(key=lambda x:x[3])
+	fS.finalAnswer.sort(key=lambda x:x[4])
+	fS.finalAnswer.sort(key=lambda x:x[3],reverse=True)
+
 	# print (finalAnswer)
 
 
@@ -85,8 +87,8 @@ def createAnswer():
 
 	additionalTime = 0
 	for data in answer:
-		if ( data[4] < additionalTime//16 ):
-			oneCar = [data[0],additionalTime//16]
+		if ( data[4] < additionalTime//25 ):
+			oneCar = [data[0],additionalTime//25]
 		else:
 			oneCar = [data[0],data[4]]
 		# print ( "Sort from ",data[1],"to",data[2] )

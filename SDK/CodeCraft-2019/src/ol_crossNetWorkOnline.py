@@ -108,14 +108,14 @@ class crossNetwork():
 #
 					SortListTemp = [[cross1Temp,value1],[cross2Temp,value2],[cross3Temp,value3],[cross4Temp,value4]]
 					# print( "SortListTemp=B",SortListTemp )
-					SortListTemp.sort(key=lambda x:x[1])
+					SortListTemp.sort(key=lambda x:x[1],reverse=True)
 					# print( "SortListTemp=A",SortListTemp )
 
 
-					cross1 = SortListTemp[3][0]
-					cross2 = SortListTemp[2][0]
-					cross3 = SortListTemp[1][0]
-					cross4 = SortListTemp[0][0]
+					cross1 = SortListTemp[0][0]
+					cross2 = SortListTemp[1][0]
+					cross3 = SortListTemp[2][0]
+					cross4 = SortListTemp[3][0]
 
 ##################################################
 					
