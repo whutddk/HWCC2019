@@ -86,8 +86,8 @@ def createAnswer():
 
 	additionalTime = 0
 	for data in answer:
-		if ( data[4] < additionalTime//20 ):
-			oneCar = [data[0],additionalTime//20]
+		if ( data[4] < additionalTime//25 ):
+			oneCar = [data[0],additionalTime//25]
 		else:
 			oneCar = [data[0],data[4]]
 		# print ( "Sort from ",data[1],"to",data[2] )
