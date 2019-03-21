@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 14:06:10
+# @Last Modified time: 2019-03-21 14:17:26
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -19,11 +19,13 @@ class crossNetwork():
 	def __init__(self):
 		self.crossCollection = []
 		self.crossList = []
+		self.carData = []
+		self.roadData = []
+		self.crossData = []
 		pass
 	
 
-	def checkroadVaild(self,startCross,roadId):
-		global crossCollection
+	def checkroadVV(self,startCross,roadId):
 		result = -1
 		# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
 		
@@ -31,7 +33,7 @@ class crossNetwork():
 			return result
 
 		# 默认路就是5000开始的
-		oneRoad = roadData[roadId-5000] 
+		oneRoad = self.roadData[roadId-5000] 
 		# print ("oneRoad=",oneRoad)
 		if ( oneRoad[4] == startCross ):
 			result = oneRoad[5]
@@ -42,9 +44,17 @@ class crossNetwork():
 			pass
 
 		for vaildCross in crossCollection:
-			if (result == vaildCross[0]):
+			if ( result == vaildCross[0] ):
 				print ( "checkroadVaild=Return" ,result)
 				crossCollection.remove(vaildCross)
+
+#####################################################################
+	#如果这条路是有效的，在这里调用子函数计算这条路的价值，然后一起返回
+
+
+#####################################################################
+
+
 				return result
 
 
@@ -54,7 +64,7 @@ class crossNetwork():
 
 
 
-	def createCrossList(self,crossData,startCross,endCross):
+	def createCrossList(self,startCross,endCross):
 
 		# 载入起始点，使用格式，每层两级，一级表示层，一级对应上层的实体枝干
 		self.crossList.append([[startCross]])
@@ -77,21 +87,21 @@ class crossNetwork():
 
 
 					# 默认cross索引是从1开始的
-					crossInfo = crossData[crossId-1]
+					crossInfo = self.crossData[crossId-1]
 					# print ("crossInfo=",crossInfo)
 
 					# 检查路标
-					cross1 = self.checkroadVaild(crossInfo[0],crossInfo[1])
-					cross2 = self.checkroadVaild(crossInfo[0],crossInfo[2])
-					cross3 = self.checkroadVaild(crossInfo[0],crossInfo[3])
-					cross4 = self.checkroadVaild(crossInfo[0],crossInfo[4])
+					cross1 = self.checkroadVV(crossInfo[0],crossInfo[1])
+					cross2 = self.checkroadVV(crossInfo[0],crossInfo[2])
+					cross3 = self.checkroadVV(crossInfo[0],crossInfo[3])
+					cross4 = self.checkroadVV(crossInfo[0],crossInfo[4])
 
 					# 本级为叶子，则下一级留空以防止错位
 					leavesCheck = []
 
 ##################################################
 
-## 价值函数排序可以在这里做，放在前面会先被for到
+## 价值函数排序可以在这里做，本级cross已经确定，下级cross的价值可以从前面return 回来，下级cross放在前面会先被for到
 
 ##################################################
 
@@ -133,13 +143,18 @@ def createNetwork(self,carData,roadData,crossData,startCross,endCross)：
 	# [carID,startPos,endPos,maxSpeed,takeoffTime]
 	# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
 	# [crossID,roadID1,roadID2,roadID3,roadID4]
-	
+
+	self.carData = carData
+	self.roadData = roadData
+	self.crossData = crossData
+
 	self.crossCollection = []
 	self.crossCollection = crossData.copy()
 	self.crossList = []
 
 
-	self.createCrossList(crossData,startCross,endCross)
+
+	self.createCrossList(startCross,endCross)
 
 
 
