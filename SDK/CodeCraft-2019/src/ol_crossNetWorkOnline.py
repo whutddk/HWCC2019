@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 14:17:26
+# @Last Modified time: 2019-03-21 15:12:51
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -18,14 +18,16 @@ class crossNetwork():
 
 	def __init__(self):
 		self.crossCollection = []
-		self.crossList = []
+		self.crossTree = []
 		self.carData = []
 		self.roadData = []
 		self.crossData = []
+		self.startCross = 1
+		self.endCross = 1
 		pass
 	
 
-	def checkroadVV(self,startCross,roadId):
+	def fw_checkroadVV(self,startCross,roadId):
 		result = -1
 		# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
 		
@@ -64,19 +66,19 @@ class crossNetwork():
 
 
 
-	def createCrossList(self,startCross,endCross):
+	def fw_createcrossTree(self,startCross,endCross):
 
 		# 载入起始点，使用格式，每层两级，一级表示层，一级对应上层的实体枝干
-		self.crossList.append([[startCross]])
+		self.crossTree.append([[self.startCross]])
 
 		# 集合中删除起始点
-		del self.crossCollection[startCross-1]
+		del self.crossCollection[self.startCross-1]
 
 		flagFound = 0
 		while(1):
 			OneCrossLever = []
 			# 扫描上一个层，即总表的最后一个list
-			lastLever = self.crossList[len(self.crossList)-1]
+			lastLever = self.crossTree[len(self.crossTree)-1]
 			for root in lastLever:
 				# print ("root=",root)
 				# 检查本层每个结点作为下一级的枝干
@@ -91,10 +93,10 @@ class crossNetwork():
 					# print ("crossInfo=",crossInfo)
 
 					# 检查路标
-					cross1 = self.checkroadVV(crossInfo[0],crossInfo[1])
-					cross2 = self.checkroadVV(crossInfo[0],crossInfo[2])
-					cross3 = self.checkroadVV(crossInfo[0],crossInfo[3])
-					cross4 = self.checkroadVV(crossInfo[0],crossInfo[4])
+					cross1 = self.fw_checkroadVV(crossInfo[0],crossInfo[1])
+					cross2 = self.fw_checkroadVV(crossInfo[0],crossInfo[2])
+					cross3 = self.fw_checkroadVV(crossInfo[0],crossInfo[3])
+					cross4 = self.fw_checkroadVV(crossInfo[0],crossInfo[4])
 
 					# 本级为叶子，则下一级留空以防止错位
 					leavesCheck = []
@@ -115,7 +117,7 @@ class crossNetwork():
 					if ( cross4 != -1 ):	
 						leavesCheck.append(cross4)
 					
-					if ( (cross1 == endCross) or (cross2 == endCross) or (cross3 == endCross) or (cross4 == endCross) ):
+					if ( (cross1 == self.endCross) or (cross2 == self.endCross) or (cross3 == self.endCross) or (cross4 == self.endCross) ):
 						flagFound = 1
 
 					# 本路口级增加一个枝干组
@@ -128,35 +130,73 @@ class crossNetwork():
 
 						self.roadList.append(OneCrossLever)
 
-						# 结束crosslist的生成
+						# 结束crossTree的生成
 						return 
-
-
 
 			self.roadList.append(OneCrossLever)
 
 		pass
 
 
-def createNetwork(self,carData,roadData,crossData,startCross,endCross)：
-
-	# [carID,startPos,endPos,maxSpeed,takeoffTime]
-	# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
-	# [crossID,roadID1,roadID2,roadID3,roadID4]
-
-	self.carData = carData
-	self.roadData = roadData
-	self.crossData = crossData
-
-	self.crossCollection = []
-	self.crossCollection = crossData.copy()
-	self.crossList = []
+####################################
 
 
+	def bw_SearchOneLever(self,lever,lastEleCnt):
+		upEleCnt = 0;
+		idCnt = 0
+		for ele in self.crossTree[lever]:
+			# print ("ele=",ele)
+			for crossID in ele:
 
-	self.createCrossList(startCross,endCross)
+				if (idCnt == lastEleCnt):
+					self.crossLine.insert(0,crossID)
+					return upEleCnt
+				idCnt = idCnt + 1;
+			upEleCnt = upEleCnt + 1
 
 
+	def bw_SortCross(self):
+
+		# 一共有多少层
+		lever = len(self.crossTree)
+		# 最后一层多少元件，决定上层的枝干编号
+		eleCnt = len(self.crossTree[len(self.crossTree)-1])
+
+		# 产生crossline
+
+		while(lever != 0):
+			lever = lever - 1
+			# print ("self.crossTree[lever]=",self.crossTree[lever])
+			eleCnt = self.bw_SearchOneLever(lever,eleCnt)
+
+		self.crossLine.append(endPos)
+
+		return
+
+
+
+	def createNetwork(self,carData,roadData,crossData,startCross,endCross)：
+
+		# [carID,startPos,endPos,maxSpeed,takeoffTime]
+		# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
+		# [crossID,roadID1,roadID2,roadID3,roadID4]
+
+		self.carData = carData
+		self.roadData = roadData
+		self.crossData = crossData
+		self.startCross = startCross
+		self.endCross = endCross
+
+		self.crossCollection = []
+		self.crossCollection = crossData.copy()
+		self.crossTree = []
+		self.crossLine = []
+
+
+		self.fw_createcrossTree()
+		self.bw_SortCross()
+
+		print ("crossLine="self.crossLine)
 
 
 

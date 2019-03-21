@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 11:35:27
+# @Last Modified time: 2019-03-21 14:18:18
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -39,81 +39,6 @@ def answer_init():
 	# 出发时间排序
 	fS.finalAnswer.sort(key=lambda x:x[3])
 	# print (finalAnswer)
-
-
-
-
-def find_roadLine(crossTree,lever,lastEleCnt):
-
-	# 产生roadline
-	flag_break = 0
-	roadLine = []
-
-	idAim = lastEleCnt
-	while(lever != 0):
-		lever = lever - 1
-
-		upEleCnt = 0;
-		idCnt = 0
-
-		# print ("crossTree[lever]=",crossTree[lever])
-		for ele in crossTree[lever]:
-			# print ("ele=",ele)
-			for crossID in ele:
-
-				if (idCnt == lastEleCnt):
-					roadLine.insert(0,crossID)
-					idAim = upEleCnt
-					flag_break = 1
-					break
-
-				idCnt = idCnt + 1;
-
-			if (flag_break == 1):
-				flag_break = 0
-				break
-
-			upEleCnt = upEleCnt + 1
-
-		lastEleCnt = upEleCnt
-
-
-	return roadLine
-
-
-def findEndPos(crossTree,endPos):
-
-	lever = len(crossTree)
-	aimID = endPos
-
-	# 找endPos
-	while(lever != 0):
-		lever = lever - 1
-		eleCnt = 0;
-		for ele in crossTree[lever]:
-			
-			for crossID in ele:
-				if (crossID == endPos):
-					return eleCnt,lever
-
-			eleCnt = eleCnt + 1
-
-
-
-
-def simpleShortestWay(startPos,endPos):
-
-	# 加载对应树
-	crossTree = crossNetworkData[startPos-1]
-
-	eleCnt,lever = findEndPos(crossTree,endPos)
-
-	roadline = find_roadLine(crossTree,lever,eleCnt)
-
-	roadline.append(endPos)
-
-	return roadline
-
 
 
 
