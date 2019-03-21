@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # @File Name: ol_crossNetWorkOnline.py
-# @File Path: K:\work\dark+PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_crossNetWorkOnline.py
+# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_crossNetWorkOnline.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
-# @Last Modified by:   29505
-# @Last Modified time: 2019-03-21 00:15:03
+# @Last Modified by:   Ruige_Lee
+# @Last Modified time: 2019-03-21 14:06:10
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -53,37 +53,8 @@ class crossNetwork():
 
 
 
-	def findNextCrossId(self,crossId):
-		crossInfo = crossData[crossId-1]
-		print ("crossInfo=",crossInfo)
 
-	# 检查路标
-		nextCross1 = checkroadVaild(crossInfo[0],crossInfo[1])
-		nextCross2 = checkroadVaild(crossInfo[0],crossInfo[2])
-		nextCross3 = checkroadVaild(crossInfo[0],crossInfo[3])
-		nextCross4 = checkroadVaild(crossInfo[0],crossInfo[4])
-
-		return nextCross1,nextCross2,nextCross3,nextCross4
-
-
-
-
-
-
-
-
-
-
-	def createNetwork(self,carData,roadData,crossData,startCross,endCross):
-
-		# [carID,startPos,endPos,maxSpeed,takeoffTime]
-		# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
-		# [crossID,roadID1,roadID2,roadID3,roadID4]
-		
-
-		self.crossCollection = []
-		self.crossCollection = crossData.copy()
-		self.crossList = []
+	def createCrossList(self,crossData,startCross,endCross):
 
 		# 载入起始点，使用格式，每层两级，一级表示层，一级对应上层的实体枝干
 		self.crossList.append([[startCross]])
@@ -102,8 +73,19 @@ class crossNetwork():
 				for crossId in root:
 					# print ("crossId=",crossId)
 
-					# 调用API查找下一级对应的节点
-					cross1,cross2,cross3,cross4 = self.findNextCrossId(crossId)
+					# 调用查找下一级对应的节点
+
+
+					# 默认cross索引是从1开始的
+					crossInfo = crossData[crossId-1]
+					# print ("crossInfo=",crossInfo)
+
+					# 检查路标
+					cross1 = self.checkroadVaild(crossInfo[0],crossInfo[1])
+					cross2 = self.checkroadVaild(crossInfo[0],crossInfo[2])
+					cross3 = self.checkroadVaild(crossInfo[0],crossInfo[3])
+					cross4 = self.checkroadVaild(crossInfo[0],crossInfo[4])
+
 					# 本级为叶子，则下一级留空以防止错位
 					leavesCheck = []
 
@@ -128,37 +110,36 @@ class crossNetwork():
 
 					# 本路口级增加一个枝干组
 					OneCrossLever.append(leavesCheck)
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 			
 			# print ( "路口未激活集合=",self.crossCollection )
 
 			# 判定完成条件，这里为找到目标点
-			if ( flagFound == 1 ):
+					if ( flagFound == 1 ):
 
-				roadList.append(OneCrossLever)
+						self.roadList.append(OneCrossLever)
 
-
-				return roadList
-
-
-
-			roadList.append(OneCrossLever)
-
-		pass
+						# 结束crosslist的生成
+						return 
 
 
 
-
-
-		return simpleShortestWay(i))
-
+			self.roadList.append(OneCrossLever)
 
 		pass
 
+
+def createNetwork(self,carData,roadData,crossData,startCross,endCross)：
+
+	# [carID,startPos,endPos,maxSpeed,takeoffTime]
+	# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
+	# [crossID,roadID1,roadID2,roadID3,roadID4]
+	
+	self.crossCollection = []
+	self.crossCollection = crossData.copy()
+	self.crossList = []
+
+
+	self.createCrossList(crossData,startCross,endCross)
 
 
 
