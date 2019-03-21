@@ -4,21 +4,23 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 14:18:18
+# @Last Modified time: 2019-03-21 15:39:57
 # @Email: 295054118@whut.edu.cn"
 
 
 import logging
 import sys
 import json
-import ol_fileSystem
+import ol_fileSystem 
+import ol_crossNetWorkOnline
 
 # car_path = '../config/car.txt'
 # road_path = '../config/road.txt'
 # cross_path = '../config/cross.txt'
 # answer_path = '../config/answer.txt'
 
-
+fS = ol_fileSystem.fS() 
+CNW = ol_crossNetWorkOnline.crossNetwork()
 
 logging.basicConfig(level=logging.DEBUG,
                     filename='../logs/CodeCraft-2019.log',
@@ -49,8 +51,8 @@ def cross2road(crossLine):
 	index = len(crossLine)
 	for i in range (0,index-1):
 		# print ( crossLine[i],crossLine[i+1] )
-		startCross = crossData[crossLine[i]-1]
-		endCross = crossData[crossLine[i+1]-1]
+		startCross = fS.crossData[crossLine[i]-1]
+		endCross = fS.crossData[crossLine[i+1]-1]
 
 		if ( (startCross[1] == endCross[1] or startCross[1] == endCross[2] or startCross[1] == endCross[3] or startCross[1] == endCross[4]) and (startCross[1] != -1) ):
 			roadLine.append( startCross[1] )
@@ -81,30 +83,26 @@ def createAnswer():
 	answer = fS.finalAnswer.copy()
 	fS.finalAnswer = []
 
+	additionalTime = 0
+	for data in answer:
+		if ( data[4] < additionalTime//16 ):
+			oneCar = [data[0],additionalTime//16]
+		else:
+			oneCar = [data[0],data[4]]
+		# print ( "Sort from ",data[1],"to",data[2] )
 
-	
+
+		crossLine = CNW.createNetwork(fS.carData,fS.roadData,fS.crossData,data[1],data[2])
+
+		roadLine = cross2road(crossLine)
+
+		oneCar.extend(roadLine)
+		
+		# print ( "oneCar=",oneCar )
+
 		
 
-		additionalTime = 0
-		for data in answer:
-			if ( data[4] < additionalTime//16 ):
-				oneCar = [data[0],additionalTime//16]
-			else:
-				oneCar = [data[0],data[4]]
-			# print ( "Sort from ",data[1],"to",data[2] )
-
-
-			crossLine = simpleShortestWay(data[1],data[2])
-
-			roadLine = cross2road(crossLine)
-
-			oneCar.extend(roadLine)
-			
-			# print ( "oneCar=",oneCar )
-
-			
-
-			additionalTime = additionalTime + 1 
+		additionalTime = additionalTime + 1 
 		# 	
 		# 	
 		# while(1):
@@ -112,30 +110,6 @@ def createAnswer():
 
 
 	pass
-
-
-
-
-
-
-# 车辆出发时间排序
-# 遍历车辆出发路口，A*寻找最短路径，作为结果
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -157,7 +131,8 @@ def main():
 
 ########################################
 	# fileSystem init
-	fS = fS() 
+
+
 
 	fS.load_data(road_path,cross_path,car_path)
 

@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 15:12:51
+# @Last Modified time: 2019-03-21 15:46:11
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -37,18 +37,19 @@ class crossNetwork():
 		# 默认路就是5000开始的
 		oneRoad = self.roadData[roadId-5000] 
 		# print ("oneRoad=",oneRoad)
-		if ( oneRoad[4] == startCross ):
+		if ( oneRoad[4] == startCross ):		
 			result = oneRoad[5]
 
-		elif ( oneRoad[5] == startCross and oneRoad[6] == 1 ):
+
+		elif ( oneRoad[5] == startCross and oneRoad[6] == 1 ):			
 			result = oneRoad[4]
 		else:
 			pass
 
-		for vaildCross in crossCollection:
+		for vaildCross in self.crossCollection:
 			if ( result == vaildCross[0] ):
-				print ( "checkroadVaild=Return" ,result)
-				crossCollection.remove(vaildCross)
+				# print ( "checkroadVaild=Return" ,result)
+				self.crossCollection.remove(vaildCross)
 
 #####################################################################
 	#如果这条路是有效的，在这里调用子函数计算这条路的价值，然后一起返回
@@ -66,7 +67,7 @@ class crossNetwork():
 
 
 
-	def fw_createcrossTree(self,startCross,endCross):
+	def fw_createcrossTree(self):
 
 		# 载入起始点，使用格式，每层两级，一级表示层，一级对应上层的实体枝干
 		self.crossTree.append([[self.startCross]])
@@ -128,12 +129,12 @@ class crossNetwork():
 			# 判定完成条件，这里为找到目标点
 					if ( flagFound == 1 ):
 
-						self.roadList.append(OneCrossLever)
+						self.crossTree.append(OneCrossLever)
 
 						# 结束crossTree的生成
 						return 
 
-			self.roadList.append(OneCrossLever)
+			self.crossTree.append(OneCrossLever)
 
 		pass
 
@@ -150,6 +151,7 @@ class crossNetwork():
 
 				if (idCnt == lastEleCnt):
 					self.crossLine.insert(0,crossID)
+					print ("upEleCnt=",upEleCnt)
 					return upEleCnt
 				idCnt = idCnt + 1;
 			upEleCnt = upEleCnt + 1
@@ -158,9 +160,13 @@ class crossNetwork():
 	def bw_SortCross(self):
 
 		# 一共有多少层
+		# print ("self.crossTree=",self.crossTree)
 		lever = len(self.crossTree)
+
 		# 最后一层多少元件，决定上层的枝干编号
+		# print ("lastLever=",self.crossTree[len(self.crossTree)-1])
 		eleCnt = len(self.crossTree[len(self.crossTree)-1])
+		# print ("eleCnt=",eleCnt)
 
 		# 产生crossline
 
@@ -169,13 +175,13 @@ class crossNetwork():
 			# print ("self.crossTree[lever]=",self.crossTree[lever])
 			eleCnt = self.bw_SearchOneLever(lever,eleCnt)
 
-		self.crossLine.append(endPos)
+		self.crossLine.append(self.endCross)
 
 		return
 
 
 
-	def createNetwork(self,carData,roadData,crossData,startCross,endCross)：
+	def createNetwork(self,carData,roadData,crossData,startCross,endCross):
 
 		# [carID,startPos,endPos,maxSpeed,takeoffTime]
 		# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
@@ -188,15 +194,19 @@ class crossNetwork():
 		self.endCross = endCross
 
 		self.crossCollection = []
-		self.crossCollection = crossData.copy()
+		self.crossCollection = self.crossData.copy()
 		self.crossTree = []
 		self.crossLine = []
 
-
+		# print ("forward")
+		print ("sort from",self.startCross,'to',self.endCross)
 		self.fw_createcrossTree()
+		# print ("backward")
 		self.bw_SortCross()
 
-		print ("crossLine="self.crossLine)
+		print ("crossLine=",self.crossLine)
+
+		return self.crossLine
 
 
 
