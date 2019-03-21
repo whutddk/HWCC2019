@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 17:03:21
+# @Last Modified time: 2019-03-21 16:59:52
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -39,8 +39,7 @@ def answer_init():
 	fS.finalAnswer = fS.carData
 
 	# 出发时间排序
-	fS.finalAnswer.sort(key=lambda x:x[4])
-	fS.finalAnswer.sort(key=lambda x:x[3],reverse=True)
+	fS.finalAnswer.sort(key=lambda x:x[3])
 	# print (finalAnswer)
 
 
@@ -86,8 +85,8 @@ def createAnswer():
 
 	additionalTime = 0
 	for data in answer:
-		if ( data[4] < additionalTime//25 ):
-			oneCar = [data[0],additionalTime//25]
+		if ( data[4] < additionalTime//16 ):
+			oneCar = [data[0],additionalTime//16]
 		else:
 			oneCar = [data[0],data[4]]
 		# print ( "Sort from ",data[1],"to",data[2] )

@@ -4,13 +4,13 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 17:03:29
+# @Last Modified time: 2019-03-21 17:24:20
 # @Email: 295054118@whut.edu.cn"
 
 
 
 import sys
-
+import ol_roadValueRisk
 
 class crossNetwork():
 
@@ -22,6 +22,7 @@ class crossNetwork():
 		self.crossData = []
 		self.startCross = 1
 		self.endCross = 1
+		self.RDV = ol_roadValueRisk.roadValue()
 		pass
 	
 
@@ -30,7 +31,7 @@ class crossNetwork():
 		# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
 		
 		if ( roadId == -1 ):
-			return result
+			return result,0
 
 		# 默认路就是5000开始的
 		oneRoad = self.roadData[roadId-5000] 
@@ -50,17 +51,18 @@ class crossNetwork():
 				self.crossCollection.remove(vaildCross)
 
 #####################################################################
-	#如果这条路是有效的，在这里调用子函数计算这条路的价值，然后一起返回
-
+	#如果这条路是有效的，在这里调用子函数计算这条路的价值，然后一起返回,
+	#可以参考的参数：道路的最高速，当前车的最高速，道路长度，车道数
+				roadValue = self.RDV.RD_Value(oneRoad[1],oneRoad[2],oneRoad[3])
 
 #####################################################################
 
 
-				return result
+				return result,roadValue
 
 
 		# print ( "checkroadVaild=Return" ,-1)
-		return -1
+		return -1,0
 
 
 
@@ -92,10 +94,10 @@ class crossNetwork():
 					# print ("crossInfo=",crossInfo)
 
 					# 检查路标
-					cross1 = self.fw_checkroadVV(crossInfo[0],crossInfo[1])
-					cross2 = self.fw_checkroadVV(crossInfo[0],crossInfo[2])
-					cross3 = self.fw_checkroadVV(crossInfo[0],crossInfo[3])
-					cross4 = self.fw_checkroadVV(crossInfo[0],crossInfo[4])
+					cross1Temp,value1 = self.fw_checkroadVV(crossInfo[0],crossInfo[1])
+					cross2Temp,value2 = self.fw_checkroadVV(crossInfo[0],crossInfo[2])
+					cross3Temp,value3 = self.fw_checkroadVV(crossInfo[0],crossInfo[3])
+					cross4Temp,value4 = self.fw_checkroadVV(crossInfo[0],crossInfo[4])
 
 					# 本级为叶子，则下一级留空以防止错位
 					leavesCheck = []
@@ -103,8 +105,21 @@ class crossNetwork():
 ##################################################
 
 ## 价值函数排序可以在这里做，本级cross已经确定，下级cross的价值可以从前面return 回来，下级cross放在前面会先被for到
+#
+					SortListTemp = [[cross1Temp,value1],[cross2Temp,value2],[cross3Temp,value3],[cross4Temp,value4]]
+					# print( "SortListTemp=B",SortListTemp )
+					SortListTemp.sort(key=lambda x:x[1])
+					# print( "SortListTemp=A",SortListTemp )
+
+
+					cross1 = SortListTemp[3][0]
+					cross2 = SortListTemp[2][0]
+					cross3 = SortListTemp[1][0]
+					cross4 = SortListTemp[0][0]
 
 ##################################################
+					
+
 
 
 					if ( cross1 != -1 ):

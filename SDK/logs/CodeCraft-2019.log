@@ -245,6 +245,7 @@
 [2019-03-21 16:06:08] INFO [main: CodeCraft-2019.py, 128] road_path is config/road.txt
 [2019-03-21 16:06:08] INFO [main: CodeCraft-2019.py, 129] cross_path is config/cross.txt
 [2019-03-21 16:06:08] INFO [main: CodeCraft-2019.py, 130] answer_path is config/answer.txt
+<<<<<<< HEAD
 [2019-03-21 17:03:03] INFO [main: CodeCraft-2019.py, 128] car_path is config/car.txt
 [2019-03-21 17:03:03] INFO [main: CodeCraft-2019.py, 129] road_path is config/road.txt
 [2019-03-21 17:03:03] INFO [main: CodeCraft-2019.py, 130] cross_path is config/cross.txt
@@ -253,3 +254,33 @@
 [2019-03-21 17:03:33] INFO [main: CodeCraft-2019.py, 129] road_path is config/road.txt
 [2019-03-21 17:03:33] INFO [main: CodeCraft-2019.py, 130] cross_path is config/cross.txt
 [2019-03-21 17:03:33] INFO [main: CodeCraft-2019.py, 131] answer_path is config/answer.txt
+=======
+[2019-03-21 16:45:33] INFO [main: CodeCraft-2019.py, 127] car_path is config/car.txt
+[2019-03-21 16:45:33] INFO [main: CodeCraft-2019.py, 128] road_path is config/road.txt
+[2019-03-21 16:45:33] INFO [main: CodeCraft-2019.py, 129] cross_path is config/cross.txt
+[2019-03-21 16:45:33] INFO [main: CodeCraft-2019.py, 130] answer_path is config/answer.txt
+[2019-03-21 16:46:22] INFO [main: CodeCraft-2019.py, 127] car_path is config/car.txt
+[2019-03-21 16:46:22] INFO [main: CodeCraft-2019.py, 128] road_path is config/road.txt
+[2019-03-21 16:46:22] INFO [main: CodeCraft-2019.py, 129] cross_path is config/cross.txt
+[2019-03-21 16:46:22] INFO [main: CodeCraft-2019.py, 130] answer_path is config/answer.txt
+[2019-03-21 16:49:03] INFO [main: CodeCraft-2019.py, 127] car_path is config/car.txt
+[2019-03-21 16:49:03] INFO [main: CodeCraft-2019.py, 128] road_path is config/road.txt
+[2019-03-21 16:49:03] INFO [main: CodeCraft-2019.py, 129] cross_path is config/cross.txt
+[2019-03-21 16:49:03] INFO [main: CodeCraft-2019.py, 130] answer_path is config/answer.txt
+[2019-03-21 16:50:12] INFO [main: CodeCraft-2019.py, 127] car_path is config/car.txt
+[2019-03-21 16:50:12] INFO [main: CodeCraft-2019.py, 128] road_path is config/road.txt
+[2019-03-21 16:50:12] INFO [main: CodeCraft-2019.py, 129] cross_path is config/cross.txt
+[2019-03-21 16:50:12] INFO [main: CodeCraft-2019.py, 130] answer_path is config/answer.txt
+[2019-03-21 16:53:34] INFO [main: CodeCraft-2019.py, 127] car_path is config/car.txt
+[2019-03-21 16:53:34] INFO [main: CodeCraft-2019.py, 128] road_path is config/road.txt
+[2019-03-21 16:53:34] INFO [main: CodeCraft-2019.py, 129] cross_path is config/cross.txt
+[2019-03-21 16:53:34] INFO [main: CodeCraft-2019.py, 130] answer_path is config/answer.txt
+[2019-03-21 16:53:56] INFO [main: CodeCraft-2019.py, 127] car_path is config/car.txt
+[2019-03-21 16:53:56] INFO [main: CodeCraft-2019.py, 128] road_path is config/road.txt
+[2019-03-21 16:53:56] INFO [main: CodeCraft-2019.py, 129] cross_path is config/cross.txt
+[2019-03-21 16:53:56] INFO [main: CodeCraft-2019.py, 130] answer_path is config/answer.txt
+[2019-03-21 17:00:00] INFO [main: CodeCraft-2019.py, 127] car_path is config/car.txt
+[2019-03-21 17:00:00] INFO [main: CodeCraft-2019.py, 128] road_path is config/road.txt
+[2019-03-21 17:00:00] INFO [main: CodeCraft-2019.py, 129] cross_path is config/cross.txt
+[2019-03-21 17:00:00] INFO [main: CodeCraft-2019.py, 130] answer_path is config/answer.txt
+>>>>>>> feature/roadValueRisk
