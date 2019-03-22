@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-22 14:34:54
+# @Last Modified time: 2019-03-22 14:57:06
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -14,12 +14,12 @@ import ol_roadValueRisk
 import ol_workingCard
 
 
-class crossNetwork(carData,roadData,crossData):
+class crossNetwork():
 
 	def __init__(self):
-		self.carData = carData
-		self.roadData = roadData
-		self.crossData = crossData
+		self.carData = []
+		self.roadData = []
+		self.crossData = []
 
 		self.crossCollection = []
 		self.crossTree = []
@@ -32,7 +32,7 @@ class crossNetwork(carData,roadData,crossData):
 
 
 		self.RDV = ol_roadValueRisk.roadValue()
-		self.wCard = ol_workingCard.workingCard(self.carData,self.roadData)
+		self.wCard = ol_workingCard.workingCard()
 
 		pass
 	
@@ -293,7 +293,11 @@ class crossNetwork(carData,roadData,crossData):
 		return self.roadLine
 
 
-
+		def crossNetwork_init(self,carData,roadData,crossData):
+			self.carData = carData
+			self.roadData = roadData
+			self.crossData = crossData
+			pass
 
 
 

@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-22 09:32:33
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-22 14:45:49
+# @Last Modified time: 2019-03-22 14:54:11
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_workingCard.py
@@ -25,9 +25,9 @@ SEARCHSLICE = 30
 # [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
 # [crossID,roadID1,roadID2,roadID3,roadID4]
 
-class workingCard(carData,roadData):
+class workingCard():
 
-	def __init__(self):
+	def __init__(self,carData,roadData):
 		self.card = []
 		self.roadData = roadData
 		self.carData = carData
