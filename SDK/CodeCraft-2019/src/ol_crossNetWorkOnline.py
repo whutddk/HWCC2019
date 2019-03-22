@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-22 11:51:19
+# @Last Modified time: 2019-03-22 14:34:54
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -32,44 +32,48 @@ class crossNetwork(carData,roadData,crossData):
 
 
 		self.RDV = ol_roadValueRisk.roadValue()
-		self.wK = ol_workingCard.workingCard(self.carData,self.roadData)
+		self.wCard = ol_workingCard.workingCard(self.carData,self.roadData)
 
 		pass
 	
 
 	def fw_checkroadVV(self,startCross,roadId):
-		result = -1
+
+		nextCross = -1
 		# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
 		
 		if ( roadId == -1 ):
-			return result,0
+			return nextCross,0
 
 		# 默认路就是5000开始的
 		oneRoad = self.roadData[roadId-5000] 
 		# print ("oneRoad=",oneRoad)
 		if ( oneRoad[4] == startCross ):		
-			result = oneRoad[5]
-
+			nextCross = oneRoad[5]
+			roadDir = 0
 
 		elif ( oneRoad[5] == startCross and oneRoad[6] == 1 ):			
-			result = oneRoad[4]
+			nextCross = oneRoad[4]
+			roadDir = 1
 		else:
 			pass
 
 		for vaildCross in self.crossCollection:
-			if ( result == vaildCross[0] ):
-				# print ( "checkroadVaild=Return" ,result)
+			if ( nextCross == vaildCross[0] ):
+				# print ( "checkroadVaild=Return" ,nextCross)
 				self.crossCollection.remove(vaildCross)
 
 #####################################################################
 	#如果这条路是有效的，在这里调用子函数计算这条路的价值，然后一起返回,
 	#可以参考的参数：道路的最高速，当前车的最高速，道路长度，车道数
-				roadValue = self.RDV.RD_Value(oneRoad[1],oneRoad[2],oneRoad[3])
+	
+				roadValue = self.wCard.queryCardOnce(roadId,roadDir)
+				# roadValue = self.RDV.RD_Value(oneRoad[1],oneRoad[2],oneRoad[3])
 
 #####################################################################
 
 
-				return result,roadValue
+				return nextCross,roadValue
 
 
 		# print ( "checkroadVaild=Return" ,-1)
@@ -220,15 +224,29 @@ class crossNetwork(carData,roadData,crossData):
 			endCrossTemp = self.crossData[self.crossLine[i+1]-1]
 
 			if ( (startCrossTemp[1] == endCrossTemp[1] or startCrossTemp[1] == endCrossTemp[2] or startCrossTemp[1] == endCrossTemp[3] or startCrossTemp[1] == endCrossTemp[4]) and (startCrossTemp[1] != -1) ):
-				self.roadLine.append( startCrossTemp[1] )
+				RoadID = startCrossTemp[1]
 			elif ( (startCrossTemp[2] == endCrossTemp[1] or startCrossTemp[2] == endCrossTemp[2] or startCrossTemp[2] == endCrossTemp[3] or startCrossTemp[2] == endCrossTemp[4]) and (startCrossTemp[2] != -1)):
-				self.roadLine.append( startCrossTemp[2] )
+				RoadID = startCrossTemp[2]
 			elif ( (startCrossTemp[3] == endCrossTemp[1] or startCrossTemp[3] == endCrossTemp[2] or startCrossTemp[3] == endCrossTemp[3] or startCrossTemp[3] == endCrossTemp[4]) and (startCrossTemp[3] != -1)):
-				self.roadLine.append( startCrossTemp[3] )
+				RoadID = startCrossTemp[3]
 			elif ( (startCrossTemp[4] == endCrossTemp[1] or startCrossTemp[4] == endCrossTemp[2] or startCrossTemp[4] == endCrossTemp[3] or startCrossTemp[4] == endCrossTemp[4]) and (startCrossTemp[4] != -1)):
-				self.roadLine.append( startCrossTemp[4] )
-			# else:
+				RoadID = startCrossTemp[4]
+
 			# print("warning",startCross,endCross)
+			self.roadLine.append( RoadID )
+
+#######################################
+
+# 外挂式加载道路工作卡
+			# 岔道ID == 
+			if ( self.crossLine[i] == self.roadData[RoadID-5000][4] ):
+				roadDir = 0
+			else:
+				roadDir = 1
+
+			self.wCard.wCard_pushOneRoad( RoadID,roadDir )
+
+#######################################
 
 
 		# print ("roadLine=",roadLine)
@@ -256,20 +274,20 @@ class crossNetwork(carData,roadData,crossData):
 		self.crossLine = []
 		self.roadLine = []
 
+		
+		self.wCard.wCrad_init(self.takeoffTime,self.carID)
+
 
 
 
 		# print ("sort from",self.startCross,'to',self.endCross)
-		queryCardOnce(self,startTimeSlice,roadID,roadDir)
-
-
 		self.fw_createcrossTree()
 		self.bw_SortCross()
 		# print ("crossLine=",self.crossLine)
 		self.cross2road()
 
-		# 强制onePreAnswer格式处理为（车，起飞时间，路，0/1，路，0/1.。。。）
-		updateCard(self,onePreAnswer)
+
+		self.wCard.updateCard()
 
 
 		return self.roadLine
