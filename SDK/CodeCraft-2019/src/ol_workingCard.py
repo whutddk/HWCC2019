@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-22 09:32:33
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-22 10:53:09
+# @Last Modified time: 2019-03-22 11:51:46
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_workingCard.py
@@ -24,7 +24,7 @@ ROAD_CNT = 200
 	# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
 	# [crossID,roadID1,roadID2,roadID3,roadID4]
 
-class workingCard():
+class workingCard(carData,roadData):
 
 	def __init__(self):
 		self.card = []
@@ -37,9 +37,9 @@ class workingCard():
 				timeSlice.append([0,0])
 			self.card.append(timeSlice)
 
-	def load_data(self,carData,roadData):
 		self.roadData = roadData
 		self.carData = carData
+
 
 		# 用于得出新结果后刷新工作牌，需要maxSpeed,takeoffTime，roadLength,maxSpeed,chnNum,行驶方向
 	
@@ -72,13 +72,13 @@ class workingCard():
 		# 用于评估路线时绕开拥堵路段
 
 		# 抽象为出发时刻后一段时间内的情况
-	def queryCardOnce(self,startTiemSlice,roadID,roadDir):
+	def queryCardOnce(self,startTimeSlice,roadID,roadDir):
 		
 		SEARCHSLICE = 30
 		maxCarNum = 0;
 		roadChnNum = self.roadData[roadID-5000][3]
 
-		for slice in range (startTiemSlice,startTiemSlice + SEARCHSLICE):
+		for slice in range (startTimeSlice,startTimeSlice + SEARCHSLICE):
 			maxCarNum = max(maxCarNum,self.card[slice][roadID-5000][roadDir])
 
 		return carNum,roadChnNum

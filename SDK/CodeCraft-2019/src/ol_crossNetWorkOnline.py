@@ -4,28 +4,36 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 21:11:00
+# @Last Modified time: 2019-03-22 11:51:19
 # @Email: 295054118@whut.edu.cn"
 
 
 
 import sys
 import ol_roadValueRisk
+import ol_workingCard
 
-class crossNetwork():
+
+class crossNetwork(carData,roadData,crossData):
 
 	def __init__(self):
+		self.carData = carData
+		self.roadData = roadData
+		self.crossData = crossData
+
 		self.crossCollection = []
 		self.crossTree = []
-		self.carData = []
-		self.roadData = []
-		self.crossData = []
+
+		self.carID = []
 		self.startCross = 1
 		self.endCross = 1
+		self.takeoffTime = []
 		self.roadLine = []
 
 
 		self.RDV = ol_roadValueRisk.roadValue()
+		self.wK = ol_workingCard.workingCard(self.carData,self.roadData)
+
 		pass
 	
 
@@ -229,17 +237,18 @@ class crossNetwork():
 
 
 
-	def createNetwork(self,carData,roadData,crossData,startCross,endCross):
+	def createNetwork(self,oneCar):
 
 		# [carID,startPos,endPos,maxSpeed,takeoffTime]
 		# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
 		# [crossID,roadID1,roadID2,roadID3,roadID4]
 
-		self.carData = carData
-		self.roadData = roadData
-		self.crossData = crossData
-		self.startCross = startCross
-		self.endCross = endCross
+
+
+		self.carID = oneCar[0]		
+		self.startCross = oneCar[1]
+		self.endCross = oneCar[2]
+		self.takeoffTime = oneCar[4]
 
 		self.crossCollection = []
 		self.crossCollection = self.crossData.copy()
@@ -247,15 +256,21 @@ class crossNetwork():
 		self.crossLine = []
 		self.roadLine = []
 
-		# print ("forward")
+
+
+
 		# print ("sort from",self.startCross,'to',self.endCross)
+		queryCardOnce(self,startTimeSlice,roadID,roadDir)
+
+
 		self.fw_createcrossTree()
-		# print ("backward")
 		self.bw_SortCross()
-
 		# print ("crossLine=",self.crossLine)
-
 		self.cross2road()
+
+		# 强制onePreAnswer格式处理为（车，起飞时间，路，0/1，路，0/1.。。。）
+		updateCard(self,onePreAnswer)
+
 
 		return self.roadLine
 
