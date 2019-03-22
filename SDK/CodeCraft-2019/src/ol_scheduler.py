@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-21 20:25:35
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 21:12:28
+# @Last Modified time: 2019-03-22 11:18:44
 # @Email: 295054118@whut.edu.cn"
 
 # [carID,startPos,endPos,maxSpeed,takeoffTime]
@@ -38,30 +38,30 @@ class scheduler():
 		# 高速先排路线
 		self.targetList.sort(key=lambda x:x[3],reverse=True)
 	
+
+		additionalTime = 0
+		
+		for ans in range(0,len(self.targetList)):
+			if ( self.targetList[ans][4] < additionalTime//25 ):
+				self.targetList[ans][4] = additionalTime//25
+			else:
+				pass
+			
+			additionalTime = additionalTime + 1 
+
+
+
 	
 	def fin_scheduler(self,preAnswer):
 
 
 		self.preAnswer = preAnswer
 
+		# 多岔路后行
 		# self.preAnswer.sort(key = lambda i:len(i)) 
-
-
-
-		additionalTime = 0
-		
-		for ans in range(0,len(self.preAnswer)):
-			if ( self.preAnswer[ans][1] < additionalTime//25 ):
-				self.preAnswer[ans][1] = additionalTime//25
-			else:
-				pass
-			
-			additionalTime = additionalTime + 1 
 
 		# for ans in self.preAnswer:
 		# 	print (ans)
-
-
 
 		return self.preAnswer
 
