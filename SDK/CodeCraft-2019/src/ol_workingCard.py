@@ -1,5 +1,14 @@
+# -*- coding: utf-8 -*-
 # @File Name: ol_workingCard.py
-# @File Path: K:\work\dark+PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_workingCard.py
+# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_workingCard.py
+# @Author: Ruige_Lee
+# @Date:   2019-03-22 09:32:33
+# @Last Modified by:   Ruige_Lee
+# @Last Modified time: 2019-03-22 10:53:09
+# @Email: 295054118@whut.edu.cn"
+
+# @File Name: ol_workingCard.py
+# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_workingCard.py
 # @Author: 29505
 # @Date:   2019-03-21 23:33:11
 # @Last Modified by:   29505
@@ -20,6 +29,7 @@ class workingCard():
 	def __init__(self):
 		self.card = []
 		self.roadData = []
+		self.carData = []
 
 		for i in range (0,SCHEDULE_SILCE):
 			timeSlice = []
@@ -27,33 +37,55 @@ class workingCard():
 				timeSlice.append([0,0])
 			self.card.append(timeSlice)
 
-	def load_data(self,roadData):
+	def load_data(self,carData,roadData):
 		self.roadData = roadData
+		self.carData = carData
 
 		# 用于得出新结果后刷新工作牌，需要maxSpeed,takeoffTime，roadLength,maxSpeed,chnNum,行驶方向
+	
+		# 强制onePreAnswer格式处理为（车，起飞时间，路，0/1，路，0/1.。。。）
 	def updateCard(self,onePreAnswer):
 
-		schTime = onePreAnswer[]
-		roadID = onePreAnswer[]
+		carID = onePreAnswer[0]
+		carSpeed = self.carData[carID][3]
+		schTime = onePreAnswer[1]		
+		roadPointer = 2
 
-		while(1):
-			self.card[schTime][roadId1][] ++
-			if (lenght /speed > schTime):
-				roadid++
-			if (roadid overflow):
-				break
+		while( roadPointer < len(onePreAnswer) ):
+			
+			roadID = onePreAnswer[roadPointer]
+			roadDir = onePreAnswer[roadPointer+1]
+			roadLength = self.roadData[roadID-5000][1]
+			roadSpeed = self.roadData[roadID-5000][2]
 
+			maxSpeed = min(roadSpeed,carSpeed)
+
+			self.card[schTime][roadID-5000][roadDir] = self.card[schTime][roadID][roadDir] + 1
+			if ( roadLength // maxSpeed < schTime):
+				roadPointer = roadPointer + 2
+
+			schTime = schTime + 1
 
 		return 0
 
 
 		# 用于评估路线时绕开拥堵路段
-		# 可精确配平，也可以抽线为出发时刻后一段时间内的情况
-	def queryCard(self):
-		pass
 
+		# 抽象为出发时刻后一段时间内的情况
+	def queryCardOnce(self,startTiemSlice,roadID,roadDir):
+		
+		SEARCHSLICE = 30
+		maxCarNum = 0;
+		roadChnNum = self.roadData[roadID-5000][3]
 
+		for slice in range (startTiemSlice,startTiemSlice + SEARCHSLICE):
+			maxCarNum = max(maxCarNum,self.card[slice][roadID-5000][roadDir])
 
+		return carNum,roadChnNum
+
+	# 可精确配平，也可以
+	def queryCardPerious(self):
+		pass		
 
 
 
