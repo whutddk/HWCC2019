@@ -20,7 +20,7 @@ import sys
 SCHEDULE_SILCE = 1000
 ROAD_CNT = 200
 
-SEARCHSLICE = 30
+SEARCHSLICE = 0
 # [carID,startPos,endPos,maxSpeed,takeoffTime]
 # [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
 # [crossID,roadID1,roadID2,roadID3,roadID4]
@@ -87,10 +87,10 @@ class workingCard():
 		for slice in range (self.startTimeSlice,self.startTimeSlice + SEARCHSLICE):
 			maxCarNum = max(maxCarNum,self.card[slice][roadID-5000][roadDir])
 
-			if ( roadChnNum > maxCarNum ):
-				return roadChnNum - maxCarNum
-			else:
-				return 0
+			# if ( roadChnNum > maxCarNum ):
+		return roadChnNum - maxCarNum
+			# else:
+
 
 
 	# 可精确配平，也可以
