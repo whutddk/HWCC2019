@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-23 16:52:15
+# @Last Modified time: 2019-03-23 16:57:46
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -107,7 +107,7 @@ class crossNetwork():
 	def fw_createcrossTree(self):
 
 		# 载入起始点，使用格式，每层两级，一级表示层，一级对应上层的实体枝干
-		self.crossTree.append([[self.startCross,0]])
+		self.crossTree.append([[[self.startCross,0]]])
 
 		# 集合中删除起始点
 		del self.crossCollection[self.startCross-1]
@@ -200,7 +200,7 @@ class crossNetwork():
 			for crossID in ele:
 
 				if (idCnt == lastEleCnt):
-					self.crossLine.insert(0,crossID)
+					self.crossLine.insert(0,crossID[0])
 					# print ("upEleCnt=",upEleCnt)
 					return upEleCnt
 				idCnt = idCnt + 1;
