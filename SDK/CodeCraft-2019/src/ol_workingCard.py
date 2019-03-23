@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-22 09:32:33
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-23 11:11:30
+# @Last Modified time: 2019-03-23 16:58:07
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_workingCard.py
@@ -67,15 +67,15 @@ class workingCard():
 				maxSpeed = min(roadSpeed,carSpeed)
 
 				self.card[schTime][roadID-5000][roadDir] = self.card[schTime][roadID-5000][roadDir] + 1
-				print( "schTime,roadID,roadDir=",schTime,roadID,roadDir  )
-				print (self.card[schTime][roadID-5000][roadDir])
+				# print( "schTime,roadID,roadDir=",schTime,roadID,roadDir  )
+				# print (self.card[schTime][roadID-5000][roadDir])
 				schTime = schTime + 1
 
 				if ( roadLength // maxSpeed < schTime):
 					# print ('break')
 					break
 
-		print ("update finish")	
+		# print ("update finish")	
 
 		return 0
 
