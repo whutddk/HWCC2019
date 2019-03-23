@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-23 16:57:46
+# @Last Modified time: 2019-03-23 17:01:21
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -32,7 +32,7 @@ class crossNetwork():
 
 
 		self.RDV = ol_roadValueRisk.roadValue()
-		self.wCard = ol_workingCard.workingCard()
+		# self.wCard = ol_workingCard.workingCard()
 
 		pass
 	
@@ -261,12 +261,12 @@ class crossNetwork():
 
 # 外挂式加载道路工作卡
 			# 岔道ID == 
-			if ( self.crossLine[i] == self.roadData[RoadID-5000][4] ):
-				roadDir = 0
-			else:
-				roadDir = 1
+			# if ( self.crossLine[i] == self.roadData[RoadID-5000][4] ):
+			# 	roadDir = 0
+			# else:
+			# 	roadDir = 1
 
-			self.wCard.wCard_pushOneRoad( RoadID,roadDir )
+			# self.wCard.wCard_pushOneRoad( RoadID,roadDir )
 
 #######################################
 
@@ -297,7 +297,7 @@ class crossNetwork():
 		self.roadLine = []
 
 		# print( "CMW.carID=",self.carID )
-		self.wCard.wCard_reset(self.takeoffTime,self.carID)
+		# self.wCard.wCard_reset(self.takeoffTime,self.carID)
 
 
 
@@ -309,7 +309,7 @@ class crossNetwork():
 		self.cross2road()
 
 
-		self.wCard.updateCard()
+		# self.wCard.updateCard()
 
 
 		return self.roadLine
@@ -321,7 +321,7 @@ class crossNetwork():
 		self.crossData = crossData
 
 
-		self.wCard.wCard_init(self.roadData,self.carData)
+		# self.wCard.wCard_init(self.roadData,self.carData)
 		pass
 
 
