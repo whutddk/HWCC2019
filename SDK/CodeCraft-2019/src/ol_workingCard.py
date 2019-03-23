@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-22 09:32:33
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-23 10:18:28
+# @Last Modified time: 2019-03-23 10:23:14
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_workingCard.py
@@ -49,8 +49,8 @@ class workingCard():
 	
 	def updateCard(self):
 
-		print("self.carID=",self.carID)
-		print( "self.carData[self.carID]=",self.carData[self.carID-10000] )
+		# print("self.carID=",self.carID)
+		# print( "self.carData[self.carID]=",self.carData[self.carID-10000] )
 		carSpeed = self.carData[self.carID-10000][3]
 
 		schTime = self.startTimeSlice	
@@ -88,8 +88,8 @@ class workingCard():
 			maxCarNum = max(maxCarNum,self.card[slice][roadID-5000][roadDir])
 
 			if ( roadChnNum > maxCarNum ):
-				return roadChnNum - maxCarNum
-
+				# return roadChnNum - maxCarNum
+				return 0
 			else:
 				return 0
 
