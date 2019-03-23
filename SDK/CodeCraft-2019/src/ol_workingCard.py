@@ -88,8 +88,7 @@ class workingCard():
 			maxCarNum = max(maxCarNum,self.card[slice][roadID-5000][roadDir])
 
 			if ( roadChnNum > maxCarNum ):
-				# return roadChnNum - maxCarNum
-				return 0
+				return roadChnNum - maxCarNum
 			else:
 				return 0
 

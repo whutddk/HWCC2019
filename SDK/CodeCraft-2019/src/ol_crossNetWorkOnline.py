@@ -67,8 +67,8 @@ class crossNetwork():
 	#如果这条路是有效的，在这里调用子函数计算这条路的价值，然后一起返回,
 	#可以参考的参数：道路的最高速，当前车的最高速，道路长度，车道数
 	
-				roadValue = self.wCard.queryCardOnce(roadId,roadDir)
-				# roadValue = self.RDV.RD_Value(oneRoad[1],oneRoad[2],oneRoad[3])
+				# roadValue = self.wCard.queryCardOnce(roadId,roadDir)
+				roadValue = self.RDV.RD_Value(oneRoad[1],oneRoad[2],oneRoad[3])
 
 #####################################################################
 
