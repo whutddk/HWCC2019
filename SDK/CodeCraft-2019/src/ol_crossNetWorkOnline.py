@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-22 19:16:59
+# @Last Modified time: 2019-03-23 10:12:45
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -275,7 +275,7 @@ class crossNetwork():
 		self.roadLine = []
 
 		
-		self.wCard.wCrad_init(self.takeoffTime,self.carID)
+		self.wCard.wCard_reset(self.takeoffTime,self.carID)
 
 
 
@@ -293,14 +293,14 @@ class crossNetwork():
 		return self.roadLine
 
 
-		def crossNetwork_init(self,carData,roadData,crossData):
-			self.carData = carData
-			self.roadData = roadData
-			self.crossData = crossData
+	def crossNetwork_init(self,carData,roadData,crossData):
+		self.carData = carData
+		self.roadData = roadData
+		self.crossData = crossData
 
 
-			self.carData,self.roadData
-			pass
+		self.wCard.wCard_init(self.roadData,self.carData)
+		pass
 
 
 

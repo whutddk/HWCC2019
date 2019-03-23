@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-22 14:55:43
+# @Last Modified time: 2019-03-23 10:10:13
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -49,7 +49,7 @@ def createAnswer():
 		
 		oneCar = [car[0],car[4]]
 
-		roadLine  = CNW.createNetwork(fS.carData,fS.roadData,fS.crossData,car)
+		roadLine  = CNW.createNetwork(car)
 		
 		oneCar.extend(roadLine)
 		
@@ -82,7 +82,7 @@ def main():
 
 
 	fS.load_data(road_path,cross_path,car_path)
-
+	CNW.crossNetwork_init(fS.carData,fS.roadData,fS.crossData)
 
 	sch.pre_scheduler(fS.carData,fS.roadData,fS.crossData)
 

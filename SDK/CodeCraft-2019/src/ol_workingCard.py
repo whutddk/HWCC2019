@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-22 09:32:33
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-22 19:17:00
+# @Last Modified time: 2019-03-23 10:12:22
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_workingCard.py
@@ -29,8 +29,8 @@ class workingCard():
 
 	def __init__(self):
 		self.card = []
-		self.roadData = roadData
-		self.carData = carData
+		self.roadData = []
+		self.carData = []
 
 		self.carID = 0
 		self.startTimeSlice = 0
@@ -96,13 +96,16 @@ class workingCard():
 		pass		
 
 
+	def wCard_init(self,roadData,carData):
+		self.roadData = roadData
+		self.carData = carData
 
-	def wCrad_init(self,startTimeSlice,carID):
+	def wCard_reset(self,startTimeSlice,carID):
 		self.startTimeSlice = startTimeSlice
 		self.roadList = []
 
 		self.carID = carID
-		
+
 
 	def wCard_pushOneRoad(self,RoadID,roadDir):
 		self.roadList.append([RoadID,roadDir])
