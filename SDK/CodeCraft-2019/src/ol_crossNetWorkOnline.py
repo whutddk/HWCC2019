@@ -71,27 +71,27 @@ class crossNetwork():
 				roadValue = self.RDV.RD_Value(oneRoad[1],oneRoad[2],oneRoad[3])
 				
 				# [crossID,roadID1,roadID2,roadID3,roadID4]
-				# if ( roadId == self.crossData[startCross-1][1]  ):
-				# 	retDir = 1
-				# elif ( roadId == self.crossData[startCross-1][2]  ):
-				# 	retDir = 2
-				# elif ( roadId == self.crossData[startCross-1][3]  ):
-				# 	retDir = 3
-				# elif ( roadId == self.crossData[startCross-1][4]  ):
-				# 	retDir = 4
-				# else:
-				# 	print ("error!")
-				# 	while(1):
-				# 		pass
-				# # 直行
-				# if ( retDir == preDir ):
-				# 	roadValue = 4
-				# elif ( (preDir == 1 and retDir == 4) or (preDir == 2 and retDir == 1) or (preDir == 3 and retDir == 2) or (preDir == 4 and retDir == 3)):
-				# 	roadValue = 3
-				# elif ( (preDir == 1 and retDir == 4) or (preDir == 2 and retDir == 1) or (preDir == 3 and retDir == 2) or (preDir == 4 and retDir == 3)):
-				# 	roadValue = 2
-				# else:
-				# 	roadValue = 0
+				if ( roadId == self.crossData[startCross-1][1]  ):
+					retDir = 1
+				elif ( roadId == self.crossData[startCross-1][2]  ):
+					retDir = 2
+				elif ( roadId == self.crossData[startCross-1][3]  ):
+					retDir = 3
+				elif ( roadId == self.crossData[startCross-1][4]  ):
+					retDir = 4
+				else:
+					print ("error!")
+					while(1):
+						pass
+				# 直行
+				if ( retDir == preDir ):
+					roadValue = 1
+				elif ( (preDir == 1 and retDir == 4) or (preDir == 2 and retDir == 1) or (preDir == 3 and retDir == 2) or (preDir == 4 and retDir == 3)):
+					roadValue = 2
+				elif ( (preDir == 1 and retDir == 4) or (preDir == 2 and retDir == 1) or (preDir == 3 and retDir == 2) or (preDir == 4 and retDir == 3)):
+					roadValue = 3
+				else:
+					roadValue = 0
 #####################################################################
 
 
