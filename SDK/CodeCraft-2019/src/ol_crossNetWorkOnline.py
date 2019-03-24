@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-23 17:17:18
+# @Last Modified time: 2019-03-24 11:22:36
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -35,7 +35,46 @@ class crossNetwork():
 		# self.wCard = ol_workingCard.workingCard()
 
 		pass
-	
+
+
+#____________________________________________________	
+
+	def find_crossIndex(self,crossID):
+
+		index = 0
+		for index in (0,len(self.crossData)):
+			if (self.crossData[index][0] == crossID):
+				return index
+
+		print ("findCrossIndex Fail!")
+		while(1):
+			pass
+
+	def find_roadIndex(self,roadID):
+
+		index = 0
+		for index in (0,len(self.roadData)):
+			if (self.roadData[index][0] == roadID):
+				return index
+
+		print ("findRoadIndex Fail!")
+		while(1):
+			pass
+
+	def find_carIndex(self,carID):
+
+		index = 0
+		for index in (0,len(self.carData)):
+			if (self.carData[index][0] == carID):
+				return index
+
+		print ("findCarIndex Fail!")
+		while(1):
+			pass
+
+#____________________________________________________
+
+
 
 	def fw_checkroadVV(self,startCross,roadId,preDir):
 		retDir = 0
@@ -45,8 +84,13 @@ class crossNetwork():
 		if ( roadId == -1 ):
 			return nextCross,0,retDir
 
-		# 默认路就是5000开始的
-		oneRoad = self.roadData[roadId-5000] 
+
+		
+#____________________________________________________		
+		oneRoad = self.roadData[self.find_roadIndex(roadID)] 
+#____________________________________________________
+
+
 		# print ("oneRoad=",oneRoad)
 		if ( oneRoad[4] == startCross ):		
 			nextCross = oneRoad[5]
@@ -71,13 +115,15 @@ class crossNetwork():
 				roadValue = self.RDV.RD_Value(oneRoad[1],oneRoad[2],oneRoad[3])
 				
 				# [crossID,roadID1,roadID2,roadID3,roadID4]
-				if ( roadId == self.crossData[startCross-1][1]  ):
+#____________________________________________________
+				if ( roadId == self.crossData[self.find_crossIndex(startCross)][1]  ):
 					retDir = 1
-				elif ( roadId == self.crossData[startCross-1][2]  ):
+				elif ( roadId == self.crossData[self.find_crossIndex(startCross)][2]  ):
 					retDir = 2
-				elif ( roadId == self.crossData[startCross-1][3]  ):
+				elif ( roadId == self.crossData[self.find_crossIndex(startCross)][3]  ):
 					retDir = 3
-				elif ( roadId == self.crossData[startCross-1][4]  ):
+				elif ( roadId == self.crossData[self.find_crossIndex(startCross)][4]  ):
+#____________________________________________________
 					retDir = 4
 				else:
 					print ("error!")
@@ -110,7 +156,9 @@ class crossNetwork():
 		self.crossTree.append([[[self.startCross,0]]])
 
 		# 集合中删除起始点
-		del self.crossCollection[self.startCross-1]
+#____________________________________________________
+		del self.crossCollection[self.find_crossIndex(startCross)]
+#____________________________________________________
 
 		flagFound = 0
 		while(1):
@@ -127,7 +175,7 @@ class crossNetwork():
 
 
 					# 默认cross索引是从1开始的
-					crossInfo = self.crossData[crossId[0]-1]
+					crossInfo = self.crossData[self.find_crossIndex(crossId[0])]
 					# print ("crossInfo=",crossInfo)
 
 					# 检查路标
@@ -242,8 +290,8 @@ class crossNetwork():
 		index = len(self.crossLine)
 		for i in range (0,index-1):
 			# print ( crossLine[i],crossLine[i+1] )
-			startCrossTemp = self.crossData[self.crossLine[i]-1]
-			endCrossTemp = self.crossData[self.crossLine[i+1]-1]
+			startCrossTemp = self.crossData[self.find_crossIndex(self.crossLine[i])]
+			endCrossTemp = self.crossData[self.find_crossIndex(self.crossLine[i+1])]
 
 			if ( (startCrossTemp[1] == endCrossTemp[1] or startCrossTemp[1] == endCrossTemp[2] or startCrossTemp[1] == endCrossTemp[3] or startCrossTemp[1] == endCrossTemp[4]) and (startCrossTemp[1] != -1) ):
 				RoadID = startCrossTemp[1]
