@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-22 09:32:33
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-23 16:58:07
+# @Last Modified time: 2019-03-24 11:44:43
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_workingCard.py
@@ -42,7 +42,42 @@ class workingCard():
 				timeSlice.append([0,0])
 			self.card.append(timeSlice)
 
+#____________________________________________________	
 
+	def find_crossIndex(self,crossID):
+
+		index = 0
+		for index in (0,len(self.crossData)):
+			if (self.crossData[index][0] == crossID):
+				return index
+
+		print ("findCrossIndex Fail!")
+		while(1):
+			pass
+
+	def find_roadIndex(self,roadID):
+
+		index = 0
+		for index in (0,len(self.roadData)):
+			if (self.roadData[index][0] == roadID):
+				return index
+
+		print ("findRoadIndex Fail!")
+		while(1):
+			pass
+
+	def find_carIndex(self,carID):
+
+		index = 0
+		for index in (0,len(self.carData)):
+			if (self.carData[index][0] == carID):
+				return index
+
+		print ("findCarIndex Fail!")
+		while(1):
+			pass
+
+#____________________________________________________
 
 
 		# 用于得出新结果后刷新工作牌，需要maxSpeed,takeoffTime，roadLength,maxSpeed,chnNum,行驶方向
@@ -51,8 +86,9 @@ class workingCard():
 
 		# print("self.carID=",self.carID)
 		# print( "self.carData[self.carID]=",self.carData[self.carID-10000] )
-		carSpeed = self.carData[self.carID-10000][3]
-
+#____________________________________________________	
+		carSpeed = self.carData[self.find_carIndex(self.carID)][3]
+#____________________________________________________	
 		schTime = self.startTimeSlice	
 
 		for roadStruct in self.roadList:
@@ -61,14 +97,19 @@ class workingCard():
 				roadID = roadStruct[0]
 				roadDir = roadStruct[1]
 
-				roadLength = self.roadData[roadID-5000][1]
-				roadSpeed = self.roadData[roadID-5000][2]
+#____________________________________________________	
+				roadLength = self.roadData[self.find_roadIndex(roadID)][1]
+				roadSpeed = self.roadData[self.find_roadIndex(roadID)][2]
+#____________________________________________________	
 
 				maxSpeed = min(roadSpeed,carSpeed)
 
-				self.card[schTime][roadID-5000][roadDir] = self.card[schTime][roadID-5000][roadDir] + 1
+#____________________________________________________	
+				self.card[schTime][self.find_roadIndex(roadID)][roadDir] = self.card[schTime][self.find_roadIndex(roadID)][roadDir] + 1
+#____________________________________________________	
+
 				# print( "schTime,roadID,roadDir=",schTime,roadID,roadDir  )
-				# print (self.card[schTime][roadID-5000][roadDir])
+				# print (self.card[schTime][self.find_roadIndex(roadID)][roadDir])
 				schTime = schTime + 1
 
 				if ( roadLength // maxSpeed < schTime):
@@ -87,10 +128,16 @@ class workingCard():
 		
 		
 		maxCarNum = 0;
-		roadChnNum = self.roadData[roadID-5000][3]
+
+#____________________________________________________	
+		roadChnNum = self.roadData[self.find_roadIndex(roadID)][3]
+#____________________________________________________	
 
 		for slice in range (self.startTimeSlice,self.startTimeSlice + SEARCHSLICE):
-			maxCarNum = max(maxCarNum,self.card[slice][roadID-5000][roadDir])
+#____________________________________________________	
+			maxCarNum = max(maxCarNum,self.card[slice][self.find_roadIndex(roadID)][roadDir])
+#____________________________________________________	
+
 
 			# if ( roadChnNum > maxCarNum ):
 		return roadChnNum - maxCarNum
