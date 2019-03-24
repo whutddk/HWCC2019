@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   29505
-# @Last Modified time: 2019-03-24 19:50:04
+# @Last Modified time: 2019-03-24 19:57:48
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -117,28 +117,28 @@ class crossNetwork():
 				
 				# [crossID,roadID1,roadID2,roadID3,roadID4]
 #____________________________________________________
-				if ( roadId == self.crossData[self.find_crossIndex(startCross)][1]  ):
-					retDir = 1
-				elif ( roadId == self.crossData[self.find_crossIndex(startCross)][2]  ):
-					retDir = 2
-				elif ( roadId == self.crossData[self.find_crossIndex(startCross)][3]  ):
-					retDir = 3
-				elif ( roadId == self.crossData[self.find_crossIndex(startCross)][4]  ):
+				# if ( roadId == self.crossData[self.find_crossIndex(startCross)][1]  ):
+				# 	retDir = 1
+				# elif ( roadId == self.crossData[self.find_crossIndex(startCross)][2]  ):
+				# 	retDir = 2
+				# elif ( roadId == self.crossData[self.find_crossIndex(startCross)][3]  ):
+				# 	retDir = 3
+				# elif ( roadId == self.crossData[self.find_crossIndex(startCross)][4]  ):
 #____________________________________________________
-					retDir = 4
-				else:
-					print ("error!")
-					while(1):
-						pass
-				# 直行
-				if ( retDir == preDir ):
-					roadValue = 1
-				elif ( (preDir == 1 and retDir == 4) or (preDir == 2 and retDir == 1) or (preDir == 3 and retDir == 2) or (preDir == 4 and retDir == 3)):
-					roadValue = 2
-				elif ( (preDir == 1 and retDir == 4) or (preDir == 2 and retDir == 1) or (preDir == 3 and retDir == 2) or (preDir == 4 and retDir == 3)):
-					roadValue = 3
-				else:
-					roadValue = 0
+					# retDir = 4
+				# else:
+				# 	print ("error!")
+				# 	while(1):
+				# 		pass
+				# # 直行
+				# if ( retDir == preDir ):
+				# 	roadValue = 1
+				# elif ( (preDir == 1 and retDir == 4) or (preDir == 2 and retDir == 1) or (preDir == 3 and retDir == 2) or (preDir == 4 and retDir == 3)):
+				# 	roadValue = 2
+				# elif ( (preDir == 1 and retDir == 4) or (preDir == 2 and retDir == 1) or (preDir == 3 and retDir == 2) or (preDir == 4 and retDir == 3)):
+				# 	roadValue = 3
+				# else:
+				# 	roadValue = 0
 #####################################################################
 
 
