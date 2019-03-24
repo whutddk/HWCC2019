@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # @File Name: CodeCraft-2019.py
-# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK\CodeCraft-2019\src\CodeCraft-2019.py
+# @File Path: K:\work\dark+PRJ\HWCC2019\SDK\CodeCraft-2019\src\CodeCraft-2019.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
-# @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-21 21:11:39
+# @Last Modified by:   29505
+# @Last Modified time: 2019-03-24 19:50:37
 # @Email: 295054118@whut.edu.cn"
 
 
@@ -45,11 +45,11 @@ def createAnswer():
 
 	preAnswer = []
 
-	for data in sch.targetList:
+	for car in sch.targetList:
 		
-		oneCar = [data[0],data[4]]
+		oneCar = [car[0],car[4]]
 
-		roadLine  = CNW.createNetwork(fS.carData,fS.roadData,fS.crossData,data[1],data[2])
+		roadLine  = CNW.createNetwork(car)
 		
 		oneCar.extend(roadLine)
 		
@@ -57,8 +57,8 @@ def createAnswer():
 
 		preAnswer.append(oneCar)
 
-	fS.finalAnswer = sch.fin_scheduler(preAnswer)
-
+	# fS.finalAnswer = sch.fin_scheduler(preAnswer)
+	fS.finalAnswer = preAnswer
 
 def main():
 
@@ -82,7 +82,7 @@ def main():
 
 
 	fS.load_data(road_path,cross_path,car_path)
-
+	CNW.crossNetwork_init(fS.carData,fS.roadData,fS.crossData)
 
 	sch.pre_scheduler(fS.carData,fS.roadData,fS.crossData)
 
