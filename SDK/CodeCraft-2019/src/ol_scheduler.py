@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # @File Name: ol_scheduler.py
-# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_scheduler.py
+# @File Path: K:\work\dark+PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_scheduler.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-21 20:25:35
-# @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-22 11:18:44
+# @Last Modified by:   29505
+# @Last Modified time: 2019-03-24 19:48:49
 # @Email: 295054118@whut.edu.cn"
 
 # [carID,startPos,endPos,maxSpeed,takeoffTime]
@@ -23,6 +23,42 @@ class scheduler():
 		self.crossData = []
 		self.targetList = []
 		self.preAnswer = []
+
+
+#____________________________________________________	
+	def find_crossIndex(self,crossID):
+
+		index = 0
+		for index in range(0,len(self.crossData)):
+			if (self.crossData[index][0] == crossID):
+				return index
+
+		print ("findCrossIndex Fail!")
+		while(1):
+			pass
+
+	def find_roadIndex(self,roadID):
+
+		index = 0
+		for index in range(0,len(self.roadData)):
+			if (self.roadData[index][0] == roadID):
+				return index
+
+		print ("findRoadIndex Fail!")
+		while(1):
+			pass
+
+	def find_carIndex(self,carID):
+
+		index = 0
+		for index in range(0,len(self.carData)):
+			if (self.carData[index][0] == carID):
+				return index
+
+		print ("findCarIndex Fail!")
+		while(1):
+			pass
+#____________________________________________________
 
 
 
