@@ -1,22 +1,23 @@
+# -*- coding: utf-8 -*-
 # @File Name: CodeCraft-2019.py
 # @File Path: K:\work\dark+PRJ\HWCC2019\SDK\CodeCraft-2019\src\CodeCraft-2019.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   29505
-# @Last Modified time: 2019-03-24 22:36:28
-# @Email: 295054118@whut.edu.cn
-# @page: https://whutddk.github.io/
-
-
+# @Last Modified time: 2019-03-24 19:50:37
+# @Email: 295054118@whut.edu.cn"
 
 
 import logging
 import sys
-
+import json
 import ol_fileSystem 
 import ol_crossNetWorkOnline
 import ol_scheduler
-
+# car_path = '../config/car.txt'
+# road_path = '../config/road.txt'
+# cross_path = '../config/cross.txt'
+# answer_path = '../config/answer.txt'
 
 fS = ol_fileSystem.fS() 
 CNW = ol_crossNetWorkOnline.crossNetwork()
@@ -34,6 +35,30 @@ logging.basicConfig(level=logging.DEBUG,
 
 
 
+
+def createAnswer():
+
+	# [carID,startPos,endPos,maxSpeed,takeoffTime]
+	# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
+	# [crossID,roadID1,roadID2,roadID3,roadID4]
+
+
+	preAnswer = []
+
+	for car in sch.targetList:
+		
+		oneCar = [car[0],car[4]]
+
+		roadLine  = CNW.createNetwork(car)
+		
+		oneCar.extend(roadLine)
+		
+		# print ( "oneCar=",oneCar )
+
+		preAnswer.append(oneCar)
+
+	# fS.finalAnswer = sch.fin_scheduler(preAnswer)
+	fS.finalAnswer = preAnswer
 
 def main():
 
@@ -56,6 +81,16 @@ def main():
 
 
 
+	fS.load_data(road_path,cross_path,car_path)
+	CNW.crossNetwork_init(fS.carData,fS.roadData,fS.crossData)
+
+	sch.pre_scheduler(fS.carData,fS.roadData,fS.crossData)
+
+	createAnswer()
+
+
+
+	fS.save_answer(answer_path)
 
 ##########################################
 
