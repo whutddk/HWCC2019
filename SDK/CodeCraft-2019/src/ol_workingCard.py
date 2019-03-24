@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # @File Name: ol_workingCard.py
-# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_workingCard.py
+# @File Path: K:\work\dark+PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_workingCard.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-22 09:32:33
-# @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-24 11:44:43
+# @Last Modified by:   29505
+# @Last Modified time: 2019-03-24 19:49:01
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_workingCard.py
@@ -47,7 +47,7 @@ class workingCard():
 	def find_crossIndex(self,crossID):
 
 		index = 0
-		for index in (0,len(self.crossData)):
+		for index in range(0,len(self.crossData)):
 			if (self.crossData[index][0] == crossID):
 				return index
 
@@ -58,7 +58,7 @@ class workingCard():
 	def find_roadIndex(self,roadID):
 
 		index = 0
-		for index in (0,len(self.roadData)):
+		for index in range(0,len(self.roadData)):
 			if (self.roadData[index][0] == roadID):
 				return index
 
@@ -69,7 +69,7 @@ class workingCard():
 	def find_carIndex(self,carID):
 
 		index = 0
-		for index in (0,len(self.carData)):
+		for index in range(0,len(self.carData)):
 			if (self.carData[index][0] == carID):
 				return index
 
@@ -85,7 +85,7 @@ class workingCard():
 	def updateCard(self):
 
 		# print("self.carID=",self.carID)
-		# print( "self.carData[self.carID]=",self.carData[self.carID-10000] )
+		# print( "self.carData[self.find_carIndex(self.carID)=",self.carData[self.find_carIndex(self.carID) )
 #____________________________________________________	
 		carSpeed = self.carData[self.find_carIndex(self.carID)][3]
 #____________________________________________________	
