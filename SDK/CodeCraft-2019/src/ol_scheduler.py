@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-21 20:25:35
 # @Last Modified by:   29505
-# @Last Modified time: 2019-03-24 20:11:50
+# @Last Modified time: 2019-03-24 20:48:15
 # @Email: 295054118@whut.edu.cn"
 
 # [carID,startPos,endPos,maxSpeed,takeoffTime]
@@ -23,7 +23,7 @@ class scheduler():
 		self.crossData = []
 		self.targetList = []
 		self.preAnswer = []
-
+		self.takeoffPlace = []
 
 #____________________________________________________	
 	def find_crossIndex(self,crossID):
@@ -63,8 +63,30 @@ class scheduler():
 
 # [carID,startPos,endPos,maxSpeed,takeoffTime]
 
-	
 
+# 不同起点车同时排
+	def diff_startCross(self):
+
+		# 根据cross来创建同出发列表
+		for cross in self.crossData:
+			self.takeoffPlace.append([])
+
+		for car in self.targetList:
+			startCrossID = car[1]
+			self.takeoffPlace[ self.find_crossIndex(startCrossID) ].append(car)
+
+		# print("self.takeoffPlace=",self.takeoffPlace)
+
+		self.targetList = []
+
+		while(len(self.takeoffPlace) > 0):
+			for group in self.takeoffPlace:
+				if ( len(group) == 0 ):
+					self.takeoffPlace.remove(group)
+					continue
+				self.targetList.append(group[0])
+				group.remove(group[0])
+		# print(self.targetList)
 
 
 
@@ -80,15 +102,26 @@ class scheduler():
 		self.targetList = self.carData.copy()
 		# 出发时间排序
 		self.targetList.sort(key=lambda x:x[4]) 
+		
+		#self.diff_startCross()
 		# 高速先排路线
 		self.targetList.sort(key=lambda x:x[3],reverse=True)
 	
 
+		
+
 		additionalTime = 0
 		
+		takeoffset = 150
+		maxtime = 1000
+
 		for ans in range(0,len(self.targetList)):
-			if ( self.targetList[ans][4] < additionalTime//25 ):
-				self.targetList[ans][4] = additionalTime//25
+			if ( additionalTime < takeoffset ):
+				pass
+			#elif ( (additionalTime-takeoffset)//20 > maxtime ):
+				#self.targetList[ans][4] = maxtime
+			elif ( self.targetList[ans][4] < (additionalTime-takeoffset)//25 ):
+				self.targetList[ans][4] = (additionalTime-takeoffset)//25
 			else:
 				pass
 			
