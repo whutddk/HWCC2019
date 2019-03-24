@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-21 20:25:35
 # @Last Modified by:   29505
-# @Last Modified time: 2019-03-24 20:46:30
+# @Last Modified time: 2019-03-24 20:48:15
 # @Email: 295054118@whut.edu.cn"
 
 # [carID,startPos,endPos,maxSpeed,takeoffTime]
@@ -65,7 +65,7 @@ class scheduler():
 
 
 # 不同起点车同时排
-	def diff_startCross_div(self):
+	def diff_startCross(self):
 
 		# 根据cross来创建同出发列表
 		for cross in self.crossData:
@@ -76,10 +76,6 @@ class scheduler():
 			self.takeoffPlace[ self.find_crossIndex(startCrossID) ].append(car)
 
 		# print("self.takeoffPlace=",self.takeoffPlace)
-		pass
-
-
-	def diff_reGroup(self):
 
 		self.targetList = []
 
@@ -90,7 +86,7 @@ class scheduler():
 					continue
 				self.targetList.append(group[0])
 				group.remove(group[0])
-		print(self.targetList)
+		# print(self.targetList)
 
 
 
@@ -110,8 +106,7 @@ class scheduler():
 		self.targetList.sort(key=lambda x:x[3],reverse=True)
 	
 
-		self.diff_startCross_div()
-		diff_reGroup()
+		self.diff_startCross()
 
 		additionalTime = 0
 		
