@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-21 20:25:35
 # @Last Modified by:   29505
-# @Last Modified time: 2019-03-24 19:48:49
+# @Last Modified time: 2019-03-24 20:11:50
 # @Email: 295054118@whut.edu.cn"
 
 # [carID,startPos,endPos,maxSpeed,takeoffTime]
@@ -59,6 +59,15 @@ class scheduler():
 		while(1):
 			pass
 #____________________________________________________
+
+
+# [carID,startPos,endPos,maxSpeed,takeoffTime]
+
+	
+
+
+
+
 
 
 
