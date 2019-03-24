@@ -102,17 +102,26 @@ class scheduler():
 		self.targetList = self.carData.copy()
 		# 出发时间排序
 		self.targetList.sort(key=lambda x:x[4]) 
+		
+		#self.diff_startCross()
 		# 高速先排路线
 		self.targetList.sort(key=lambda x:x[3],reverse=True)
 	
 
-		self.diff_startCross()
+		
 
 		additionalTime = 0
 		
+		takeoffset = 150
+		maxtime = 1000
+
 		for ans in range(0,len(self.targetList)):
-			if ( self.targetList[ans][4] < additionalTime//25 ):
-				self.targetList[ans][4] = additionalTime//25
+			if ( additionalTime < takeoffset ):
+				pass
+			#elif ( (additionalTime-takeoffset)//20 > maxtime ):
+				#self.targetList[ans][4] = maxtime
+			elif ( self.targetList[ans][4] < (additionalTime-takeoffset)//25 ):
+				self.targetList[ans][4] = (additionalTime-takeoffset)//25
 			else:
 				pass
 			
