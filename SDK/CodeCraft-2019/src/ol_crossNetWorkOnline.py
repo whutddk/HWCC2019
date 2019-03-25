@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-25 14:17:40
+# @Last Modified time: 2019-03-25 14:36:53
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -309,34 +309,47 @@ class crossNetwork():
 			crossID = cross[0]
 			crossTree = self.fw_createCrossTree(crossID)
 			self.crossTreeGroup.append(crossTree)
-		# print ("self.crossTreeGroup=",self.crossTreeGroup)
 
-		# for tree in self.crossTreeGroup:
-		# 	print ( "tree len=",len(tree) )
-		# print ("self.crossLineGroup=",self.crossLineGroup)
 
 ################################################################################
+		if (0):
+			# 重新按高速先行进行排序测试
+			crossLine = []
+			for oneCrossLineGroup in self.crossLineGroup:
+				for car in oneCrossLineGroup:
+					crossLine.append(car)
+			
+			# 先出发在前
+			crossLine.sort(key=lambda x:x[1])
+			# 高速在前
+			crossLine.sort(key=lambda x:x[0],reverse=True)
 
-		# 重新按高速先行进行排序测试
-		crossLine = []
-		for oneCrossLineGroup in self.crossLineGroup:
-			for car in oneCrossLineGroup:
-				crossLine.append(car)
+			for i in range(0,len(crossLine)):
+				crossLine[i].remove(crossLine[i][0])
+				crossLine[i].remove(crossLine[i][0])
+			# print ( crossLine )
 		
-		# 先出发在前
-		crossLine.sort(key=lambda x:x[1])
-		# 高速在前
-		crossLine.sort(key=lambda x:x[0],reverse=True)
-
-
-		for i in range(0,len(crossLine)):
-			crossLine[i].remove(crossLine[i][0])
-			crossLine[i].remove(crossLine[i][0])
-		# print ( crossLine )
-
-
+		# 最原始方案
 		
+
+		if(1):
+			crossLine = []
+			for oneCrossLineGroup in self.crossLineGroup:
+				for car in oneCrossLineGroup:
+					crossLine.append(car)
+			
+			for i in range(0,len(crossLine)):
+				crossLine[i].remove(crossLine[i][0])
+				crossLine[i].remove(crossLine[i][0])
+
+
+
+
 ################################################################################
+		
+
+
+
 		roadLine = []
 		for car in crossLine:
 			roadLine.append(self.cross2road(car))
