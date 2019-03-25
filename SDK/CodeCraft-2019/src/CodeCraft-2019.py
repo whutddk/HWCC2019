@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-25 13:54:41
+# @Last Modified time: 2019-03-25 14:07:26
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: CodeCraft-2019.py
@@ -66,10 +66,18 @@ def main():
 	# fileSystem init
 	fS.load_data(road_path,cross_path,car_path)
 
-	CNW.crossNetwork_init(fS.carData,fS.roadData,fS.crossData)
+	preSort = sch.pre_scheduler(fS.carData,fS.roadData,fS.crossData)
+
+	CNW.crossNetwork_init(preSort,fS.roadData,fS.crossData)
 
 	roadLine = CNW.createNetwork()
-	print (roadLine)
+
+	# print (roadLine)
+
+	fS.finalAnswer = sch.fin_scheduler(roadLine)
+
+
+	fS.save_answer(answer_path)
 ##########################################
 
 
