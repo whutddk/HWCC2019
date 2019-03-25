@@ -334,6 +334,7 @@ class crossNetwork():
 
 		if(1):
 			crossLine = []
+			self.crossLineGroup.sort(key = lambda i:len(i),reverse=True)
 			for oneCrossLineGroup in self.crossLineGroup:
 				for car in oneCrossLineGroup:
 					crossLine.append(car)
