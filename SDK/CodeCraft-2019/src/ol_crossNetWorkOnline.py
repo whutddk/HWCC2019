@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-25 11:30:22
+# @Last Modified time: 2019-03-25 12:16:20
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -44,8 +44,8 @@ class crossNetwork():
 		self.roadData = []
 		self.crossData = []
 		self.crossTreeGroup = []
-
 		self.crossLineGroup = []
+
 		self.crossCollection = []
 
 
@@ -92,6 +92,57 @@ class crossNetwork():
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+
+
+
+
+
+
+
+	def bw_SortCross(self,crossTree,eleCnt_i):
+
+		lever = len(crossTree)
+		crossLine = []
+		# 最后一层多少元件，决定上层的枝干编号
+		# print ("lastLever=",self.crossTree[len(self.crossTree)-1])
+		eleCnt = eleCnt_i
+		# print ("eleCnt=",eleCnt)
+
+		# 产生crossline
+		lever = lever - 1
+		while(lever != 0):
+			lever = lever - 1
+			# print ("crossTree[lever]=",crossTree[lever])
+			eleCnt = self.bw_SearchOneLever(lever,eleCnt)
+
+		crossLine.append(self.endCross)
+
+		return crossLine
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	def fw_checkroadVV(self,startCross,roadId):
 		nextCross = -1
 		# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
@@ -127,9 +178,22 @@ class crossNetwork():
 		return -1,0
 
 
-
+# [carID,startPos,endPos,maxSpeed,takeoffTime]
 # 生成树同时把该起点的corssLine进行全局编排，放入一组
 	def fw_createCrossTree(self,crossID):
+
+
+
+		oneCrossLineGroup = []
+		# 同一起点的车
+		oneCrossCarGroup = []
+
+		for car in self.carData:
+			if ( car[1] == crossID ):
+				oneCrossCarGroup.append(car)
+
+
+
 		self.crossCollection = self.crossData.copy()
 		crossTree = []
 		crossTree.append([[crossID]])
@@ -145,8 +209,8 @@ class crossNetwork():
 			OneCrossLever = []
 			lastLever = crossTree[len(crossTree)-1]
 
-			for root in lastLever:
-				for crossId in root:
+			for eleCnt in range(0,len(lastLever)):
+				for crossId in lastLever[eleCnt]:
 					crossInfo = self.crossData[self.find_crossIndex(crossId)]
 					# print ("crossInfo=",crossInfo)
 
@@ -185,8 +249,19 @@ class crossNetwork():
 						leavesCheck.append(cross4)
 					
 
-					# if ( (cross1 == self.endCross) or (cross2 == self.endCross) or (cross3 == self.endCross) or (cross4 == self.endCross) ):
-					# 	flagFound = 1
+					# 提前生成该起点车的cross路线
+					for car in oneCrossCarGroup:
+						endCross = car[2]
+						if ( (cross1 == endCross) or (cross2 == endCross) or (cross3 == endCross) or (cross4 == endCross) ):
+							crossLine = self.bw_SortCross(crossTree,eleCnt)
+							crossLine.append( crossId )
+							crossLine.append( endCross )
+							carSch = [car[0],car[4]]
+							carSch.extend(crossLine)
+
+							oneCrossLineGroup.append(carSch)
+
+
 
 					# 本路口级增加一个枝干组
 					OneCrossLever.append(leavesCheck)
@@ -197,6 +272,7 @@ class crossNetwork():
 			crossTree.append(OneCrossLever)
 
 			if ( len(self.crossCollection) == 0 ):
+				self.crossLineGroup.append(OneCrossLever)
 				return crossTree
 
 		pass			
@@ -219,12 +295,13 @@ class crossNetwork():
 
 	def createNetwork(self):
 
+		self.crossLineGroup = []
 	# 产生树表，每棵树级越少越先
 		for cross in self.crossData:
 			crossID = cross[0]
 			crossTree = self.fw_createCrossTree(crossID)
 			self.crossTreeGroup.append(crossTree)
-
+		# print ("self.crossTreeGroup=",self.crossTreeGroup)
 
 		for tree in self.crossTreeGroup:
 			print ( "tree len=",len(tree) )
