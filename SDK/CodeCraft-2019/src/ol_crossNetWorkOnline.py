@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-25 13:14:59
+# @Last Modified time: 2019-03-25 13:16:50
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -175,8 +175,6 @@ class crossNetwork():
 # 生成树同时把该起点的corssLine进行全局编排，放入一组
 	def fw_createCrossTree(self,crossID):
 
-
-
 		oneCrossLineGroup = []
 		# 同一起点的车
 		oneCrossCarGroup = []
@@ -290,9 +288,9 @@ class crossNetwork():
 			self.crossTreeGroup.append(crossTree)
 		# print ("self.crossTreeGroup=",self.crossTreeGroup)
 
-		for tree in self.crossTreeGroup:
-			print ( "tree len=",len(tree) )
-
+		# for tree in self.crossTreeGroup:
+		# 	print ( "tree len=",len(tree) )
+		print ("self.crossLineGroup=",self.crossLineGroup)
 
 
 
