@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-25 13:56:38
+# @Last Modified time: 2019-03-25 14:17:40
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -248,8 +248,8 @@ class crossNetwork():
 							crossLine.append( crossId )
 							crossLine.append( endCross )
 
-							# 先带入最高速度为第一项，方便后排序
-							carSch = [car[3],car[0],car[4]]
+							# 先带入最高速度为第一项，起飞时间为第二项，方便后排序
+							carSch = [car[3],car[4],car[0],car[4]]
 							carSch.extend(crossLine)
 
 							oneCrossLineGroup.append(carSch)
@@ -278,7 +278,7 @@ class crossNetwork():
 		# print("crossLine=",crossLine)
 		roadLine = [crossLine[0],crossLine[1]]
 		index = len(crossLine)
-		for i in range (2,index-1):
+		for i in range (3,index-1):
 			# print ( crossLine[i],crossLine[i+1] )
 			startCrossTemp = self.crossData[self.find_crossIndex(crossLine[i])]
 			endCrossTemp = self.crossData[self.find_crossIndex(crossLine[i+1])]
@@ -322,6 +322,9 @@ class crossNetwork():
 		for oneCrossLineGroup in self.crossLineGroup:
 			for car in oneCrossLineGroup:
 				crossLine.append(car)
+		
+		# 先出发在前
+		crossLine.sort(key=lambda x:x[1])
 		# 高速在前
 		crossLine.sort(key=lambda x:x[0],reverse=True)
 
