@@ -334,20 +334,20 @@ class crossNetwork():
 
 		if(1):
 			crossLine = []
-			sch = 8 
+			sch = 7 
 			speed = 0
 			prespeed = 0
 
 			self.crossLineGroup.sort(key = lambda i:len(i),reverse=True)
 			for oneCrossLineGroup in self.crossLineGroup:
-
+				sch = sch + 2
 
 				oneCrossLineGroup.sort(key=lambda x:x[0],reverse=True)
 				for car in oneCrossLineGroup:
 					speed = car[0]
 					if ( speed != prespeed ):
 						prespeed = speed
-						sch = sch + 2
+						sch = sch + 1
 
 					car[3] = sch
 
