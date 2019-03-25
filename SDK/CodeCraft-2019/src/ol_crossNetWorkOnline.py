@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-25 13:16:50
+# @Last Modified time: 2019-03-25 13:56:38
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -247,7 +247,9 @@ class crossNetwork():
 							crossLine = self.bw_SortCross(crossTree,eleCnt)
 							crossLine.append( crossId )
 							crossLine.append( endCross )
-							carSch = [car[0],car[4]]
+
+							# 先带入最高速度为第一项，方便后排序
+							carSch = [car[3],car[0],car[4]]
 							carSch.extend(crossLine)
 
 							oneCrossLineGroup.append(carSch)
@@ -272,8 +274,29 @@ class crossNetwork():
 
 
 
-	def cross2road(self):
-		pass
+	def cross2road(self,crossLine):
+		# print("crossLine=",crossLine)
+		roadLine = [crossLine[0],crossLine[1]]
+		index = len(crossLine)
+		for i in range (2,index-1):
+			# print ( crossLine[i],crossLine[i+1] )
+			startCrossTemp = self.crossData[self.find_crossIndex(crossLine[i])]
+			endCrossTemp = self.crossData[self.find_crossIndex(crossLine[i+1])]
+
+			if ( (startCrossTemp[1] == endCrossTemp[1] or startCrossTemp[1] == endCrossTemp[2] or startCrossTemp[1] == endCrossTemp[3] or startCrossTemp[1] == endCrossTemp[4]) and (startCrossTemp[1] != -1) ):
+				RoadID = startCrossTemp[1]
+			elif ( (startCrossTemp[2] == endCrossTemp[1] or startCrossTemp[2] == endCrossTemp[2] or startCrossTemp[2] == endCrossTemp[3] or startCrossTemp[2] == endCrossTemp[4]) and (startCrossTemp[2] != -1)):
+				RoadID = startCrossTemp[2]
+			elif ( (startCrossTemp[3] == endCrossTemp[1] or startCrossTemp[3] == endCrossTemp[2] or startCrossTemp[3] == endCrossTemp[3] or startCrossTemp[3] == endCrossTemp[4]) and (startCrossTemp[3] != -1)):
+				RoadID = startCrossTemp[3]
+			elif ( (startCrossTemp[4] == endCrossTemp[1] or startCrossTemp[4] == endCrossTemp[2] or startCrossTemp[4] == endCrossTemp[3] or startCrossTemp[4] == endCrossTemp[4]) and (startCrossTemp[4] != -1)):
+				RoadID = startCrossTemp[4]
+
+			# print("warning",startCross,endCross)
+			roadLine.append( RoadID )
+
+		# print ("roadLine=",roadLine)
+		return roadLine
 
 
 
@@ -290,11 +313,31 @@ class crossNetwork():
 
 		# for tree in self.crossTreeGroup:
 		# 	print ( "tree len=",len(tree) )
-		print ("self.crossLineGroup=",self.crossLineGroup)
+		# print ("self.crossLineGroup=",self.crossLineGroup)
+
+################################################################################
+
+		# 重新按高速先行进行排序测试
+		crossLine = []
+		for oneCrossLineGroup in self.crossLineGroup:
+			for car in oneCrossLineGroup:
+				crossLine.append(car)
+		# 高速在前
+		crossLine.sort(key=lambda x:x[0],reverse=True)
 
 
+		for i in range(0,len(crossLine)):
+			crossLine[i].remove(crossLine[i][0])
+
+		# print ( crossLine )
 
 
+		
+################################################################################
+		roadLine = []
+		for car in crossLine:
+			roadLine.append(self.cross2road(car))
+		return roadLine
 
 
 	def crossNetwork_init(self,carData,roadData,crossData):

@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-25 12:06:40
+# @Last Modified time: 2019-03-25 13:54:41
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: CodeCraft-2019.py
@@ -68,8 +68,8 @@ def main():
 
 	CNW.crossNetwork_init(fS.carData,fS.roadData,fS.crossData)
 
-	CNW.createNetwork()
-
+	roadLine = CNW.createNetwork()
+	print (roadLine)
 ##########################################
 
 
