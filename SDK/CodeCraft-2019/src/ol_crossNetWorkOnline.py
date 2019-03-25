@@ -278,7 +278,7 @@ class crossNetwork():
 		# print("crossLine=",crossLine)
 		roadLine = [crossLine[0],crossLine[1]]
 		index = len(crossLine)
-		for i in range (3,index-1):
+		for i in range (2,index-1):
 			# print ( crossLine[i],crossLine[i+1] )
 			startCrossTemp = self.crossData[self.find_crossIndex(crossLine[i])]
 			endCrossTemp = self.crossData[self.find_crossIndex(crossLine[i+1])]
@@ -331,7 +331,7 @@ class crossNetwork():
 
 		for i in range(0,len(crossLine)):
 			crossLine[i].remove(crossLine[i][0])
-
+			crossLine[i].remove(crossLine[i][0])
 		# print ( crossLine )
 
 
