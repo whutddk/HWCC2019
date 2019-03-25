@@ -334,7 +334,7 @@ class crossNetwork():
 
 		if(1):
 			crossLine = []
-			sch = -1 
+			sch = 8 
 			speed = 0
 			prespeed = 0
 
@@ -347,7 +347,7 @@ class crossNetwork():
 					speed = car[0]
 					if ( speed != prespeed ):
 						prespeed = speed
-						sch = sch + 5
+						sch = sch + 2
 
 					car[3] = sch
 
