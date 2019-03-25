@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-25 12:16:20
+# @Last Modified time: 2019-03-25 13:14:59
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -93,10 +93,22 @@ class crossNetwork():
 
 
 
+	def bw_SearchOneLever(self,crossTree,lever,lastEleCnt):
+		upEleCnt = 0;
+		idCnt = 0
+		for ele in crossTree[lever]:
+			# print ("ele=",ele)
+			for crossID in ele:
 
+				if (idCnt == lastEleCnt):
+					# print ("upEleCnt=",upEleCnt)
+					return upEleCnt,crossID
+				idCnt = idCnt + 1;
+			upEleCnt = upEleCnt + 1
 
-
-
+		print ("error")
+		while(1):
+			pass
 
 
 	def bw_SortCross(self,crossTree,eleCnt_i):
@@ -113,29 +125,10 @@ class crossNetwork():
 		while(lever != 0):
 			lever = lever - 1
 			# print ("crossTree[lever]=",crossTree[lever])
-			eleCnt = self.bw_SearchOneLever(lever,eleCnt)
-
-		crossLine.append(self.endCross)
+			eleCnt,upCrossID = self.bw_SearchOneLever(crossTree,lever,eleCnt)
+			crossLine.insert(0,upCrossID)
 
 		return crossLine
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -272,19 +265,13 @@ class crossNetwork():
 			crossTree.append(OneCrossLever)
 
 			if ( len(self.crossCollection) == 0 ):
-				self.crossLineGroup.append(OneCrossLever)
+				self.crossLineGroup.append(oneCrossLineGroup)
 				return crossTree
 
 		pass			
 
 
 
-	def bw_SearchOneLever(self,lever,lastEleCnt):
-		pass
-
-
-	def bw_SortCross(self):
-		pass
 
 
 	def cross2road(self):
