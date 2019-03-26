@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   29505
-# @Last Modified time: 2019-03-26 21:30:40
+# @Last Modified time: 2019-03-26 22:01:56
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -405,38 +405,71 @@ class crossNetwork():
 			prespeed = 0
 
 
-			while( len(self.crossLineGroup) > 0 ):
-				offsetTime = offsetTime + 5
-				sch = 0
-				# 所有岔道起点，路径多的在前
-				self.crossLineGroup.sort(key = lambda i:len(i),reverse=True)
 
-				# 直接取量最大的一个
-				oneCrossLineGroup = self.crossLineGroup[0]
-				# print (len(oneCrossLineGroup))
-				# sch = sch + 2
+# 爆发式起飞策略：
+	# 开始阶段空域清爽，以永不死锁的最大吞吐进行起飞
+	# 用不死锁逻辑满后，使用调参法
 
-				# 同一起点，速度高的车在前
-				oneCrossLineGroup.sort(key=lambda x:x[0],reverse=True)
-				for car in oneCrossLineGroup:
-					speed = car[0]
+			# 所有岔道起点，路径多的在前
+			self.crossLineGroup.sort(key = lambda i:len(i),reverse=True)
 
-					# 同速则同时
-					if ( speed != prespeed ):
-						prespeed = speed
-						sch = sch + 1
-					car[2] = sch + offsetTime
+			# 直接取量最大的一个
+			oneCrossLineGroup = self.crossLineGroup[0]
 
-					crossLine.append(car)
+			# 同一起点，速度高的车在前
+			oneCrossLineGroup.sort(key=lambda x:x[0],reverse=True)
+			for car in oneCrossLineGroup:
+				speed = car[0]
+
+
+				# 同速则同时
+				if ( speed == 8 ):
+					pass
+				elif ( speed == 6 ):
+					car[2] = 11
+				elif ( speed == 4 ):
+					car[2] = 12
+				elif ( speed == 2 ):
+					car[2] = 13
+				else:
+					print("error!")
+					while(1):
+						pass
+				crossLine.append(car)
+				usedCarID = car[1]
+			
+				# 遍历其余的cross,删除重复的车
+				for i in range(1,len(self.crossLineGroup)):
+					clearCrossLineGroup = self.crossLineGroup[i]
+					for checkCar in clearCrossLineGroup:
+						if ( checkCar[1] == usedCarID):
+							clearCrossLineGroup.remove(checkCar)
+			
+			# 遍历完成之后，删除本组cross
+			self.crossLineGroup.remove(self.crossLineGroup[0])
+
+			# 检查这组生成后，其余cross有没有空的，有则删除掉
+			for checkCrossGroup in self.crossLineGroup:
+				if (len(checkCrossGroup) == 0):
+					self.crossLineGroup.remove(checkCrossGroup)
+
+#_____________________________________
+
+			# 重新按高速先行进行排序测试
+			crossLineExtend = []
+
+			while (len(self.crossLineGroup)>0):
+				for car in self.crossLineGroup[0]:
+					crossLineExtend.append(car)
 					usedCarID = car[1]
-				
+
 					# 遍历其余的cross,删除重复的车
 					for i in range(1,len(self.crossLineGroup)):
 						clearCrossLineGroup = self.crossLineGroup[i]
 						for checkCar in clearCrossLineGroup:
 							if ( checkCar[1] == usedCarID):
 								clearCrossLineGroup.remove(checkCar)
-				
+
 				# 遍历完成之后，删除本组cross
 				self.crossLineGroup.remove(self.crossLineGroup[0])
 
@@ -445,14 +478,24 @@ class crossNetwork():
 					if (len(checkCrossGroup) == 0):
 						self.crossLineGroup.remove(checkCrossGroup)
 
+			# 高速在前
+			crossLineExtend.sort(key=lambda x:x[0],reverse=True)
+			additionalTime = 0
+			takeoffset = 13
+
+			for ans in range(0,len(crossLineExtend)):
+				crossLineExtend[ans][2] = (additionalTime)//25+takeoffset
+				additionalTime = additionalTime + 1 
+#_____________________________________			
+
+			crossLine.extend(crossLineExtend)
 
 
 			# 删除车速度
 			
 			for k in range(0,len(crossLine)):
-				# print (crossLine[k])
 				crossLine[k].remove(crossLine[k][0])
-
+				# print (crossLine[k])
 				
 
 ################################################################################
