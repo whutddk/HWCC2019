@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-26 14:11:43
+# @Last Modified time: 2019-03-26 14:33:13
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -122,7 +122,7 @@ class crossNetwork():
 
 		# 产生crossline
 		lever = lever - 1
-		while(lever != 0):
+		while(lever > 0):
 			lever = lever - 1
 			# print ("crossTree[lever]=",crossTree[lever])
 			eleCnt,upCrossID = self.bw_SearchOneLever(crossTree,lever,eleCnt)
@@ -271,8 +271,7 @@ class crossNetwork():
 							crossLine = self.bw_SortCross(crossTree,eleCnt)
 							crossLine.append( crossId )
 							crossLine.append( startCross )
-							crossLine.sort(key=None,reverse=True)
-
+							crossLine.reverse()
 
 							# 先带入最高速度为第一项，起飞时间为第二项，方便后排序
 							carSch = [car[3],car[0],car[4]]
@@ -405,13 +404,13 @@ class crossNetwork():
 
 
 
-				# 删除车速度
+			# 删除车速度
+			
+			for k in range(0,len(crossLine)):
 				
-				for k in range(0,len(crossLine)):
-					print (crossLine[k])
-					crossLine[k].remove(crossLine[k][0])
+				crossLine[k].remove(crossLine[k][0])
 
-
+				# print (crossLine[k])
 
 ################################################################################
 		
