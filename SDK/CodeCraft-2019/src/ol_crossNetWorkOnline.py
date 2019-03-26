@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-26 15:51:56
+# @Last Modified time: 2019-03-26 15:53:50
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -411,7 +411,7 @@ class crossNetwork():
 
 				# 直接取量最大的一个
 				oneCrossLineGroup = self.crossLineGroup[0]
-				print (len(oneCrossLineGroup))
+				# print (len(oneCrossLineGroup))
 				# sch = sch + 2
 
 				# 同一起点，速度高的车在前
