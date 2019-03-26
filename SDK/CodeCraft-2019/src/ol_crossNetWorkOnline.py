@@ -312,7 +312,7 @@ class crossNetwork():
 
 
 ################################################################################
-		if (1):
+		if (0):
 			# 重新按高速先行进行排序测试
 			crossLine = []
 			for oneCrossLineGroup in self.crossLineGroup:
@@ -331,16 +331,16 @@ class crossNetwork():
 		# 最原始方案
 		
 
-		if(0):
+		if(1):
 			crossLine = []
-			sch = 7 
+			sch = 8 
 			speed = 0
 			prespeed = 0
 
 			# 所有岔道起点，路径多的在前
 			self.crossLineGroup.sort(key = lambda i:len(i),reverse=True)
 			for oneCrossLineGroup in self.crossLineGroup:
-				sch = sch + 2
+				# sch = sch + 2
 
 				# 同一起点，速度高的车在前
 				oneCrossLineGroup.sort(key=lambda x:x[0],reverse=True)
@@ -350,7 +350,7 @@ class crossNetwork():
 					# 同速则同时
 					if ( speed != prespeed ):
 						prespeed = speed
-						sch = sch + 1
+						sch = sch + 2
 
 					car[2] = sch
 

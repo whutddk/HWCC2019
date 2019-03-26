@@ -74,8 +74,8 @@ def main():
 
 	# print (roadLine)
 
-	fS.finalAnswer = sch.fin_scheduler(roadLine)
-	# fS.finalAnswer = roadLine
+	# fS.finalAnswer = sch.fin_scheduler(roadLine)
+	fS.finalAnswer = roadLine
 
 	fS.save_answer(answer_path)
 ##########################################
