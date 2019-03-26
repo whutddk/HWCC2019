@@ -212,7 +212,7 @@ class crossNetwork():
 		oneCrossEndCarGroup = []
 		for car in self.carData:
 			# 终点为该cross，且速度比较高
-			if ( car[2] == crossID and car[3] > 6 ):
+			if ( car[2] == crossID and car[3] > 0 ):
 				oneCrossEndCarGroup.append(car)
 
 #***************************************************************************************
