@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-26 10:23:17
+# @Last Modified time: 2019-03-26 10:31:22
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -312,7 +312,7 @@ class crossNetwork():
 
 
 ################################################################################
-		if (0):
+		if (1):
 			# 重新按高速先行进行排序测试
 			crossLine = []
 			for oneCrossLineGroup in self.crossLineGroup:
@@ -331,7 +331,7 @@ class crossNetwork():
 		# 最原始方案
 		
 
-		if(1):
+		if(0):
 			crossLine = []
 			sch = 7 
 			speed = 0
