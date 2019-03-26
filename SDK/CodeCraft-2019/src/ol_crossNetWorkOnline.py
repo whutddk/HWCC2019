@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-25 15:38:00
+# @Last Modified time: 2019-03-26 10:23:17
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -249,7 +249,7 @@ class crossNetwork():
 							crossLine.append( endCross )
 
 							# 先带入最高速度为第一项，起飞时间为第二项，方便后排序
-							carSch = [car[3],car[4],car[0],car[4]]
+							carSch = [car[3],car[0],car[4]]
 							carSch.extend(crossLine)
 
 							oneCrossLineGroup.append(carSch)
@@ -320,12 +320,11 @@ class crossNetwork():
 					crossLine.append(car)
 			
 			# 先出发在前
-			crossLine.sort(key=lambda x:x[1])
+			crossLine.sort(key=lambda x:x[2])
 			# 高速在前
 			crossLine.sort(key=lambda x:x[0],reverse=True)
 
 			for i in range(0,len(crossLine)):
-				crossLine[i].remove(crossLine[i][0])
 				crossLine[i].remove(crossLine[i][0])
 			# print ( crossLine )
 		
@@ -338,32 +337,33 @@ class crossNetwork():
 			speed = 0
 			prespeed = 0
 
+			# 所有岔道起点，路径多的在前
 			self.crossLineGroup.sort(key = lambda i:len(i),reverse=True)
 			for oneCrossLineGroup in self.crossLineGroup:
 				sch = sch + 2
 
+				# 同一起点，速度高的车在前
 				oneCrossLineGroup.sort(key=lambda x:x[0],reverse=True)
 				for car in oneCrossLineGroup:
 					speed = car[0]
+
+					# 同速则同时
 					if ( speed != prespeed ):
 						prespeed = speed
 						sch = sch + 1
 
-					car[3] = sch
+					car[2] = sch
 
 					crossLine.append(car)
 			
+			# 删除车速度
 			for i in range(0,len(crossLine)):
 				crossLine[i].remove(crossLine[i][0])
-				crossLine[i].remove(crossLine[i][0])
-
 
 
 
 ################################################################################
 		
-
-
 
 		roadLine = []
 		for car in crossLine:
