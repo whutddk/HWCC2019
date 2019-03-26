@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-26 11:44:43
+# @Last Modified time: 2019-03-26 14:11:43
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -391,20 +391,24 @@ class crossNetwork():
 					# 遍历其余的cross,删除重复的车
 					for i in range(1,len(self.crossLineGroup)):
 						clearCrossLineGroup = self.crossLineGroup[i]
-						for j in range (0,len(clearCrossLineGroup)):
-							if (clearCrossLineGroup[j][1] == usedCarID):
-								clearCrossLineGroup.remove(clearCrossLineGroup[j])
+						for checkCar in clearCrossLineGroup:
+							if ( checkCar[1] == usedCarID):
+								clearCrossLineGroup.remove(checkCar)
 				
+				# 遍历完成之后，删除本组cross
 				self.crossLineGroup.remove(self.crossLineGroup[0])
 
-				for i in range(0,len(self.crossLineGroup)):
-					if (len(self.crossLineGroup[i] == 0)):
-						self.crossLineGroup.remove(self.crossLineGroup[i])
+				# 检查这组生成后，其余cross有没有空的，有则删除掉
+				for checkCrossGroup in self.crossLineGroup:
+					if (len(checkCrossGroup) == 0):
+						self.crossLineGroup.remove(checkCrossGroup)
 
 
 
 				# 删除车速度
+				
 				for k in range(0,len(crossLine)):
+					print (crossLine[k])
 					crossLine[k].remove(crossLine[k][0])
 
 
