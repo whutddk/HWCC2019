@@ -96,8 +96,8 @@ class scheduler():
 		for ans in range(0,len(answer)):
 			if ( additionalTime < takeoffset ):
 				pass
-			elif ( answer[ans][1] < (additionalTime-takeoffset)//20 ):
-				answer[ans][1] = (additionalTime-takeoffset)//20
+			elif ( answer[ans][1] < (additionalTime-takeoffset)//25 ):
+				answer[ans][1] = (additionalTime-takeoffset)//25
 			else:
 				pass
 			
