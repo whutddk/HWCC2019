@@ -1,17 +1,40 @@
 # -*- coding: utf-8 -*-
 # @File Name: ol_crossNetWorkOnline.py
-# @File Path: K:\work\dark+PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_crossNetWorkOnline.py
+# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_crossNetWorkOnline.py
+# @Author: Ruige_Lee
+# @Date:   2019-03-25 08:50:11
+# @Last Modified by:   Ruige_Lee
+# @Last Modified time: 2019-03-26 10:31:22
+# @Email: 295054118@whut.edu.cn"
+
+# @File Name: ol_crossNetWorkOnline.py
+# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_crossNetWorkOnline.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-19 11:00:06
 # @Last Modified by:   29505
-# @Last Modified time: 2019-03-24 19:57:48
-# @Email: 295054118@whut.edu.cn"
+# @Last Modified time: 2019-03-25 00:01:32
+# @Email: 295054118@whut.edu.cn
+# @page: https://whutddk.github.io/
+
+# 整体流程定义
+
+# (获得最高速度，要计算极差，防止有漏)
+
+# 出发时间排序(sch)
+# 速度排序(sch)
+#[ 起点排序](sch)
+# 直到未调度车辆数归零
+# 取1个剩余未调度车辆 
+	# 生长三叉树直到完全长满
+		# [每长一个结点，检查未调度表中是否有该起点车辆，（允许限制条件，速度太小就不考虑）且其终点为树根（先不查枝干），有则加入本“拍”“起点节”调度，从未调度表中删除]
+		# 每长一个结点，检查未调度表中是否有起点为树根，终点为该点的车辆，有则加入本“拍”“起点节”调度，从未调度表中删除
+	# 遍历小节进行排序，速度相同一起写入出发时间，（不受道路限速影响），严格限制不同速度出发时间不同，防止慢速车号小先跑了
 
 
 
 import sys
 import ol_roadValueRisk
-import ol_workingCard
+
 
 
 class crossNetwork():
@@ -20,25 +43,19 @@ class crossNetwork():
 		self.carData = []
 		self.roadData = []
 		self.crossData = []
+		self.crossTreeGroup = []
+		self.crossLineGroup = []
 
 		self.crossCollection = []
-		self.crossTree = []
-
-		self.carID = []
-		self.startCross = 1
-		self.endCross = 1
-		self.takeoffTime = []
-		self.roadLine = []
 
 
 		self.RDV = ol_roadValueRisk.roadValue()
-		# self.wCard = ol_workingCard.workingCard()
+
 
 		pass
 
 
 #____________________________________________________	
-
 	def find_crossIndex(self,crossID):
 
 		index = 0
@@ -72,34 +89,67 @@ class crossNetwork():
 		print ("findCarIndex Fail!")
 		while(1):
 			pass
-
-#____________________________________________________
-
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-	def fw_checkroadVV(self,startCross,roadId,preDir):
-		retDir = 0
+
+	def bw_SearchOneLever(self,crossTree,lever,lastEleCnt):
+		upEleCnt = 0;
+		idCnt = 0
+		for ele in crossTree[lever]:
+			# print ("ele=",ele)
+			for crossID in ele:
+
+				if (idCnt == lastEleCnt):
+					# print ("upEleCnt=",upEleCnt)
+					return upEleCnt,crossID
+				idCnt = idCnt + 1;
+			upEleCnt = upEleCnt + 1
+
+		print ("error")
+		while(1):
+			pass
+
+
+	def bw_SortCross(self,crossTree,eleCnt_i):
+
+		lever = len(crossTree)
+		crossLine = []
+		# 最后一层多少元件，决定上层的枝干编号
+		# print ("lastLever=",self.crossTree[len(self.crossTree)-1])
+		eleCnt = eleCnt_i
+		# print ("eleCnt=",eleCnt)
+
+		# 产生crossline
+		lever = lever - 1
+		while(lever != 0):
+			lever = lever - 1
+			# print ("crossTree[lever]=",crossTree[lever])
+			eleCnt,upCrossID = self.bw_SearchOneLever(crossTree,lever,eleCnt)
+			crossLine.insert(0,upCrossID)
+
+		return crossLine
+
+
+
+
+
+
+
+	def fw_checkroadVV(self,startCross,roadId):
 		nextCross = -1
 		# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
 		
 		if ( roadId == -1 ):
-			return nextCross,0,retDir
-
-
-		
-#____________________________________________________		
+			return nextCross,0
+			
 		oneRoad = self.roadData[self.find_roadIndex(roadId)] 
-#____________________________________________________
-
 
 		# print ("oneRoad=",oneRoad)
 		if ( oneRoad[4] == startCross ):		
 			nextCross = oneRoad[5]
-			roadDir = 0
-
 		elif ( oneRoad[5] == startCross and oneRoad[6] == 1 ):			
 			nextCross = oneRoad[4]
-			roadDir = 1
 		else:
 			pass
 
@@ -112,85 +162,54 @@ class crossNetwork():
 	#如果这条路是有效的，在这里调用子函数计算这条路的价值，然后一起返回,
 	#可以参考的参数：道路的最高速，当前车的最高速，道路长度，车道数
 	
-				# roadValue = self.wCard.queryCardOnce(roadId,roadDir)
 				roadValue = self.RDV.RD_Value(oneRoad[1],oneRoad[2],oneRoad[3])
 				
-				# [crossID,roadID1,roadID2,roadID3,roadID4]
-#____________________________________________________
-				# if ( roadId == self.crossData[self.find_crossIndex(startCross)][1]  ):
-				# 	retDir = 1
-				# elif ( roadId == self.crossData[self.find_crossIndex(startCross)][2]  ):
-				# 	retDir = 2
-				# elif ( roadId == self.crossData[self.find_crossIndex(startCross)][3]  ):
-				# 	retDir = 3
-				# elif ( roadId == self.crossData[self.find_crossIndex(startCross)][4]  ):
-#____________________________________________________
-					# retDir = 4
-				# else:
-				# 	print ("error!")
-				# 	while(1):
-				# 		pass
-				# # 直行
-				# if ( retDir == preDir ):
-				# 	roadValue = 1
-				# elif ( (preDir == 1 and retDir == 4) or (preDir == 2 and retDir == 1) or (preDir == 3 and retDir == 2) or (preDir == 4 and retDir == 3)):
-				# 	roadValue = 2
-				# elif ( (preDir == 1 and retDir == 4) or (preDir == 2 and retDir == 1) or (preDir == 3 and retDir == 2) or (preDir == 4 and retDir == 3)):
-				# 	roadValue = 3
-				# else:
-				# 	roadValue = 0
 #####################################################################
 
-
-				return nextCross,roadValue,retDir
-
-
+				return nextCross,roadValue
 		# print ( "checkroadVaild=Return" ,-1)
-		return -1,0,retDir
+		return -1,0
+
+
+# [carID,startPos,endPos,maxSpeed,takeoffTime]
+# 生成树同时把该起点的corssLine进行全局编排，放入一组
+	def fw_createCrossTree(self,crossID):
+
+		oneCrossLineGroup = []
+		# 同一起点的车
+		oneCrossCarGroup = []
+
+		for car in self.carData:
+			if ( car[1] == crossID ):
+				oneCrossCarGroup.append(car)
 
 
 
+		self.crossCollection = self.crossData.copy()
+		crossTree = []
+		crossTree.append([[crossID]])
 
-	def fw_createcrossTree(self):
-
-		# 载入起始点，使用格式，每层两级，一级表示层，一级对应上层的实体枝干
-		self.crossTree.append([[[self.startCross,0]]])
-
-		# 集合中删除起始点
-
-		# del self.crossCollection[self.find_crossIndex(self.startCross)]
+		# delete start cross
 		for vaildCross in self.crossCollection:
-			if ( vaildCross[0] == self.startCross ):
+			if ( vaildCross[0] == crossID ):
 				# print ( "checkroadVaild=Return" ,nextCross)
 				self.crossCollection.remove(vaildCross)
 				break
 
-
-		flagFound = 0
 		while(1):
 			OneCrossLever = []
-			# 扫描上一个层，即总表的最后一个list
-			lastLever = self.crossTree[len(self.crossTree)-1]
-			for root in lastLever:
-				# print ("root=",root)
-				# 检查本层每个结点作为下一级的枝干
-				for crossId in root:
-					# print ("crossId=",crossId)
+			lastLever = crossTree[len(crossTree)-1]
 
-					# 调用查找下一级对应的节点
-
-
-
-#____________________________________________________
-					crossInfo = self.crossData[self.find_crossIndex(crossId[0])]
-#____________________________________________________
+			for eleCnt in range(0,len(lastLever)):
+				for crossId in lastLever[eleCnt]:
+					crossInfo = self.crossData[self.find_crossIndex(crossId)]
 					# print ("crossInfo=",crossInfo)
 
 					# 检查路标
-					cross1Temp,value1,preDir1 = self.fw_checkroadVV(crossInfo[0],crossInfo[1],crossId[1])
-					cross2Temp,value2,preDir2 = self.fw_checkroadVV(crossInfo[0],crossInfo[2],crossId[1])
-					cross3Temp,value3,preDir3 = self.fw_checkroadVV(crossInfo[0],crossInfo[3],crossId[1])
-					cross4Temp,value4,preDir4 = self.fw_checkroadVV(crossInfo[0],crossInfo[4],crossId[1])
+					cross1Temp,value1 = self.fw_checkroadVV(crossInfo[0],crossInfo[1])
+					cross2Temp,value2 = self.fw_checkroadVV(crossInfo[0],crossInfo[2])
+					cross3Temp,value3 = self.fw_checkroadVV(crossInfo[0],crossInfo[3])
+					cross4Temp,value4 = self.fw_checkroadVV(crossInfo[0],crossInfo[4])
 
 					# 本级为叶子，则下一级留空以防止错位
 					leavesCheck = []
@@ -198,108 +217,71 @@ class crossNetwork():
 ##################################################
 
 ## 价值函数排序可以在这里做，本级cross已经确定，下级cross的价值可以从前面return 回来，下级cross放在前面会先被for到
-#
-					SortListTemp = [[cross1Temp,value1,preDir1],[cross2Temp,value2,preDir2],[cross3Temp,value3,preDir3],[cross4Temp,value4,preDir4]]
+
+					SortListTemp = [[cross1Temp,value1],[cross2Temp,value2],[cross3Temp,value3],[cross4Temp,value4]]
 					# print( "SortListTemp=B",SortListTemp )
 					SortListTemp.sort(key=lambda x:x[1],reverse=True)
 					# print( "SortListTemp=A",SortListTemp )
 
-
-					cross1 = [ SortListTemp[0][0], SortListTemp[0][2]]
-					cross2 = [ SortListTemp[1][0], SortListTemp[1][2]]
-					cross3 = [ SortListTemp[2][0], SortListTemp[2][2]]
-					cross4 = [ SortListTemp[3][0], SortListTemp[3][2]]
+					cross1 = SortListTemp[0][0]
+					cross2 = SortListTemp[1][0]
+					cross3 = SortListTemp[2][0]
+					cross4 = SortListTemp[3][0]
 
 ##################################################
-					
-
-
-
-					if ( cross1[0] != -1 ):
+				
+					if ( cross1 != -1 ):
 						leavesCheck.append(cross1)
-					if ( cross2[0] != -1 ):	
+					if ( cross2 != -1 ):	
 						leavesCheck.append(cross2)
-					if ( cross3[0] != -1 ):	
+					if ( cross3 != -1 ):	
 						leavesCheck.append(cross3)
-					if ( cross4[0] != -1 ):	
+					if ( cross4 != -1 ):	
 						leavesCheck.append(cross4)
 					
-					if ( (cross1[0] == self.endCross) or (cross2[0] == self.endCross) or (cross3[0] == self.endCross) or (cross4[0] == self.endCross) ):
-						flagFound = 1
+
+					# 提前生成该起点车的cross路线
+					for car in oneCrossCarGroup:
+						endCross = car[2]
+						if ( (cross1 == endCross) or (cross2 == endCross) or (cross3 == endCross) or (cross4 == endCross) ):
+							crossLine = self.bw_SortCross(crossTree,eleCnt)
+							crossLine.append( crossId )
+							crossLine.append( endCross )
+
+							# 先带入最高速度为第一项，起飞时间为第二项，方便后排序
+							carSch = [car[3],car[0],car[4]]
+							carSch.extend(crossLine)
+
+							oneCrossLineGroup.append(carSch)
+
+
 
 					# 本路口级增加一个枝干组
 					OneCrossLever.append(leavesCheck)
-			
-			# print ( "路口未激活集合=",self.crossCollection )
+				
+				# print ( "路口未激活集合=",self.crossCollection )	
+			# print ( "路口集合=",crossCollection )
 
-			# 判定完成条件，这里为找到目标点
-					if ( flagFound == 1 ):
+			crossTree.append(OneCrossLever)
 
-						self.crossTree.append(OneCrossLever)
+			if ( len(self.crossCollection) == 0 ):
+				self.crossLineGroup.append(oneCrossLineGroup)
+				return crossTree
 
-						# 结束crossTree的生成
-						return 
-
-			self.crossTree.append(OneCrossLever)
-
-		pass
-
-
-####################################
-
-
-	def bw_SearchOneLever(self,lever,lastEleCnt):
-		upEleCnt = 0;
-		idCnt = 0
-		for ele in self.crossTree[lever]:
-			# print ("ele=",ele)
-			for crossID in ele:
-
-				if (idCnt == lastEleCnt):
-					self.crossLine.insert(0,crossID[0])
-					# print ("upEleCnt=",upEleCnt)
-					return upEleCnt
-				idCnt = idCnt + 1;
-			upEleCnt = upEleCnt + 1
-
-		print ("error")
-		while(1):
-			pass
+		pass			
 
 
 
-	def bw_SortCross(self):
-
-		# 一共有多少层
-		# print ("self.crossTree=",self.crossTree)
-		lever = len(self.crossTree)
-
-		# 最后一层多少元件，决定上层的枝干编号
-		# print ("lastLever=",self.crossTree[len(self.crossTree)-1])
-		eleCnt = len(self.crossTree[len(self.crossTree)-1])-1
-		# print ("eleCnt=",eleCnt)
-
-		# 产生crossline
-		lever = lever - 1
-		while(lever != 0):
-			lever = lever - 1
-			# print ("self.crossTree[lever]=",self.crossTree[lever])
-			eleCnt = self.bw_SearchOneLever(lever,eleCnt)
-
-		self.crossLine.append(self.endCross)
-
-		return
 
 
-	def cross2road(self):
-
+	def cross2road(self,crossLine):
 		# print("crossLine=",crossLine)
-		self.roadLine = []
-		index = len(self.crossLine)
-		for i in range (0,index-1):
+		roadLine = [crossLine[0],crossLine[1]]
+		index = len(crossLine)
+		for i in range (2,index-1):
 			# print ( crossLine[i],crossLine[i+1] )
-			startCrossTemp = self.crossData[self.find_crossIndex(self.crossLine[i])]
-			endCrossTemp = self.crossData[self.find_crossIndex(self.crossLine[i+1])]
+			startCrossTemp = self.crossData[self.find_crossIndex(crossLine[i])]
+			endCrossTemp = self.crossData[self.find_crossIndex(crossLine[i+1])]
 
 			if ( (startCrossTemp[1] == endCrossTemp[1] or startCrossTemp[1] == endCrossTemp[2] or startCrossTemp[1] == endCrossTemp[3] or startCrossTemp[1] == endCrossTemp[4]) and (startCrossTemp[1] != -1) ):
 				RoadID = startCrossTemp[1]
@@ -311,78 +293,85 @@ class crossNetwork():
 				RoadID = startCrossTemp[4]
 
 			# print("warning",startCross,endCross)
-			self.roadLine.append( RoadID )
-
-#######################################
-
-# 外挂式加载道路工作卡
-			# 岔道ID == 
-			# if ( self.crossLine[i] == self.roadData[self.find_roadIndex(roadID)][4] ):
-			# 	roadDir = 0
-			# else:
-			# 	roadDir = 1
-
-			# self.wCard.wCard_pushOneRoad( RoadID,roadDir )
-
-#######################################
-
+			roadLine.append( RoadID )
 
 		# print ("roadLine=",roadLine)
-		return 
+		return roadLine
 
 
 
 
-	def createNetwork(self,oneCar):
+	def createNetwork(self):
 
-		# [carID,startPos,endPos,maxSpeed,takeoffTime]
-		# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
-		# [crossID,roadID1,roadID2,roadID3,roadID4]
-
-
-
-		self.carID = oneCar[0]		
-		self.startCross = oneCar[1]
-		self.endCross = oneCar[2]
-		self.takeoffTime = oneCar[4]
-
-		self.crossCollection = []
-		self.crossCollection = self.crossData.copy()
-		self.crossTree = []
-		self.crossLine = []
-		self.roadLine = []
-
-		# print( "CMW.carID=",self.carID )
-		# self.wCard.wCard_reset(self.takeoffTime,self.carID)
+		self.crossLineGroup = []
+	# 产生树表，每棵树级越少越先
+		for cross in self.crossData:
+			crossID = cross[0]
+			crossTree = self.fw_createCrossTree(crossID)
+			self.crossTreeGroup.append(crossTree)
 
 
+################################################################################
+		if (0):
+			# 重新按高速先行进行排序测试
+			crossLine = []
+			for oneCrossLineGroup in self.crossLineGroup:
+				for car in oneCrossLineGroup:
+					crossLine.append(car)
+			
+			# 先出发在前
+			crossLine.sort(key=lambda x:x[2])
+			# 高速在前
+			crossLine.sort(key=lambda x:x[0],reverse=True)
+
+			for i in range(0,len(crossLine)):
+				crossLine[i].remove(crossLine[i][0])
+			# print ( crossLine )
+		
+		# 最原始方案
+		
+
+		if(1):
+			crossLine = []
+			sch = 8 
+			speed = 0
+			prespeed = 0
+
+			# 所有岔道起点，路径多的在前
+			self.crossLineGroup.sort(key = lambda i:len(i),reverse=True)
+			for oneCrossLineGroup in self.crossLineGroup:
+				# sch = sch + 2
+
+				# 同一起点，速度高的车在前
+				oneCrossLineGroup.sort(key=lambda x:x[0],reverse=True)
+				for car in oneCrossLineGroup:
+					speed = car[0]
+
+					# 同速则同时
+					if ( speed != prespeed ):
+						prespeed = speed
+						sch = sch + 2
+
+					car[2] = sch
+
+					crossLine.append(car)
+			
+			# 删除车速度
+			for i in range(0,len(crossLine)):
+				crossLine[i].remove(crossLine[i][0])
 
 
-		# print ("sort from",self.startCross,'to',self.endCross)
-		self.fw_createcrossTree()
-		self.bw_SortCross()
-		# print ("crossLine=",self.crossLine)
-		self.cross2road()
 
+################################################################################
+		
 
-		# self.wCard.updateCard()
-
-
-		return self.roadLine
+		roadLine = []
+		for car in crossLine:
+			roadLine.append(self.cross2road(car))
+		return roadLine
 
 
 	def crossNetwork_init(self,carData,roadData,crossData):
 		self.carData = carData
 		self.roadData = roadData
 		self.crossData = crossData
-
-
-		# self.wCard.wCard_init(self.roadData,self.carData)
-		pass
-
-
-
-
-
-
-
