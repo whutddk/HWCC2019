@@ -399,13 +399,15 @@ class crossNetwork():
 		if(1):
 			
 			crossLine = []
-			sch = 8 
+			sch = 0 
+			offsetTime = 10
 			speed = 0
 			prespeed = 0
 
 
 			while( len(self.crossLineGroup) > 0 ):
-
+				offsetTime = offsetTime + 5
+				sch = 0
 				# 所有岔道起点，路径多的在前
 				self.crossLineGroup.sort(key = lambda i:len(i),reverse=True)
 
@@ -422,8 +424,8 @@ class crossNetwork():
 					# 同速则同时
 					if ( speed != prespeed ):
 						prespeed = speed
-						sch = sch + 2
-					car[2] = sch
+						sch = sch + 1
+					car[2] = sch + offsetTime
 
 					crossLine.append(car)
 					usedCarID = car[1]
