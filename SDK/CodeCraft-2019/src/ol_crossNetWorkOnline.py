@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-26 10:31:22
+# @Last Modified time: 2019-03-26 11:44:43
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -177,12 +177,20 @@ class crossNetwork():
 
 		oneCrossLineGroup = []
 		# 同一起点的车
-		oneCrossCarGroup = []
-
+		oneCrossStartCarGroup = []
 		for car in self.carData:
 			if ( car[1] == crossID ):
-				oneCrossCarGroup.append(car)
+				oneCrossStartCarGroup.append(car)
 
+#***************************************************************************************
+		# 同一终点的车（考虑刷选条件）
+		oneCrossEndCarGroup = []
+		for car in self.carData:
+			# 终点为该cross，且速度比较高
+			if ( car[2] == crossID and car[3] > 6 ):
+				oneCrossEndCarGroup.append(car)
+
+#***************************************************************************************
 
 
 		self.crossCollection = self.crossData.copy()
@@ -241,7 +249,7 @@ class crossNetwork():
 					
 
 					# 提前生成该起点车的cross路线
-					for car in oneCrossCarGroup:
+					for car in oneCrossStartCarGroup:
 						endCross = car[2]
 						if ( (cross1 == endCross) or (cross2 == endCross) or (cross3 == endCross) or (cross4 == endCross) ):
 							crossLine = self.bw_SortCross(crossTree,eleCnt)
@@ -254,8 +262,27 @@ class crossNetwork():
 
 							oneCrossLineGroup.append(carSch)
 
+#***************************************************************************************
+
+					# 提前生成该起点车的cross路线
+					for car in oneCrossEndCarGroup:
+						startCross = car[1]
+						if ( (cross1 == startCross) or (cross2 == startCross) or (cross3 == startCross) or (cross4 == startCross) ):
+							crossLine = self.bw_SortCross(crossTree,eleCnt)
+							crossLine.append( crossId )
+							crossLine.append( startCross )
+							crossLine.sort(key=None,reverse=True)
 
 
+							# 先带入最高速度为第一项，起飞时间为第二项，方便后排序
+							carSch = [car[3],car[0],car[4]]
+							carSch.extend(crossLine)
+
+							oneCrossLineGroup.append(carSch)
+
+
+
+#***************************************************************************************
 					# 本路口级增加一个枝干组
 					OneCrossLever.append(leavesCheck)
 				
@@ -332,14 +359,19 @@ class crossNetwork():
 		
 
 		if(1):
+			
 			crossLine = []
 			sch = 8 
 			speed = 0
 			prespeed = 0
 
-			# 所有岔道起点，路径多的在前
-			self.crossLineGroup.sort(key = lambda i:len(i),reverse=True)
-			for oneCrossLineGroup in self.crossLineGroup:
+
+			while( len(self.crossLineGroup) > 0 ):
+
+				# 所有岔道起点，路径多的在前
+				self.crossLineGroup.sort(key = lambda i:len(i),reverse=True)
+				# 直接取量最大的一个
+				oneCrossLineGroup = self.crossLineGroup[0]
 				# sch = sch + 2
 
 				# 同一起点，速度高的车在前
@@ -351,14 +383,29 @@ class crossNetwork():
 					if ( speed != prespeed ):
 						prespeed = speed
 						sch = sch + 2
-
 					car[2] = sch
 
 					crossLine.append(car)
-			
-			# 删除车速度
-			for i in range(0,len(crossLine)):
-				crossLine[i].remove(crossLine[i][0])
+					usedCarID = car[1]
+				
+					# 遍历其余的cross,删除重复的车
+					for i in range(1,len(self.crossLineGroup)):
+						clearCrossLineGroup = self.crossLineGroup[i]
+						for j in range (0,len(clearCrossLineGroup)):
+							if (clearCrossLineGroup[j][1] == usedCarID):
+								clearCrossLineGroup.remove(clearCrossLineGroup[j])
+				
+				self.crossLineGroup.remove(self.crossLineGroup[0])
+
+				for i in range(0,len(self.crossLineGroup)):
+					if (len(self.crossLineGroup[i] == 0)):
+						self.crossLineGroup.remove(self.crossLineGroup[i])
+
+
+
+				# 删除车速度
+				for k in range(0,len(crossLine)):
+					crossLine[k].remove(crossLine[k][0])
 
 
 
