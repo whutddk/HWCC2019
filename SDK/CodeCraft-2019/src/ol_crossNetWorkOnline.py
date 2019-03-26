@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-26 15:37:36
+# @Last Modified time: 2019-03-26 15:51:56
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -323,7 +323,9 @@ class crossNetwork():
 
 									# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
 								road = self.roadData[self.find_roadIndex(RoadID)]
-								if ( road[4] == endCrossTemp and road[5] == startCrossTemp and raod[6] == 0 ):
+								# print (road)
+								# 为单行道 而且起点终点反向了
+								if ( road[6] == 0 and road[4] == crossLine[i+1] and road[5] == crossLine[i] ):
 									Violation = 1
 									break
 
@@ -409,7 +411,7 @@ class crossNetwork():
 
 				# 直接取量最大的一个
 				oneCrossLineGroup = self.crossLineGroup[0]
-				# print (len(oneCrossLineGroup))
+				print (len(oneCrossLineGroup))
 				# sch = sch + 2
 
 				# 同一起点，速度高的车在前
