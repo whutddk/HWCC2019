@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-26 14:38:02
+# @Last Modified time: 2019-03-26 15:37:36
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -90,6 +90,31 @@ class crossNetwork():
 		while(1):
 			pass
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	def cross2road(self,crossLine):
+		# print("crossLine=",crossLine)
+		roadLine = [crossLine[0],crossLine[1]]
+		index = len(crossLine)
+		for i in range (2,index-1):
+			# print ( crossLine[i],crossLine[i+1] )
+			startCrossTemp = self.crossData[self.find_crossIndex(crossLine[i])]
+			endCrossTemp = self.crossData[self.find_crossIndex(crossLine[i+1])]
+
+			if ( (startCrossTemp[1] == endCrossTemp[1] or startCrossTemp[1] == endCrossTemp[2] or startCrossTemp[1] == endCrossTemp[3] or startCrossTemp[1] == endCrossTemp[4]) and (startCrossTemp[1] != -1) ):
+				RoadID = startCrossTemp[1]
+			elif ( (startCrossTemp[2] == endCrossTemp[1] or startCrossTemp[2] == endCrossTemp[2] or startCrossTemp[2] == endCrossTemp[3] or startCrossTemp[2] == endCrossTemp[4]) and (startCrossTemp[2] != -1)):
+				RoadID = startCrossTemp[2]
+			elif ( (startCrossTemp[3] == endCrossTemp[1] or startCrossTemp[3] == endCrossTemp[2] or startCrossTemp[3] == endCrossTemp[3] or startCrossTemp[3] == endCrossTemp[4]) and (startCrossTemp[3] != -1)):
+				RoadID = startCrossTemp[3]
+			elif ( (startCrossTemp[4] == endCrossTemp[1] or startCrossTemp[4] == endCrossTemp[2] or startCrossTemp[4] == endCrossTemp[3] or startCrossTemp[4] == endCrossTemp[4]) and (startCrossTemp[4] != -1)):
+				RoadID = startCrossTemp[4]
+
+			# print("warning",startCross,endCross)
+			roadLine.append( RoadID )
+
+		# print ("roadLine=",roadLine)
+		return roadLine
+
 
 
 
@@ -252,6 +277,7 @@ class crossNetwork():
 					for car in oneCrossStartCarGroup:
 						endCross = car[2]
 						if ( (cross1 == endCross) or (cross2 == endCross) or (cross3 == endCross) or (cross4 == endCross) ):
+							oneCrossStartCarGroup.remove(car)
 							crossLine = self.bw_SortCross(crossTree,eleCnt)
 							crossLine.append( crossId )
 							crossLine.append( endCross )
@@ -260,18 +286,52 @@ class crossNetwork():
 							carSch = [car[3],car[0],car[4]]
 							carSch.extend(crossLine)
 
+
+
 							oneCrossLineGroup.append(carSch)
 
 #***************************************************************************************
 
-					# 提前生成该起点车的cross路线
+					# 提前生成该终点车的cross路线
 					for car in oneCrossEndCarGroup:
 						startCross = car[1]
 						if ( (cross1 == startCross) or (cross2 == startCross) or (cross3 == startCross) or (cross4 == startCross) ):
+							oneCrossEndCarGroup.remove(car)
 							crossLine = self.bw_SortCross(crossTree,eleCnt)
 							crossLine.append( crossId )
 							crossLine.append( startCross )
 							crossLine.reverse()
+
+							#(((((((((((((((((((((((((((())))))))))))))))))))))))))))
+							# 需要排除反向单行道情况
+
+							Violation = 0
+
+							index = len(crossLine)
+							for i in range (0,index-1):
+								startCrossTemp = self.crossData[self.find_crossIndex(crossLine[i])]
+								endCrossTemp = self.crossData[self.find_crossIndex(crossLine[i+1])]
+
+								if ( (startCrossTemp[1] == endCrossTemp[1] or startCrossTemp[1] == endCrossTemp[2] or startCrossTemp[1] == endCrossTemp[3] or startCrossTemp[1] == endCrossTemp[4]) and (startCrossTemp[1] != -1) ):
+									RoadID = startCrossTemp[1]
+								elif ( (startCrossTemp[2] == endCrossTemp[1] or startCrossTemp[2] == endCrossTemp[2] or startCrossTemp[2] == endCrossTemp[3] or startCrossTemp[2] == endCrossTemp[4]) and (startCrossTemp[2] != -1)):
+									RoadID = startCrossTemp[2]
+								elif ( (startCrossTemp[3] == endCrossTemp[1] or startCrossTemp[3] == endCrossTemp[2] or startCrossTemp[3] == endCrossTemp[3] or startCrossTemp[3] == endCrossTemp[4]) and (startCrossTemp[3] != -1)):
+									RoadID = startCrossTemp[3]
+								elif ( (startCrossTemp[4] == endCrossTemp[1] or startCrossTemp[4] == endCrossTemp[2] or startCrossTemp[4] == endCrossTemp[3] or startCrossTemp[4] == endCrossTemp[4]) and (startCrossTemp[4] != -1)):
+									RoadID = startCrossTemp[4]
+
+									# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
+								road = self.roadData[self.find_roadIndex(RoadID)]
+								if ( road[4] == endCrossTemp and road[5] == startCrossTemp and raod[6] == 0 ):
+									Violation = 1
+									break
+
+
+							if ( Violation == 1 ):
+								continue
+							#(((((((((((((((((((((((((((())))))))))))))))))))))))))))
+
 
 							# 先带入最高速度为第一项，起飞时间为第二项，方便后排序
 							carSch = [car[3],car[0],car[4]]
@@ -279,9 +339,8 @@ class crossNetwork():
 
 							oneCrossLineGroup.append(carSch)
 
-
-
 #***************************************************************************************
+
 					# 本路口级增加一个枝干组
 					OneCrossLever.append(leavesCheck)
 				
@@ -300,29 +359,7 @@ class crossNetwork():
 
 
 
-	def cross2road(self,crossLine):
-		# print("crossLine=",crossLine)
-		roadLine = [crossLine[0],crossLine[1]]
-		index = len(crossLine)
-		for i in range (2,index-1):
-			# print ( crossLine[i],crossLine[i+1] )
-			startCrossTemp = self.crossData[self.find_crossIndex(crossLine[i])]
-			endCrossTemp = self.crossData[self.find_crossIndex(crossLine[i+1])]
 
-			if ( (startCrossTemp[1] == endCrossTemp[1] or startCrossTemp[1] == endCrossTemp[2] or startCrossTemp[1] == endCrossTemp[3] or startCrossTemp[1] == endCrossTemp[4]) and (startCrossTemp[1] != -1) ):
-				RoadID = startCrossTemp[1]
-			elif ( (startCrossTemp[2] == endCrossTemp[1] or startCrossTemp[2] == endCrossTemp[2] or startCrossTemp[2] == endCrossTemp[3] or startCrossTemp[2] == endCrossTemp[4]) and (startCrossTemp[2] != -1)):
-				RoadID = startCrossTemp[2]
-			elif ( (startCrossTemp[3] == endCrossTemp[1] or startCrossTemp[3] == endCrossTemp[2] or startCrossTemp[3] == endCrossTemp[3] or startCrossTemp[3] == endCrossTemp[4]) and (startCrossTemp[3] != -1)):
-				RoadID = startCrossTemp[3]
-			elif ( (startCrossTemp[4] == endCrossTemp[1] or startCrossTemp[4] == endCrossTemp[2] or startCrossTemp[4] == endCrossTemp[3] or startCrossTemp[4] == endCrossTemp[4]) and (startCrossTemp[4] != -1)):
-				RoadID = startCrossTemp[4]
-
-			# print("warning",startCross,endCross)
-			roadLine.append( RoadID )
-
-		# print ("roadLine=",roadLine)
-		return roadLine
 
 
 
@@ -369,8 +406,10 @@ class crossNetwork():
 
 				# 所有岔道起点，路径多的在前
 				self.crossLineGroup.sort(key = lambda i:len(i),reverse=True)
+
 				# 直接取量最大的一个
 				oneCrossLineGroup = self.crossLineGroup[0]
+				# print (len(oneCrossLineGroup))
 				# sch = sch + 2
 
 				# 同一起点，速度高的车在前
