@@ -277,7 +277,7 @@ class crossNetwork():
 					for car in oneCrossStartCarGroup:
 						endCross = car[2]
 						if ( (cross1 == endCross) or (cross2 == endCross) or (cross3 == endCross) or (cross4 == endCross) ):
-							oneCrossStartCarGroup.remove(car)
+							# oneCrossStartCarGroup.remove(car)
 							crossLine = self.bw_SortCross(crossTree,eleCnt)
 							crossLine.append( crossId )
 							crossLine.append( endCross )
@@ -296,7 +296,7 @@ class crossNetwork():
 					for car in oneCrossEndCarGroup:
 						startCross = car[1]
 						if ( (cross1 == startCross) or (cross2 == startCross) or (cross3 == startCross) or (cross4 == startCross) ):
-							oneCrossEndCarGroup.remove(car)
+							# oneCrossEndCarGroup.remove(car)
 							crossLine = self.bw_SortCross(crossTree,eleCnt)
 							crossLine.append( crossId )
 							crossLine.append( startCross )
