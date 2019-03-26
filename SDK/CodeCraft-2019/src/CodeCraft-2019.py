@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-26 14:07:52
+# @Last Modified time: 2019-03-26 14:35:53
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: CodeCraft-2019.py
@@ -72,7 +72,7 @@ def main():
 
 	roadLine = CNW.createNetwork()
 
-	print (roadLine)
+	# print (roadLine)
 
 	# fS.finalAnswer = sch.fin_scheduler(roadLine)
 	fS.finalAnswer = roadLine

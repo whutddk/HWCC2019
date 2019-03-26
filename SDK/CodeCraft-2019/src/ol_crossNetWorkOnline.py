@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-26 14:33:13
+# @Last Modified time: 2019-03-26 14:38:02
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -407,10 +407,10 @@ class crossNetwork():
 			# 删除车速度
 			
 			for k in range(0,len(crossLine)):
-				
+				# print (crossLine[k])
 				crossLine[k].remove(crossLine[k][0])
 
-				# print (crossLine[k])
+				
 
 ################################################################################
 		
