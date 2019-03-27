@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-27 10:06:17
+# @Last Modified time: 2019-03-27 15:33:15
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -393,42 +393,7 @@ class crossNetwork():
 				crossLine[i].remove(crossLine[i][0])
 			# print ( crossLine )
 		
-		# 最原始方案
-		
 
-		if(0):
-			crossLine = []
-			sch = 8 
-			speed = 0
-			prespeed = 0
-
-			# 所有岔道起点，路径多的在前
-			self.crossLineGroup.sort(key = lambda i:len(i),reverse=True)
-			for oneCrossLineGroup in self.crossLineGroup:
-				# sch = sch + 2
-
-				# 同一起点，速度高的车在前
-				oneCrossLineGroup.sort(key=lambda x:x[0],reverse=True)
-				for car in oneCrossLineGroup:
-					speed = car[0]
-
-					# 同速则同时
-					if ( speed != prespeed ):
-						prespeed = speed
-						sch = sch + 2
-
-					car[2] = sch
-
-					crossLine.append(car)
-			
-			# 删除车速度
-			for i in range(0,len(crossLine)):
-				crossLine[i].remove(crossLine[i][0])
-
-
-
-################################################################################
-		
 
 		roadLine = []
 		for car in crossLine:
