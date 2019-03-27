@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-27 15:57:33
+# @Last Modified time: 2019-03-27 16:27:50
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -344,11 +344,15 @@ class crossNetwork():
 			regroup.append([])
 
 		groupCnt = 0
+		oneGroupCnt = 0
 		for car in speed8:
 			regroup[groupCnt].append(car)
-			groupCnt = groupCnt + 1
-			if ( groupCnt == 64 ):
-				groupCnt = 0
+			oneGroupCnt = oneGroupCnt + 1
+			if ( oneGroupCnt == 8 ):
+				oneGroupCnt = 0
+				groupCnt = groupCnt + 1
+				if ( groupCnt == 64 ):
+					groupCnt = 0
 
 		speed8 = []
 		for i in range(0,64):
