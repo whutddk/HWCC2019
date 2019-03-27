@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-27 15:34:33
+# @Last Modified time: 2019-03-27 15:57:33
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -313,11 +313,15 @@ class crossNetwork():
 
 ################################################################################
 
+		# 同cross可以提供一些永不死锁的爆发量，但其他cross加入后，流量下降
+		# 使用不同cross可以提供大的瞬间爆发量，因不同速度之间基本解耦
 			
 		speed8 = []
 		speed6 = []
 		speed4 = []
 		speed2 = []
+
+
 		for oneCrossLineGroup in self.crossLineGroup:
 			for car in oneCrossLineGroup:
 				if ( car[0] == 8 ):
@@ -332,6 +336,23 @@ class crossNetwork():
 					print("error")
 					while(1):
 						pass
+		
+		# 出发点重组默认64个岔道口
+		speed8.sort(key=lambda x:x[3])
+		regroup = []
+		for i in range(0,64):
+			regroup.append([])
+
+		groupCnt = 0
+		for car in speed8:
+			regroup[groupCnt].append(car)
+			groupCnt = groupCnt + 1
+			if ( groupCnt == 64 ):
+				groupCnt = 0
+
+		speed8 = []
+		for i in range(0,64):
+			speed8.extend(regroup[i])
 
 		
 		# 先出发在前
@@ -339,7 +360,8 @@ class crossNetwork():
 		speed6.sort(key=lambda x:x[2])
 		speed4.sort(key=lambda x:x[2])
 		speed2.sort(key=lambda x:x[2])
-
+		
+		# print (speed8)
 
 		# 高速在前
 		# crossLine.sort(key=lambda x:x[0],reverse=True)
