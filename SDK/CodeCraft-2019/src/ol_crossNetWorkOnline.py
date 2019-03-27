@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-26 10:31:22
+# @Last Modified time: 2019-03-27 15:34:33
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -304,7 +304,7 @@ class crossNetwork():
 	def createNetwork(self):
 
 		self.crossLineGroup = []
-	# 产生树表，每棵树级越少越先
+
 		for cross in self.crossData:
 			crossID = cross[0]
 			crossTree = self.fw_createCrossTree(crossID)
@@ -312,58 +312,87 @@ class crossNetwork():
 
 
 ################################################################################
-		if (0):
-			# 重新按高速先行进行排序测试
-			crossLine = []
-			for oneCrossLineGroup in self.crossLineGroup:
-				for car in oneCrossLineGroup:
-					crossLine.append(car)
+
 			
-			# 先出发在前
-			crossLine.sort(key=lambda x:x[2])
-			# 高速在前
-			crossLine.sort(key=lambda x:x[0],reverse=True)
+		speed8 = []
+		speed6 = []
+		speed4 = []
+		speed2 = []
+		for oneCrossLineGroup in self.crossLineGroup:
+			for car in oneCrossLineGroup:
+				if ( car[0] == 8 ):
+					speed8.append(car)
+				elif ( car[0] == 6 ):
+					speed6.append(car)
+				elif ( car[0] == 4 ):
+					speed4.append(car)
+				elif ( car[0] == 2 ):
+					speed2.append(car)
+				else:
+					print("error")
+					while(1):
+						pass
 
-			for i in range(0,len(crossLine)):
-				crossLine[i].remove(crossLine[i][0])
-			# print ( crossLine )
 		
-		# 最原始方案
+		# 先出发在前
+		speed8.sort(key=lambda x:x[2])
+		speed6.sort(key=lambda x:x[2])
+		speed4.sort(key=lambda x:x[2])
+		speed2.sort(key=lambda x:x[2])
+
+
+		# 高速在前
+		# crossLine.sort(key=lambda x:x[0],reverse=True)
+
+
+		additionalTime = 0		
+		for ans in range(0,len(speed8)):
+			if ( speed8[ans][2] < additionalTime//34 ):
+				speed8[ans][2] = additionalTime//34
+			else:
+				pass			
+			additionalTime = additionalTime + 1 
+
+		offset = additionalTime//34 + 3
+		additionalTime = 0
+		for ans in range(0,len(speed6)):
+			if ( speed6[ans][2] < additionalTime//34 + offset ):
+				speed6[ans][2] = additionalTime//34 + offset	
+			additionalTime = additionalTime + 1 
+
+		offset = offset + additionalTime//34 + 7
+		additionalTime = 0
+		for ans in range(0,len(speed4)):
+			if ( speed4[ans][2] < additionalTime//30 + offset ):
+				speed4[ans][2] = additionalTime//30 + offset
+		
+			additionalTime = additionalTime + 1 
+
+		offset = offset + additionalTime//30 + 19
+		additionalTime = 0
+		for ans in range(0,len(speed2)):
+			if ( speed2[ans][2] < additionalTime//25 + offset ):
+				speed2[ans][2] = additionalTime//25 + offset
+		
+			additionalTime = additionalTime + 1 
+
+
+
+		crossLine = []
+		for car in speed8:
+			crossLine.append(car)
+		for car in speed6:
+			crossLine.append(car)
+		for car in speed4:
+			crossLine.append(car)
+		for car in speed2:
+			crossLine.append(car)
+
+		for i in range(0,len(crossLine)):
+			crossLine[i].remove(crossLine[i][0])
+		# print ( crossLine )
 		
 
-		if(1):
-			crossLine = []
-			sch = 8 
-			speed = 0
-			prespeed = 0
-
-			# 所有岔道起点，路径多的在前
-			self.crossLineGroup.sort(key = lambda i:len(i),reverse=True)
-			for oneCrossLineGroup in self.crossLineGroup:
-				# sch = sch + 2
-
-				# 同一起点，速度高的车在前
-				oneCrossLineGroup.sort(key=lambda x:x[0],reverse=True)
-				for car in oneCrossLineGroup:
-					speed = car[0]
-
-					# 同速则同时
-					if ( speed != prespeed ):
-						prespeed = speed
-						sch = sch + 2
-
-					car[2] = sch
-
-					crossLine.append(car)
-			
-			# 删除车速度
-			for i in range(0,len(crossLine)):
-				crossLine[i].remove(crossLine[i][0])
-
-
-
-################################################################################
-		
 
 		roadLine = []
 		for car in crossLine:
