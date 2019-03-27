@@ -72,7 +72,7 @@ def main():
 
 	roadLine = CNW.createNetwork()
 
-	print (roadLine)
+	# print (roadLine)
 
 	# fS.finalAnswer = sch.fin_scheduler(roadLine)
 	fS.finalAnswer = roadLine

@@ -354,14 +354,14 @@ class crossNetwork():
 					pass			
 				additionalTime = additionalTime + 1 
 
-			offset = additionalTime//25 + 0
+			offset = additionalTime//25 + 1
 			additionalTime = 0
 			for ans in range(0,len(speed6)):
 				if ( speed6[ans][2] < additionalTime//25 + offset ):
 					speed6[ans][2] = additionalTime//25 + offset	
 				additionalTime = additionalTime + 1 
 
-			offset = offset + additionalTime//25 + 0
+			offset = offset + additionalTime//25 + 1
 			additionalTime = 0
 			for ans in range(0,len(speed4)):
 				if ( speed4[ans][2] < additionalTime//25 + offset ):
@@ -369,7 +369,7 @@ class crossNetwork():
 			
 				additionalTime = additionalTime + 1 
 
-			offset = offset + additionalTime//25 + 0
+			offset = offset + additionalTime//25 + 1
 			additionalTime = 0
 			for ans in range(0,len(speed2)):
 				if ( speed2[ans][2] < additionalTime//25 + offset ):
