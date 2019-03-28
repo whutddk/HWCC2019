@@ -371,8 +371,6 @@ class crossNetwork():
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
 
-		offset = schTimer + 1
-		additionalTime = 0
 
 		for car in preResultGroup[0][1]:
 			schTimer = additionalTime//34 + offset
@@ -387,15 +385,14 @@ class crossNetwork():
 			if ( car[2] < schTimer ):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
-		offset = schTimer + 1
-		additionalTime = 0
+
 
 		for car in preResultGroup[0][3]:
 			schTimer = additionalTime//37 + offset
 			if ( car[2] < schTimer ):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
-		offset = schTimer + 1
+		offset = schTimer + 2
 		additionalTime = 0
 
 		for car in preResultGroup[0][4]:
@@ -410,7 +407,7 @@ class crossNetwork():
 #------------------speed 6--------------------------
 
 		for car in preResultGroup[1][0]:
-			schTimer = additionalTime//35 + offset
+			schTimer = additionalTime//34 + offset
 			if ( car[2] < schTimer ):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
@@ -457,7 +454,7 @@ class crossNetwork():
 #-----------------speed 4----------------------------
 
 		for car in preResultGroup[2][0]:
-			schTimer = additionalTime//30 + offset
+			schTimer = additionalTime//31 + offset
 			if ( car[2] < schTimer ):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
@@ -498,13 +495,13 @@ class crossNetwork():
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
 			
-		offset = schTimer + 19 + 1
+		offset = schTimer + 10 + 1
 		additionalTime = 0
 
 #----------------speed 2------------------------------
 
 		for car in preResultGroup[3][0]:
-			schTimer = additionalTime//25 + offset
+			schTimer = additionalTime//26 + offset
 			if ( car[2] < schTimer ):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
@@ -513,7 +510,7 @@ class crossNetwork():
 		additionalTime = 0
 
 		for car in preResultGroup[3][1]:
-			schTimer = additionalTime//25 + offset
+			schTimer = additionalTime//26 + offset
 			if ( car[2] < schTimer ):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
@@ -545,7 +542,7 @@ class crossNetwork():
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
 			
-		offset = schTimer + 1
+		offset = schTimer + 2
 		additionalTime = 0
 
 #----------------------------------------------------
