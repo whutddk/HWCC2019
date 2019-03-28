@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-27 15:34:33
+# @Last Modified time: 2019-03-28 13:52:07
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -318,6 +318,8 @@ class crossNetwork():
 		speed6 = []
 		speed4 = []
 		speed2 = []
+
+
 		for oneCrossLineGroup in self.crossLineGroup:
 			for car in oneCrossLineGroup:
 				if ( car[0] == 8 ):
@@ -339,6 +341,12 @@ class crossNetwork():
 		speed6.sort(key=lambda x:x[2])
 		speed4.sort(key=lambda x:x[2])
 		speed2.sort(key=lambda x:x[2])
+
+		# 先出发在前
+		speed8.sort(key = lambda i:len(i),reverse=True )
+		speed6.sort(key = lambda i:len(i),reverse=True )
+		speed4.sort(key = lambda i:len(i),reverse=True )
+		speed2.sort(key = lambda i:len(i),reverse=True )
 
 
 		# 高速在前
@@ -390,7 +398,7 @@ class crossNetwork():
 
 		for i in range(0,len(crossLine)):
 			crossLine[i].remove(crossLine[i][0])
-		# print ( crossLine )
+			print ( crossLine[i] )
 		
 
 
