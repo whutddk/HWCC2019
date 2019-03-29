@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # @File Name: ol_crossNetWorkOnline.py
-# @File Path: K:\work\dark+PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_crossNetWorkOnline.py
+# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_crossNetWorkOnline.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
-# @Last Modified by:   29505
-# @Last Modified time: 2019-03-28 20:27:33
+# @Last Modified by:   Ruige_Lee
+# @Last Modified time: 2019-03-29 14:21:07
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -357,6 +357,7 @@ class crossNetwork():
 			speed_step3.sort(key=lambda x:x[2])
 			speed_step4.sort(key=lambda x:x[2])
 			speed_step5.sort(key=lambda x:x[2])
+			
 			finResultGroup.append([speed_step1,speed_step2,speed_step3,speed_step4,speed_step5])
 
 
@@ -568,60 +569,9 @@ class crossNetwork():
 			
 		self.depart_Speed_takeoff()
 
-		
-		# 先出发在前
-		# speed8.sort(key=lambda x:x[2])
-		# speed6.sort(key=lambda x:x[2])
-		# speed4.sort(key=lambda x:x[2])
-		# speed2.sort(key=lambda x:x[2])
-
-
-		# 高速在前
-		# crossLine.sort(key=lambda x:x[0],reverse=True)
-
-
-		# additionalTime = 0		
-		# for ans in range(0,len(speed8)):
-		# 	if ( speed8[ans][2] < additionalTime//34 ):
-		# 		speed8[ans][2] = additionalTime//34
-		# 	else:
-		# 		pass			
-		# 	additionalTime = additionalTime + 1 
-
-		# offset = additionalTime//34 + 3
-		# additionalTime = 0
-		# for ans in range(0,len(speed6)):
-		# 	if ( speed6[ans][2] < additionalTime//34 + offset ):
-		# 		speed6[ans][2] = additionalTime//34 + offset	
-		# 	additionalTime = additionalTime + 1 
-
-		# offset = offset + additionalTime//34 + 7
-		# additionalTime = 0
-		# for ans in range(0,len(speed4)):
-		# 	if ( speed4[ans][2] < additionalTime//30 + offset ):
-		# 		speed4[ans][2] = additionalTime//30 + offset
-		
-		# 	additionalTime = additionalTime + 1 
-
-		# offset = offset + additionalTime//30 + 19
-		# additionalTime = 0
-		# for ans in range(0,len(speed2)):
-		# 	if ( speed2[ans][2] < additionalTime//25 + offset ):
-		# 		speed2[ans][2] = additionalTime//25 + offset
-		
-		# 	additionalTime = additionalTime + 1 
-
 
 
 		crossLine = []
-		# for car in speed8:
-		# 	crossLine.append(car)
-		# for car in speed6:
-		# 	crossLine.append(car)
-		# for car in speed4:
-		# 	crossLine.append(car)
-		# for car in speed2:
-		# 	crossLine.append(car)
 
 		for speed in self.crossLineGroup:
 			for takeoffTime in speed:
@@ -630,7 +580,7 @@ class crossNetwork():
 
 		for i in range(0,len(crossLine)):
 			crossLine[i].remove(crossLine[i][0])
-			print ( crossLine[i] )
+			# print ( crossLine[i] )
 		
 
 
