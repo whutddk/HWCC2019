@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-29 11:07:54
+# @Last Modified time: 2019-03-29 14:24:35
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: CodeCraft-2019.py
@@ -92,7 +92,9 @@ def main():
 
 	print ("carTakeOffTimeStep=",timeStep)
 
-
+	print ( "cross number =" , len(fS.crossData))
+	print ( "road number =" , len(fS.roadData))
+	print ("answer length = ", len(fS.carData))
 
 ##########################################
 
