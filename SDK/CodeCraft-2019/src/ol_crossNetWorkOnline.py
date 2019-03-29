@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   whutddkUbuntu16
-# @Last Modified time: 2019-03-29 15:51:52
+# @Last Modified time: 2019-03-29 16:52:58
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -460,7 +460,7 @@ class crossNetwork():
 #-----------------speed 4----------------------------
 
 		for car in preResultGroup[2][0]:
-			schTimer = additionalTime//25 + offset
+			schTimer = additionalTime//24 + offset
 			if ( car[2] < schTimer ):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
