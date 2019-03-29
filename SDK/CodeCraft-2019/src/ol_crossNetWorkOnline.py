@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # @File Name: ol_crossNetWorkOnline.py
-# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_crossNetWorkOnline.py
+# @File Path: /home/whutddk/下载/HWCC2019/SDK/CodeCraft-2019/src/ol_crossNetWorkOnline.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
-# @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-29 14:21:07
+# @Last Modified by:   whutddkUbuntu16
+# @Last Modified time: 2019-03-29 15:51:52
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -372,9 +372,11 @@ class crossNetwork():
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
 
+		offset = schTimer + 1
+		additionalTime = 0
 
 		for car in preResultGroup[0][1]:
-			schTimer = additionalTime//34 + offset
+			schTimer = additionalTime//37 + offset
 			if ( car[2] < schTimer ):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
@@ -387,17 +389,20 @@ class crossNetwork():
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
 
+		offset = schTimer + 1
+		additionalTime = 0
 
 		for car in preResultGroup[0][3]:
 			schTimer = additionalTime//37 + offset
 			if ( car[2] < schTimer ):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
-		offset = schTimer + 2
+
+		offset = schTimer + 1
 		additionalTime = 0
 
 		for car in preResultGroup[0][4]:
-			schTimer = additionalTime//40 + offset
+			schTimer = additionalTime//34 + offset
 			if ( car[2] < schTimer ):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
@@ -449,13 +454,13 @@ class crossNetwork():
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
 			
-		offset = schTimer + 7 + 1
+		offset = schTimer + 8
 		additionalTime = 0
 
 #-----------------speed 4----------------------------
 
 		for car in preResultGroup[2][0]:
-			schTimer = additionalTime//31 + offset
+			schTimer = additionalTime//25 + offset
 			if ( car[2] < schTimer ):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
@@ -464,7 +469,7 @@ class crossNetwork():
 		additionalTime = 0
 
 		for car in preResultGroup[2][1]:
-			schTimer = additionalTime//30 + offset
+			schTimer = additionalTime//33 + offset
 			if ( car[2] < schTimer ):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
@@ -473,7 +478,7 @@ class crossNetwork():
 		additionalTime = 0
 
 		for car in preResultGroup[2][2]:
-			schTimer = additionalTime//30 + offset
+			schTimer = additionalTime//33 + offset
 			if ( car[2] < schTimer ):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
@@ -482,7 +487,7 @@ class crossNetwork():
 		additionalTime = 0
 
 		for car in preResultGroup[2][3]:
-			schTimer = additionalTime//30 + offset
+			schTimer = additionalTime//33 + offset
 			if ( car[2] < schTimer):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
@@ -491,18 +496,18 @@ class crossNetwork():
 		additionalTime = 0
 
 		for car in preResultGroup[2][4]:
-			schTimer = additionalTime//30 + offset
+			schTimer = additionalTime//31 + offset
 			if ( car[2] < schTimer ):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
 			
-		offset = schTimer + 10 + 1
+		offset = schTimer + 11
 		additionalTime = 0
 
 #----------------speed 2------------------------------
 
 		for car in preResultGroup[3][0]:
-			schTimer = additionalTime//26 + offset
+			schTimer = additionalTime//25 + offset
 			if ( car[2] < schTimer ):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
@@ -511,7 +516,7 @@ class crossNetwork():
 		additionalTime = 0
 
 		for car in preResultGroup[3][1]:
-			schTimer = additionalTime//26 + offset
+			schTimer = additionalTime//25 + offset
 			if ( car[2] < schTimer ):
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
@@ -543,8 +548,7 @@ class crossNetwork():
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
 			
-		offset = schTimer + 2
-		additionalTime = 0
+
 
 #----------------------------------------------------
 		self.crossLineGroup = preResultGroup
