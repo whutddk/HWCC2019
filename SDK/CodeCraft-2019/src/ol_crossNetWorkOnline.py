@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-27 15:34:33
+# @Last Modified time: 2019-03-29 14:11:15
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -318,6 +318,7 @@ class crossNetwork():
 		speed6 = []
 		speed4 = []
 		speed2 = []
+		
 		for oneCrossLineGroup in self.crossLineGroup:
 			for car in oneCrossLineGroup:
 				if ( car[0] == 8 ):
@@ -347,32 +348,38 @@ class crossNetwork():
 
 		additionalTime = 0		
 		for ans in range(0,len(speed8)):
-			if ( speed8[ans][2] < additionalTime//34 ):
-				speed8[ans][2] = additionalTime//34
+			schTime = additionalTime//34
+			if ( speed8[ans][2] < schTime ):
+				speed8[ans][2] = schTime
 			else:
 				pass			
 			additionalTime = additionalTime + 1 
 
-		offset = additionalTime//34 + 3
+		offset = schTime + 3
+
 		additionalTime = 0
+
 		for ans in range(0,len(speed6)):
-			if ( speed6[ans][2] < additionalTime//34 + offset ):
-				speed6[ans][2] = additionalTime//34 + offset	
+			schTime = additionalTime//34 + offset
+			if ( speed6[ans][2] < schTime  ):
+				speed6[ans][2] = schTime	
 			additionalTime = additionalTime + 1 
 
-		offset = offset + additionalTime//34 + 7
+		offset = schTime + 7
 		additionalTime = 0
 		for ans in range(0,len(speed4)):
-			if ( speed4[ans][2] < additionalTime//30 + offset ):
-				speed4[ans][2] = additionalTime//30 + offset
+			schTime = additionalTime//30 + offset
+			if ( speed4[ans][2] < schTime ):
+				speed4[ans][2] = schTime
 		
 			additionalTime = additionalTime + 1 
 
-		offset = offset + additionalTime//30 + 19
+		offset = schTime + 19
 		additionalTime = 0
 		for ans in range(0,len(speed2)):
-			if ( speed2[ans][2] < additionalTime//25 + offset ):
-				speed2[ans][2] = additionalTime//25 + offset
+			schTime = additionalTime//25 + offset
+			if ( speed2[ans][2] < schTime ):
+				speed2[ans][2] = schTime
 		
 			additionalTime = additionalTime + 1 
 
@@ -390,7 +397,7 @@ class crossNetwork():
 
 		for i in range(0,len(crossLine)):
 			crossLine[i].remove(crossLine[i][0])
-		# print ( crossLine )
+			# print ( crossLine[i] )
 		
 
 
