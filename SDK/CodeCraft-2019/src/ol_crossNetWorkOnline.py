@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   whutddkUbuntu16
-# @Last Modified time: 2019-03-30 10:06:14
+# @Last Modified time: 2019-03-30 10:15:49
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -442,14 +442,7 @@ class crossNetwork():
 		
 			additionalTime = additionalTime + 1 
 
-		offset = schTime + 1
-		additionalTime = 0
-		for ans in range(0,len(speed2)):
-			schTime = additionalTime//26 + offset
-			if ( speed2[ans][2] < schTime ):
-				speed2[ans][2] = schTime
-		
-			additionalTime = additionalTime + 1 
+
 
 
 ###################################################################
@@ -461,20 +454,26 @@ class crossNetwork():
 		crossLine = []
 		for car in speed16:
 			crossLine.append(car)
-		for car in speed14:
+		for car in speed14:		
 			crossLine.append(car)
-		for car in speed12:
+		for car in speed12:		
 			crossLine.append(car)
-		for car in speed10:
+		for car in speed10:			
+			crossLine.append(car)
+		for car in speed8:			
+			crossLine.append(car)
+		for car in speed6:		
+			crossLine.append(car)
+		for car in speed4:	
 			crossLine.append(car)
 
-		for car in speed8:
-			crossLine.append(car)
-		for car in speed6:
-			crossLine.append(car)
-		for car in speed4:
-			crossLine.append(car)
-
+		# print ("len of s16 = ",len(speed16))
+		# print ("len of s14 = ",len(speed14))
+		# print ("len of s12 = ",len(speed12))
+		# print ("len of s10 = ",len(speed10))	
+		# print ("len of s8 = ",len(speed8))
+		# print ("len of s6 = ",len(speed6))
+		# print ("len of s4 = ",len(speed4))
 
 		for i in range(0,len(crossLine)):
 			crossLine[i].remove(crossLine[i][0])
