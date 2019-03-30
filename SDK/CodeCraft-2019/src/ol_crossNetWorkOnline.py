@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # @File Name: ol_crossNetWorkOnline.py
-# @File Path: /home/whutddk/下载/HWCC2019/SDK/CodeCraft-2019/src/ol_crossNetWorkOnline.py
+# @File Path: K:\work\dark+PRJ\HWCC2019\SDK\CodeCraft-2019\src\ol_crossNetWorkOnline.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
-# @Last Modified by:   whutddkUbuntu16
-# @Last Modified time: 2019-03-29 16:52:58
+# @Last Modified by:   29505
+# @Last Modified time: 2019-03-30 15:34:55
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -329,26 +329,50 @@ class crossNetwork():
 
 		finResultGroup = []
 
-		for speed in preResultGroup:			
+		speedStep = []
+		carData = self.carData.copy()
+		carData.sort(key=lambda x:x[4],reverse=True)
+
+		timeStep = []
+		for car in carData:
+			time = car[4]
+			if time in timeStep:
+				pass
+			else:
+				timeStep.append(time)
+			
+		timeSteplen = len( timeStep )
+
+		timeSteplen = (timeSteplen+1) // 5
+		
+		print (timeStep[timeSteplen],timeStep[timeSteplen*2],timeStep[timeSteplen*3],timeStep[timeSteplen*4],timeStep[timeSteplen*5])
+
+
+
+		for speed in preResultGroup:	
+
+
+
 			speed_step1 = []
 			speed_step2 = []
 			speed_step3 = []
 			speed_step4 = []
 			speed_step5 = []
+
 			for car in speed:
-				if ( car[2] < 3 ):
+				if ( car[2] < timeStep[timeSteplen] ):
 
 					speed_step1.append(car)
-				elif ( car[2] < 5 ):
+				elif ( car[2] < timeStep[timeSteplen*2] ):
 
 					speed_step2.append(car)
-				elif ( car[2] < 7 ):
+				elif ( car[2] < timeStep[timeSteplen*3] ):
 
 					speed_step3.append(car)
-				elif ( car[2] < 9 ):
+				elif ( car[2] < timeStep[timeSteplen*4] ):
 
 					speed_step4.append(car)
-				elif ( car[2] < 11 ):
+				elif ( car[2] < timeStep[timeSteplen*5] ):
 
 					speed_step5.append(car)
 
