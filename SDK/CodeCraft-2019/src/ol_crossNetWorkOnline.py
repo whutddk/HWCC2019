@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   29505
-# @Last Modified time: 2019-03-30 15:52:23
+# @Last Modified time: 2019-03-30 15:58:40
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -404,7 +404,11 @@ class crossNetwork():
 
 		additionalTime = 0
 		offset = 0 
-#------------------speed 8--------------------------
+
+
+
+#------------------speed 16--------------------------
+		
 		for car in preResultGroup[0][0]:
 			schTimer = additionalTime//34 + offset
 			if ( car[2] < schTimer ):
@@ -449,7 +453,7 @@ class crossNetwork():
 		offset = schTimer + 3
 		additionalTime = 0
 
-#------------------speed 6--------------------------
+#------------------speed 14--------------------------
 
 		for car in preResultGroup[1][0]:
 			schTimer = additionalTime//34 + offset
@@ -496,7 +500,7 @@ class crossNetwork():
 		offset = schTimer + 8
 		additionalTime = 0
 
-#-----------------speed 4----------------------------
+#-----------------speed 12----------------------------
 
 		for car in preResultGroup[2][0]:
 			schTimer = additionalTime//24 + offset
@@ -543,7 +547,7 @@ class crossNetwork():
 		offset = schTimer + 11
 		additionalTime = 0
 
-#----------------speed 2------------------------------
+#----------------speed 10------------------------------
 
 		for car in preResultGroup[3][0]:
 			schTimer = additionalTime//25 + offset
@@ -587,6 +591,139 @@ class crossNetwork():
 		 		car[2] = schTimer
 			additionalTime = additionalTime + 1
 			
+
+#----------------speed 8------------------------------
+
+		for car in preResultGroup[4][0]:
+			schTimer = additionalTime//25 + offset
+			if ( car[2] < schTimer ):
+		 		car[2] = schTimer
+			additionalTime = additionalTime + 1
+			
+		offset = schTimer + 1
+		additionalTime = 0
+
+		for car in preResultGroup[4][1]:
+			schTimer = additionalTime//25 + offset
+			if ( car[2] < schTimer ):
+		 		car[2] = schTimer
+			additionalTime = additionalTime + 1
+			
+		offset = schTimer + 1
+		additionalTime = 0
+
+		for car in preResultGroup[4][2]:
+			schTimer = additionalTime//25 + offset
+			if ( car[2] < schTimer ):
+		 		car[2] = schTimer
+			additionalTime = additionalTime + 1
+			
+		offset = schTimer + 1
+		additionalTime = 0
+
+		for car in preResultGroup[4][3]:
+			schTimer = additionalTime//25 + offset
+			if ( car[2] < schTimer ):
+		 		car[2] = schTimer
+			additionalTime = additionalTime + 1
+			
+		offset = schTimer + 1
+		additionalTime = 0
+
+		for car in preResultGroup[4][4]:
+			schTimer = additionalTime//25 + offset
+			if ( car[2] < schTimer ):
+		 		car[2] = schTimer
+			additionalTime = additionalTime + 1
+
+
+#----------------speed 6------------------------------
+
+		for car in preResultGroup[5][0]:
+			schTimer = additionalTime//25 + offset
+			if ( car[2] < schTimer ):
+		 		car[2] = schTimer
+			additionalTime = additionalTime + 1
+			
+		offset = schTimer + 1
+		additionalTime = 0
+
+		for car in preResultGroup[5][1]:
+			schTimer = additionalTime//25 + offset
+			if ( car[2] < schTimer ):
+		 		car[2] = schTimer
+			additionalTime = additionalTime + 1
+			
+		offset = schTimer + 1
+		additionalTime = 0
+
+		for car in preResultGroup[5][2]:
+			schTimer = additionalTime//25 + offset
+			if ( car[2] < schTimer ):
+		 		car[2] = schTimer
+			additionalTime = additionalTime + 1
+			
+		offset = schTimer + 1
+		additionalTime = 0
+
+		for car in preResultGroup[5][3]:
+			schTimer = additionalTime//25 + offset
+			if ( car[2] < schTimer ):
+		 		car[2] = schTimer
+			additionalTime = additionalTime + 1
+			
+		offset = schTimer + 1
+		additionalTime = 0
+
+		for car in preResultGroup[5][4]:
+			schTimer = additionalTime//25 + offset
+			if ( car[2] < schTimer ):
+		 		car[2] = schTimer
+			additionalTime = additionalTime + 1
+
+#----------------speed 4------------------------------
+
+		for car in preResultGroup[6][0]:
+			schTimer = additionalTime//25 + offset
+			if ( car[2] < schTimer ):
+		 		car[2] = schTimer
+			additionalTime = additionalTime + 1
+			
+		offset = schTimer + 1
+		additionalTime = 0
+
+		for car in preResultGroup[6][1]:
+			schTimer = additionalTime//25 + offset
+			if ( car[2] < schTimer ):
+		 		car[2] = schTimer
+			additionalTime = additionalTime + 1
+			
+		offset = schTimer + 1
+		additionalTime = 0
+
+		for car in preResultGroup[6][2]:
+			schTimer = additionalTime//25 + offset
+			if ( car[2] < schTimer ):
+		 		car[2] = schTimer
+			additionalTime = additionalTime + 1
+			
+		offset = schTimer + 1
+		additionalTime = 0
+
+		for car in preResultGroup[6][3]:
+			schTimer = additionalTime//25 + offset
+			if ( car[2] < schTimer ):
+		 		car[2] = schTimer
+			additionalTime = additionalTime + 1
+			
+		offset = schTimer + 1
+		additionalTime = 0
+
+		for car in preResultGroup[6][4]:
+			schTimer = additionalTime//25 + offset
+			if ( car[2] < schTimer ):
+		 		car[2] = schTimer
+			additionalTime = additionalTime + 1
 
 
 #----------------------------------------------------
