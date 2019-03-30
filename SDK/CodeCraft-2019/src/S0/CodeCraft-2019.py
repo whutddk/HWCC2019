@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # @File Name: CodeCraft-2019.py
-# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK\CodeCraft-2019\src\CodeCraft-2019.py
+# @File Path: /home/whutddk/下载/HWCC2019/SDK/CodeCraft-2019/src/CodeCraft-2019.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
-# @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-03-27 10:01:28
+# @Last Modified by:   whutddkUbuntu16
+# @Last Modified time: 2019-03-30 08:51:36
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: CodeCraft-2019.py
@@ -17,9 +17,7 @@
 # @page: https://whutddk.github.io/
 
 
-# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
-# [crossID,roadID1,roadID2,roadID3,roadID4]
-# [carID,startPos,endPos,maxSpeed,takeoffTime]
+
 
 import logging
 import sys
@@ -66,18 +64,38 @@ def main():
 	# fileSystem init
 	fS.load_data(road_path,cross_path,car_path)
 
-	preSort = sch.pre_scheduler(fS.carData,fS.roadData,fS.crossData)
+# [roadID,roadLength,maxSpeed,chnNum,startID,endID,doubleBool]
+# [crossID,roadID1,roadID2,roadID3,roadID4]
+# [carID,startPos,endPos,maxSpeed,takeoffTime]
 
-	CNW.crossNetwork_init(preSort,fS.roadData,fS.crossData)
+	speedStep = []
+	fS.carData.sort(key=lambda x:x[3],reverse=True)
 
-	roadLine = CNW.createNetwork()
+	for car in fS.carData:
+		speed = car[3]
+		if speed in speedStep:
+			pass
+		else:
+			speedStep.append(speed)
 
-	# print (roadLine)
 
-	# fS.finalAnswer = sch.fin_scheduler(roadLine)
-	fS.finalAnswer = roadLine
+	fS.carData.sort(key=lambda x:x[4],reverse=True)
+	print ("speedStep=",speedStep)
 
-	fS.save_answer(answer_path)
+	timeStep = []
+	for car in fS.carData:
+		time = car[4]
+		if time in timeStep:
+			pass
+		else:
+			timeStep.append(time)
+
+	print ("carTakeOffTimeStep=",timeStep)
+
+	print ( "cross number =" , len(fS.crossData))
+	print ( "road number =" , len(fS.roadData))
+	print ("answer length = ", len(fS.carData))
+
 ##########################################
 
 
