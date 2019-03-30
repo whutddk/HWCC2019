@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   whutddkUbuntu16
-# @Last Modified time: 2019-03-30 09:11:39
+# @Last Modified time: 2019-03-30 16:17:18
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -304,7 +304,7 @@ class crossNetwork():
 	def createNetwork(self):
 
 		self.crossLineGroup = []
-	# 产生树表，每棵树级越少越先
+
 		for cross in self.crossData:
 			crossID = cross[0]
 			crossTree = self.fw_createCrossTree(crossID)
@@ -312,25 +312,174 @@ class crossNetwork():
 
 
 ################################################################################
+
+
+
+		speed16 = []	
+		speed14 = []
+		speed12 = []
+		speed10 = []	
+		speed8 = []
+		speed6 = []
+		speed4 = []
+
 		
-		# 重新按高速先行进行排序测试
-		crossLine = []
 		for oneCrossLineGroup in self.crossLineGroup:
 			for car in oneCrossLineGroup:
-				crossLine.append(car)
+				if ( car[0] == 16 ):
+					speed16.append(car)
+				elif (car[0] == 14 ):
+					speed14.append(car)
+				elif ( car[0] == 12 ):
+					speed12.append(car)
+				elif ( car[0] == 10 ):
+					speed10.append(car)
+				elif ( car[0] == 8 ):
+					speed8.append(car)
+				elif ( car[0] == 6 ):
+					speed6.append(car)
+				elif ( car[0] == 4 ):
+					speed4.append(car)
+
+				else:
+					print("error")
+					while(1):
+						pass
+
 		
 		# 先出发在前
-		crossLine.sort(key=lambda x:x[2])
-		crossLine.sort(key=lambda x:x[0],reverse=True)
+		speed16.sort(key=lambda x:x[2])
+		speed14.sort(key=lambda x:x[2])
+		speed12.sort(key=lambda x:x[2])
+		speed10.sort(key=lambda x:x[2])
+		speed8.sort(key=lambda x:x[2])
+		speed6.sort(key=lambda x:x[2])
+		speed4.sort(key=lambda x:x[2])
+
+
+		# 高速在前
+		# crossLine.sort(key=lambda x:x[0],reverse=True)
+
+
+
+##################################################################################
+		offset = 0
+
+
+
+		additionalTime = 0		
+		for ans in range(0,len(speed16)):
+			schTime = additionalTime//42 + offset
+			if ( speed16[ans][2] < schTime ):
+				speed16[ans][2] = schTime
+			else:
+				pass			
+			additionalTime = additionalTime + 1 
+
+		offset = schTime - 7
+
+
+		additionalTime = 0		
+		for ans in range(0,len(speed14)):
+			schTime = additionalTime//42 + offset
+			if ( speed14[ans][2] < schTime ):
+				speed14[ans][2] = schTime
+			else:
+				pass			
+			additionalTime = additionalTime + 1 
+
+		offset = schTime +1
+
+
+		additionalTime = 0		
+		for ans in range(0,len(speed12)):
+			schTime = additionalTime//41 + offset
+			if ( speed12[ans][2] < schTime ):
+				speed12[ans][2] = schTime
+			else:
+				pass			
+			additionalTime = additionalTime + 1 
+
+		offset = schTime + 1
+
+		additionalTime = 0		
+		for ans in range(0,len(speed10)):
+			schTime = additionalTime//43 + offset
+			if ( speed10[ans][2] < schTime ):
+				speed10[ans][2] = schTime
+			else:
+				pass			
+			additionalTime = additionalTime + 1 
+
+		offset = schTime + 1
+
+
+		additionalTime = 0		
+		for ans in range(0,len(speed8)):
+			schTime = additionalTime//45 + offset
+			if ( speed8[ans][2] < schTime ):
+				speed8[ans][2] = schTime
+			else:
+				pass			
+			additionalTime = additionalTime + 1 
+
+		offset = schTime + 1
+
+		additionalTime = 0
+
+		for ans in range(0,len(speed6)):
+			schTime = additionalTime//33 + offset
+			if ( speed6[ans][2] < schTime  ):
+				speed6[ans][2] = schTime	
+			additionalTime = additionalTime + 1 
+
+		offset = schTime - 5
+		additionalTime = 0
+		for ans in range(0,len(speed4)):
+			schTime = additionalTime//24 + offset
+			if ( speed4[ans][2] < schTime ):
+				speed4[ans][2] = schTime
+		
+			additionalTime = additionalTime + 1 
+
+
+
+
+###################################################################
+
+
+
+
+
+		crossLine = []
+		for car in speed16:
+			crossLine.append(car)
+		for car in speed14:		
+			crossLine.append(car)
+		for car in speed12:		
+			crossLine.append(car)
+		for car in speed10:			
+			crossLine.append(car)
+		for car in speed8:			
+			crossLine.append(car)
+		for car in speed6:		
+			crossLine.append(car)
+		for car in speed4:	
+			crossLine.append(car)
+
+		# print ("len of s16 = ",len(speed16))
+		# print ("len of s14 = ",len(speed14))
+		# print ("len of s12 = ",len(speed12))
+		# print ("len of s10 = ",len(speed10))	
+		# print ("len of s8 = ",len(speed8))
+		# print ("len of s6 = ",len(speed6))
+		# print ("len of s4 = ",len(speed4))
 
 		for i in range(0,len(crossLine)):
 			crossLine[i].remove(crossLine[i][0])
 			# print ( crossLine[i] )
 		
 
-
-################################################################################
-		
 
 		roadLine = []
 		for car in crossLine:
