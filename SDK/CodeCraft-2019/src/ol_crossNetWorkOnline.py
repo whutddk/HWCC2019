@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   whutddkUbuntu16
-# @Last Modified time: 2019-03-30 16:11:25
+# @Last Modified time: 2019-03-30 16:17:18
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -433,7 +433,7 @@ class crossNetwork():
 				speed6[ans][2] = schTime	
 			additionalTime = additionalTime + 1 
 
-		offset = schTime - 3
+		offset = schTime - 5
 		additionalTime = 0
 		for ans in range(0,len(speed4)):
 			schTime = additionalTime//24 + offset
