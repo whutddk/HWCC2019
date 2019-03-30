@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   whutddkUbuntu16
-# @Last Modified time: 2019-03-30 09:30:49
+# @Last Modified time: 2019-03-30 09:40:11
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_scheduler.py
@@ -96,8 +96,8 @@ class scheduler():
 		for ans in range(0,len(answer)):
 			if ( additionalTime < takeoffset ):
 				pass
-			elif ( answer[ans][1] < (additionalTime-takeoffset)//20 ):
-				answer[ans][1] = (additionalTime-takeoffset)//20
+			elif ( answer[ans][1] < (additionalTime-takeoffset)//25 ):
+				answer[ans][1] = (additionalTime-takeoffset)//25
 			else:
 				pass
 			
