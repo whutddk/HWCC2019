@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   whutddkUbuntu16
-# @Last Modified time: 2019-03-30 15:27:12
+# @Last Modified time: 2019-03-30 15:38:43
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -376,7 +376,7 @@ class crossNetwork():
 				pass			
 			additionalTime = additionalTime + 1 
 
-		offset = schTime + 1
+		offset = schTime -2
 
 
 		additionalTime = 0		
