@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   29505
-# @Last Modified time: 2019-03-30 15:34:55
+# @Last Modified time: 2019-03-30 15:40:45
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -305,20 +305,33 @@ class crossNetwork():
 
 		preResultGroup = []
 
+		speed16 = []
+		speed14 = []
+		speed12 = []
+		speed10 = []
 		speed8 = []
 		speed6 = []
 		speed4 = []
-		speed2 = []
+
 		for oneCrossLineGroup in self.crossLineGroup:
 			for car in oneCrossLineGroup:
-				if ( car[0] == 8 ):
+				if ( car[0] == 16 ):
+					speed16.append(car)
+				elif ( car[0] == 14 ):
+					speed14.append(car)
+				elif ( car[0] == 12 ):
+					speed12.append(car)
+				elif ( car[0] == 10 ):
+					speed10.append(car)
+
+
+				elif ( car[0] == 8 ):
 					speed8.append(car)
 				elif ( car[0] == 6 ):
 					speed6.append(car)
 				elif ( car[0] == 4 ):
 					speed4.append(car)
-				elif ( car[0] == 2 ):
-					speed2.append(car)
+
 				else:
 					print("error")
 					while(1):
