@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   29505
-# @Last Modified time: 2019-03-30 15:40:45
+# @Last Modified time: 2019-03-30 15:52:23
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -337,7 +337,7 @@ class crossNetwork():
 					while(1):
 						pass
 
-		preResultGroup = [speed8,speed6,speed4,speed2]
+		preResultGroup = [speed16,speed14,speed12,speed10,speed8,speed6,speed4]
 
 
 		finResultGroup = []
@@ -356,9 +356,11 @@ class crossNetwork():
 			
 		timeSteplen = len( timeStep )
 
-		timeSteplen = (timeSteplen+1) // 5
+		timeSteplen = (timeSteplen+1) // 5 
 		
-		print (timeStep[timeSteplen],timeStep[timeSteplen*2],timeStep[timeSteplen*3],timeStep[timeSteplen*4],timeStep[timeSteplen*5])
+		# print ( timeStep )
+		# print ( timeSteplen )
+		# print (timeStep[0]+1,timeStep[timeSteplen]+1,timeStep[timeSteplen*2]+1,timeStep[timeSteplen*3]+1,timeStep[timeSteplen*4]+1)
 
 
 
@@ -373,19 +375,19 @@ class crossNetwork():
 			speed_step5 = []
 
 			for car in speed:
-				if ( car[2] < timeStep[timeSteplen] ):
+				if ( car[2] < timeStep[0]+1):
 
 					speed_step1.append(car)
-				elif ( car[2] < timeStep[timeSteplen*2] ):
+				elif ( car[2] < timeStep[timeSteplen]+1 ):
 
 					speed_step2.append(car)
-				elif ( car[2] < timeStep[timeSteplen*3] ):
+				elif ( car[2] < timeStep[timeSteplen*2]+1 ):
 
 					speed_step3.append(car)
-				elif ( car[2] < timeStep[timeSteplen*4] ):
+				elif ( car[2] < timeStep[timeSteplen*3]+1 ):
 
 					speed_step4.append(car)
-				elif ( car[2] < timeStep[timeSteplen*5] ):
+				elif ( car[2] <= timeStep[timeSteplen*4]+1 ):
 
 					speed_step5.append(car)
 
