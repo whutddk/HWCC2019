@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   29505
-# @Last Modified time: 2019-04-01 23:48:58
+# @Last Modified time: 2019-04-01 23:52:14
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_fileSystem.py
@@ -135,7 +135,7 @@ class fS():
 				# print (takeoffTime)
 
 				self.carData.append([carID,startPos,endPos,maxSpeed,takeoffTime,isPri,isPreSet])
-			print (self.carData)
+			# print (self.carData)
 
 
 
