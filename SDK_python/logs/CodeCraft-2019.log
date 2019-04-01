@@ -1,0 +1,13 @@
+[2018-12-17 15:47:41] INFO [main: CodeCraft-2019.py, 21] car_path is config/car.txt
+[2018-12-17 15:47:41] INFO [main: CodeCraft-2019.py, 22] road_path is config/road.txt
+[2018-12-17 15:47:41] INFO [main: CodeCraft-2019.py, 23] cross_path is config/cross.txt
+[2018-12-17 15:47:41] INFO [main: CodeCraft-2019.py, 24] answer_path is config/answer.txt[2019-04-01 23:46:01] INFO [main: CodeCraft-2019.py, 44] car_path is config/car.txt
+[2019-04-01 23:46:01] INFO [main: CodeCraft-2019.py, 45] road_path is config/road.txt
+[2019-04-01 23:46:01] INFO [main: CodeCraft-2019.py, 46] cross_path is config/cross.txt
+[2019-04-01 23:46:01] INFO [main: CodeCraft-2019.py, 47] preset_answer_path is config/presetAnswer.txt
+[2019-04-01 23:46:01] INFO [main: CodeCraft-2019.py, 48] answer_path is config/answer.txt
+[2019-04-01 23:49:01] INFO [main: CodeCraft-2019.py, 44] car_path is config/car.txt
+[2019-04-01 23:49:01] INFO [main: CodeCraft-2019.py, 45] road_path is config/road.txt
+[2019-04-01 23:49:01] INFO [main: CodeCraft-2019.py, 46] cross_path is config/cross.txt
+[2019-04-01 23:49:01] INFO [main: CodeCraft-2019.py, 47] preset_answer_path is config/presetAnswer.txt
+[2019-04-01 23:49:01] INFO [main: CodeCraft-2019.py, 48] answer_path is config/answer.txt
