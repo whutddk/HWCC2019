@@ -3,7 +3,7 @@
 # @Author: 29505
 # @Date:   2019-04-02 23:13:28
 # @Last Modified by:   29505
-# @Last Modified time: 2019-04-02 23:47:46
+# @Last Modified time: 2019-04-02 23:54:16
 # @Email: 295054118@whut.edu.cn
 # @page: https://whutddk.github.io/
 
@@ -30,14 +30,14 @@ class preProduce():
 # [preSetCarID,startTime,roadId1,roadId2........]
 
 		preSetTakeoffTime = []
-		# print (presetAnswerData)
+		# print ("presetAnswerData=",presetAnswerData)
 		for car in presetAnswerData:
 			startTime = car[1]
 			if  startTime in preSetTakeoffTime:
 				pass
 			else:
 				preSetTakeoffTime.append(startTime)
-		# print( "preSetTakeoffTime=",preSetTakeoffTime )
+		print( "preSetTakeoffTime=",preSetTakeoffTime )
 
 
 

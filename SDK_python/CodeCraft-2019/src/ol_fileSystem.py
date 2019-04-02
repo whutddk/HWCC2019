@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   29505
-# @Last Modified time: 2019-04-02 23:50:32
+# @Last Modified time: 2019-04-02 23:53:58
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_fileSystem.py
@@ -174,9 +174,9 @@ class fS():
 				po = string.find(')')
 				finalRoadID = int(string[:po])
 				onePresetAnswer.append(finalRoadID)
-				print ("onePresetAnswer=",onePresetAnswer)
+				# print ("onePresetAnswer=",onePresetAnswer)
 
-				self.carData.append(onePresetAnswer)
+				self.presetAnswerData.append(onePresetAnswer)
 			# print (self.carData)
 
 
