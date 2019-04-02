@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-04-02 10:39:13
+# @Last Modified time: 2019-04-02 10:56:16
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -257,7 +257,7 @@ class crossNetwork():
 					# 提前生成该起点车的cross路线
 					for car in oneCrossCarGroup:
 						endCross = car[2]
-						if ( (cross1 == endCross) or (cross2 == endCross) or (cross3 == endCross) or (cross4 == endCross) ):
+						if ( ( car[6] == 0 ) and ((cross1 == endCross) or (cross2 == endCross) or (cross3 == endCross) or (cross4 == endCross)) ):
 							crossLine = self.bw_SortCross(crossTree,eleCnt)
 							crossLine.append( crossId )
 							crossLine.append( endCross )
@@ -332,7 +332,7 @@ class crossNetwork():
 		for oneCrossLineGroup in self.crossLineGroup:
 			for car in oneCrossLineGroup:
 				crossLine.append(car)
-		
+
 		# 先出发在前
 		crossLine.sort(key=lambda x:x[2])
 		crossLine.sort(key=lambda x:x[0],reverse=True)
@@ -349,6 +349,10 @@ class crossNetwork():
 		roadLine = []
 		for car in crossLine:
 			roadLine.append(self.cross2road(car))
+
+		for car in self.presetAnswerData:
+			crossLine.append(car)
+			
 		return roadLine
 
 
