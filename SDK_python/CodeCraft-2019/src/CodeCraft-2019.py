@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # @File Name: CodeCraft-2019.py
-# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK_python\CodeCraft-2019\src\CodeCraft-2019.py
+# @File Path: K:\work\dark+PRJ\HWCC2019\SDK_python\CodeCraft-2019\src\CodeCraft-2019.py
 # @Author: Ruige_Lee
 # @Date:   2019-04-02 09:43:48
-# @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-04-02 11:09:55
+# @Last Modified by:   29505
+# @Last Modified time: 2019-04-02 23:31:20
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: CodeCraft-2019.py
@@ -26,10 +26,12 @@ import sys
 
 import ol_fileSystem 
 import ol_crossNetWorkOnline
+import ol_preProduce
+
 
 fS = ol_fileSystem.fS() 
 CNW = ol_crossNetWorkOnline.crossNetwork()
-
+pP = ol_preProduce.preProduce()
 
 
 logging.basicConfig(level=logging.DEBUG,
@@ -66,11 +68,13 @@ def main():
 	fS.load_data(car_path,road_path,cross_path,preset_answer_path)
 
 	CNW.crossNetwork_init(fS.carData,fS.roadData,fS.crossData,fS.presetAnswerData)
+	pP.dealData(fS.carData,fS.roadData,fS.crossData,fS.presetAnswerData)
+
 
 	roadLine = CNW.createNetwork()
 
 	fS.finalAnswer = roadLine
-	print (roadLine)
+	# print (roadLine)
 	fS.save_answer(answer_path)
 ##########################################
 

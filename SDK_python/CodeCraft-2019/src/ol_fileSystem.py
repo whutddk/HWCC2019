@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # @File Name: ol_fileSystem.py
-# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK_python\CodeCraft-2019\src\ol_fileSystem.py
+# @File Path: K:\work\dark+PRJ\HWCC2019\SDK_python\CodeCraft-2019\src\ol_fileSystem.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
-# @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-04-02 09:47:45
+# @Last Modified by:   29505
+# @Last Modified time: 2019-04-02 23:50:32
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_fileSystem.py
@@ -138,6 +138,46 @@ class fS():
 			# print (self.carData)
 
 
+
+
+
+
+		with open(preset_answer_path,'r') as presetAnswerFile:
+			for data in presetAnswerFile.readlines():
+				if data[0] == '#':
+					continue
+
+
+				onePresetAnswer = []
+
+				string = data
+				po = string.find(',')
+				preSetCarID = int(string[1:po])
+
+				string = string[po+1:]
+				po = string.find(',')
+				startTime = int(string[:po])
+
+				onePresetAnswer = [preSetCarID,startTime]
+				
+
+				string = string[po+1:]
+				po = string.find(',')
+
+				while( po != -1 ):
+
+					nextRoadID = int(string[:po])
+					onePresetAnswer.append(nextRoadID)
+					string = string[po+2:]
+					po = string.find(',')
+
+				po = string.find(')')
+				finalRoadID = int(string[:po])
+				onePresetAnswer.append(finalRoadID)
+				print ("onePresetAnswer=",onePresetAnswer)
+
+				self.carData.append(onePresetAnswer)
+			# print (self.carData)
 
 
 	
