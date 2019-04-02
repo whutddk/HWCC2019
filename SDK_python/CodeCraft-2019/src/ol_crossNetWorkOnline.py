@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-04-02 10:56:16
+# @Last Modified time: 2019-04-02 11:10:23
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -268,8 +268,6 @@ class crossNetwork():
 
 							oneCrossLineGroup.append(carSch)
 
-
-
 					# 本路口级增加一个枝干组
 					OneCrossLever.append(leavesCheck)
 				
@@ -335,7 +333,24 @@ class crossNetwork():
 
 		# 先出发在前
 		crossLine.sort(key=lambda x:x[2])
+		# 高速在前
 		crossLine.sort(key=lambda x:x[0],reverse=True)
+
+
+
+		additionalTime = 0
+		for ans in range(0,len(crossLine)):
+			schTime = additionalTime//1 
+			if ( crossLine[ans][2] < schTime ):
+				crossLine[ans][2] = schTime
+		
+			additionalTime = additionalTime + 1 
+
+
+
+
+
+
 
 		for i in range(0,len(crossLine)):
 			crossLine[i].remove(crossLine[i][0])
@@ -349,10 +364,11 @@ class crossNetwork():
 		roadLine = []
 		for car in crossLine:
 			roadLine.append(self.cross2road(car))
+			# print ( roadLine[i] )
 
 		for car in self.presetAnswerData:
 			crossLine.append(car)
-			
+
 		return roadLine
 
 
