@@ -344,7 +344,7 @@ class crossNetwork():
 			if ( crossLine[ans][2] < schTime ):
 				crossLine[ans][2] = schTime
 		
-			additionalTime = additionalTime + 1 
+			additionalTime = additionalTime + 5 
 
 
 
