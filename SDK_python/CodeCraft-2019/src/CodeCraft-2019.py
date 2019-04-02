@@ -1,5 +1,14 @@
+# -*- coding: utf-8 -*-
 # @File Name: CodeCraft-2019.py
-# @File Path: K:\work\dark+PRJ\HWCC2019\SDK_python\CodeCraft-2019\src\CodeCraft-2019.py
+# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK_python\CodeCraft-2019\src\CodeCraft-2019.py
+# @Author: Ruige_Lee
+# @Date:   2019-04-02 09:43:48
+# @Last Modified by:   Ruige_Lee
+# @Last Modified time: 2019-04-02 10:30:32
+# @Email: 295054118@whut.edu.cn"
+
+# @File Name: CodeCraft-2019.py
+# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK_python\CodeCraft-2019\src\CodeCraft-2019.py
 # @Author: 29505
 # @Date:   2019-04-01 23:19:28
 # @Last Modified by:   29505
@@ -16,10 +25,10 @@ import logging
 import sys
 
 import ol_fileSystem 
-# import ol_crossNetWorkOnline
+import ol_crossNetWorkOnline
 
 fS = ol_fileSystem.fS() 
-# CNW = ol_crossNetWorkOnline.crossNetwork()
+CNW = ol_crossNetWorkOnline.crossNetwork()
 
 
 
@@ -56,7 +65,7 @@ def main():
 	# fileSystem init
 	fS.load_data(car_path,road_path,cross_path,preset_answer_path)
 
-	# CNW.crossNetwork_init(fS.carData,fS.roadData,fS.crossData,fS.presetAnswerData)
+	CNW.crossNetwork_init(fS.carData,fS.roadData,fS.crossData,fS.presetAnswerData)
 
 	# roadLine = CNW.createNetwork()
 

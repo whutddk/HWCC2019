@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # @File Name: ol_crossNetWorkOnline.py
-# @File Path: /home/whutddk/下载/HWCC2019/SDK/CodeCraft-2019/src/ol_crossNetWorkOnline.py
+# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK_python\CodeCraft-2019\src\ol_crossNetWorkOnline.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
-# @Last Modified by:   whutddkUbuntu16
-# @Last Modified time: 2019-03-30 09:11:39
+# @Last Modified by:   Ruige_Lee
+# @Last Modified time: 2019-04-02 10:39:13
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -43,9 +43,12 @@ class crossNetwork():
 		self.carData = []
 		self.roadData = []
 		self.crossData = []
+		self.presetAnswerData = []
+
+
+
 		self.crossTreeGroup = []
 		self.crossLineGroup = []
-
 		self.crossCollection = []
 
 
@@ -64,7 +67,7 @@ class crossNetwork():
 			if (self.crossData[index][0] == crossID):
 				return index
 
-		print ("findCrossIndex Fail!")
+		print ("find CrossIndex Fail!")
 		while(1):
 			pass
 
@@ -75,7 +78,7 @@ class crossNetwork():
 			if (self.roadData[index][0] == roadID):
 				return index
 
-		print ("findRoadIndex Fail!")
+		print ("find RoadIndex Fail!")
 		while(1):
 			pass
 
@@ -86,7 +89,18 @@ class crossNetwork():
 			if (self.carData[index][0] == carID):
 				return index
 
-		print ("findCarIndex Fail!")
+		print ("find CarIndex Fail!")
+		while(1):
+			pass
+
+	def find_persetAnswerIndex(self,carID):
+
+		index = 0
+		for index in range(0,len(self.presetAnswerData)):
+			if (self.presetAnswerData[index][0] == carID):
+				return index
+
+		print ("find presetAnswerIndex Fail!")
 		while(1):
 			pass
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -338,7 +352,11 @@ class crossNetwork():
 		return roadLine
 
 
-	def crossNetwork_init(self,carData,roadData,crossData):
+	def crossNetwork_init(self,carData,roadData,crossData,presetAnswerData):
 		self.carData = carData
 		self.roadData = roadData
 		self.crossData = crossData
+		self.presetAnswerData = presetAnswerData
+
+
+
