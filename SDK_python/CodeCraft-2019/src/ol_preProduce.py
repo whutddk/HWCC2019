@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-04-03 09:50:38
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-04-03 09:54:00
+# @Last Modified time: 2019-04-03 10:07:39
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_preProduce.py
@@ -38,6 +38,9 @@ class preProduce():
 # [carID,startPos,endPos,maxSpeed,takeoffTime,isPri,isPreSet]
 # [preSetCarID,startTime,roadId1,roadId2........]
 
+		# print ( "totalCarNum = ",len(carData) )
+
+
 		preSetTakeoffTime = []
 		# print ("presetAnswerData=",presetAnswerData)
 		for car in presetAnswerData:
@@ -46,7 +49,9 @@ class preProduce():
 				pass
 			else:
 				preSetTakeoffTime.append(startTime)
-		print( "preSetTakeoffTime=",preSetTakeoffTime )
+
+		# print( "preSetTakeoffTime=",preSetTakeoffTime )
+		# print( "preSetCarNum = ",len(presetAnswerData) )
 
 
 
