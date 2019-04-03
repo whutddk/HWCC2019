@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # @File Name: ol_crossNetWorkOnline.py
-# @File Path: K:\work\dark+PRJ\HWCC2019\SDK_python\CodeCraft-2019\src\ol_crossNetWorkOnline.py
+# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK_python\CodeCraft-2019\src\ol_crossNetWorkOnline.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
-# @Last Modified by:   29505
-# @Last Modified time: 2019-04-02 23:13:16
+# @Last Modified by:   Ruige_Lee
+# @Last Modified time: 2019-04-03 09:55:31
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -366,8 +366,6 @@ class crossNetwork():
 			roadLine.append(self.cross2road(car))
 			# print ( roadLine[i] )
 
-		for car in self.presetAnswerData:
-			crossLine.append(car)
 
 		return roadLine
 
