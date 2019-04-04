@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # @File Name: ol_crossNetWorkOnline.py
-# @File Path: K:\work\dark+PRJ\HWCC2019\SDK_python\CodeCraft-2019\src\ol_crossNetWorkOnline.py
+# @File Path: M:\MAS2\dark_PRJ\HWCC2019\SDK_python\CodeCraft-2019\src\ol_crossNetWorkOnline.py
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
-# @Last Modified by:   29505
-# @Last Modified time: 2019-04-03 23:39:19
+# @Last Modified by:   Ruige_Lee
+# @Last Modified time: 2019-04-04 09:25:10
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -337,21 +337,26 @@ class crossNetwork():
 		crossLine.sort(key=lambda x:x[0],reverse=True)
 
 
-		offset = 0
-		additionalTime = 2
+		offset = 2
+		additionalTime = 0
 		
 		for ans in range(0,len(crossLine)):
-			schTime = additionalTime//1 + offset
+			schTime =  offset
 			if ( crossLine[ans][2] < schTime ):
 				crossLine[ans][2] = schTime
-			# additionalTime = additionalTime + 5
+
+			additionalTime = additionalTime + 1
 			
 
 			if ( schTime < 755 ):
-				additionalTime = additionalTime + 5
+				if ( additionalTime == 2 ):
+					additionalTime = 0
+					offset = offset + 5
 				 
 			else:			
-				additionalTime = additionalTime + 3 
+				if ( additionalTime == 2 ):
+					additionalTime = 0
+					offset = offset + 3 
 
 
 
@@ -370,7 +375,7 @@ class crossNetwork():
 		roadLine = []
 		for car in crossLine:
 			roadLine.append(self.cross2road(car))
-			# print ( roadLine[i] )
+			print ( car )
 
 
 		return roadLine
