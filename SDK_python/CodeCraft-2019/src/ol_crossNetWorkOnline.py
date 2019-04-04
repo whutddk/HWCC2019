@@ -354,7 +354,7 @@ class crossNetwork():
 					offset = offset + 5
 				 
 			else:			
-				if ( additionalTime == 15 ):
+				if ( additionalTime == 65 ):
 					additionalTime = 0
 					offset = offset + 3 
 
