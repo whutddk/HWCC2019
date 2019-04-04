@@ -349,12 +349,12 @@ class crossNetwork():
 			
 
 			if ( schTime < 755 ):
-				if ( additionalTime == 10 ):
+				if ( additionalTime == 15 ):
 					additionalTime = 0
 					offset = offset + 5
 				 
 			else:			
-				if ( additionalTime == 10 ):
+				if ( additionalTime == 15 ):
 					additionalTime = 0
 					offset = offset + 3 
 
