@@ -349,12 +349,12 @@ class crossNetwork():
 			
 
 			if ( schTime < 755 ):
-				if ( additionalTime == 2 ):
+				if ( additionalTime == 10 ):
 					additionalTime = 0
 					offset = offset + 5
 				 
 			else:			
-				if ( additionalTime == 2 ):
+				if ( additionalTime == 10 ):
 					additionalTime = 0
 					offset = offset + 3 
 
@@ -375,7 +375,7 @@ class crossNetwork():
 		roadLine = []
 		for car in crossLine:
 			roadLine.append(self.cross2road(car))
-			print ( car )
+			# print ( car )
 
 
 		return roadLine
