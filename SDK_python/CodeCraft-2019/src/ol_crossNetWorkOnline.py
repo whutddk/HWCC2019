@@ -378,32 +378,32 @@ class crossNetwork():
 						offset = offset + 3 
 
 				elif ( ans < 5 * ansLeft / 10 ):
-					if( additionalTime == 72 ):
+					if( additionalTime == 80 ):
 						additionalTime = 0
 						offset = offset + 3 
 
 				elif ( ans < 6 * ansLeft / 10 ):
-					if( additionalTime == 72 ):
+					if( additionalTime == 80 ):
 						additionalTime = 0
 						offset = offset + 3 
 
 				elif ( ans < 7 * ansLeft / 10 ):
-					if( additionalTime == 72 ):
+					if( additionalTime == 80 ):
 						additionalTime = 0
 						offset = offset + 3 
 
 				elif ( ans < 8 * ansLeft / 10 ):
-					if( additionalTime == 72 ):
+					if( additionalTime == 80 ):
 						additionalTime = 0
 						offset = offset + 3 
 
 				elif ( ans < 9 * ansLeft / 10 ):
-					if( additionalTime == 72 ):
+					if( additionalTime == 80 ):
 						additionalTime = 0
 						offset = offset + 3 
 
 				else: #( ans < ansLeft / 10 )
-					if( additionalTime == 72 ):
+					if( additionalTime == 80 ):
 						additionalTime = 0
 						offset = offset + 3 
 
