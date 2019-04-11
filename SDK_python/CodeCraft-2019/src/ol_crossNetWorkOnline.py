@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-04-11 16:20:43
+# @Last Modified time: 2019-04-11 20:12:26
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -357,47 +357,47 @@ class crossNetwork():
 				 
 			else:	
 				ansLeft = len(crossLine) - ansUsed		
-				if ( ans < 1 * ansLeft / 10 ):
+				if ( ans < ansUsed + 1 * ansLeft / 10 ):
 					if( additionalTime == 72 ):
 						additionalTime = 0
 						offset = offset + 3 
 						
-				elif ( ans < 2 * ansLeft / 10 ):
+				elif ( ans < ansUsed + 2 * ansLeft / 10 ):
 					if( additionalTime == 80 ):
 						additionalTime = 0
 						offset = offset + 3 
 
-				elif ( ans < 3 * ansLeft / 10 ):
+				elif ( ans < ansUsed + 3 * ansLeft / 10 ):
 					if( additionalTime == 72 ):
 						additionalTime = 0
 						offset = offset + 3 
 
-				elif ( ans < 4 * ansLeft / 10 ):
+				elif ( ans < ansUsed + 4 * ansLeft / 10 ):
 					if( additionalTime == 80 ):
 						additionalTime = 0
 						offset = offset + 3 
 
-				elif ( ans < 5 * ansLeft / 10 ):
+				elif ( ans < ansUsed + 5 * ansLeft / 10 ):
 					if( additionalTime == 80 ):
 						additionalTime = 0
 						offset = offset + 3 
 
-				elif ( ans < 6 * ansLeft / 10 ):
+				elif ( ans < ansUsed + 6 * ansLeft / 10 ):
 					if( additionalTime == 80 ):
 						additionalTime = 0
 						offset = offset + 3 
 
-				elif ( ans < 7 * ansLeft / 10 ):
+				elif ( ans < ansUsed + 7 * ansLeft / 10 ):
 					if( additionalTime == 80 ):
 						additionalTime = 0
 						offset = offset + 3 
 
-				elif ( ans < 8 * ansLeft / 10 ):
+				elif ( ans < ansUsed + 8 * ansLeft / 10 ):
 					if( additionalTime == 80 ):
 						additionalTime = 0
 						offset = offset + 3 
 
-				elif ( ans < 9 * ansLeft / 10 ):
+				elif ( ans < ansUsed + 9 * ansLeft / 10 ):
 					if( additionalTime == 80 ):
 						additionalTime = 0
 						offset = offset + 3 
