@@ -4,7 +4,7 @@
 # @Author: Ruige_Lee
 # @Date:   2019-03-25 08:50:11
 # @Last Modified by:   Ruige_Lee
-# @Last Modified time: 2019-04-04 09:25:10
+# @Last Modified time: 2019-04-11 16:20:43
 # @Email: 295054118@whut.edu.cn"
 
 # @File Name: ol_crossNetWorkOnline.py
@@ -339,6 +339,7 @@ class crossNetwork():
 
 		offset = 1
 		additionalTime = 0
+		ansUsed = 0
 		
 		for ans in range(0,len(crossLine)):
 			schTime =  offset
@@ -349,14 +350,63 @@ class crossNetwork():
 			
 
 			if ( schTime < 755 ):
+				ansUsed = ansUsed + 1
 				if ( additionalTime == 20 ):
 					additionalTime = 0
 					offset = offset + 5
 				 
-			else:			
-				if ( additionalTime == 72 ):
-					additionalTime = 0
-					offset = offset + 3 
+			else:	
+				ansLeft = len(crossLine) - ansUsed		
+				if ( ans < 1 * ansLeft / 10 ):
+					if( additionalTime == 72 ):
+						additionalTime = 0
+						offset = offset + 3 
+						
+				elif ( ans < 2 * ansLeft / 10 ):
+					if( additionalTime == 72 ):
+						additionalTime = 0
+						offset = offset + 3 
+
+				elif ( ans < 3 * ansLeft / 10 ):
+					if( additionalTime == 72 ):
+						additionalTime = 0
+						offset = offset + 3 
+
+				elif ( ans < 4 * ansLeft / 10 ):
+					if( additionalTime == 72 ):
+						additionalTime = 0
+						offset = offset + 3 
+
+				elif ( ans < 5 * ansLeft / 10 ):
+					if( additionalTime == 72 ):
+						additionalTime = 0
+						offset = offset + 3 
+
+				elif ( ans < 6 * ansLeft / 10 ):
+					if( additionalTime == 72 ):
+						additionalTime = 0
+						offset = offset + 3 
+
+				elif ( ans < 7 * ansLeft / 10 ):
+					if( additionalTime == 72 ):
+						additionalTime = 0
+						offset = offset + 3 
+
+				elif ( ans < 8 * ansLeft / 10 ):
+					if( additionalTime == 72 ):
+						additionalTime = 0
+						offset = offset + 3 
+
+				elif ( ans < 9 * ansLeft / 10 ):
+					if( additionalTime == 72 ):
+						additionalTime = 0
+						offset = offset + 3 
+
+				else: #( ans < ansLeft / 10 )
+					if( additionalTime == 72 ):
+						additionalTime = 0
+						offset = offset + 3 
+
 
 
 
