@@ -38,7 +38,8 @@ class preProduce():
 # [carID,startPos,endPos,maxSpeed,takeoffTime,isPri,isPreSet]
 # [preSetCarID,startTime,roadId1,roadId2........]
 
-		# print ( "totalCarNum = ",len(carData) )
+		# total Car number
+		print ( "totalCarNum = ",len(carData) )
 
 
 		preSetTakeoffTime = []
@@ -50,8 +51,34 @@ class preProduce():
 			else:
 				preSetTakeoffTime.append(startTime)
 
-		# print( "preSetTakeoffTime=",preSetTakeoffTime )
-		# print( "preSetCarNum = ",len(presetAnswerData) )
+		print( "preSetTakeoffTime=",preSetTakeoffTime )
+		print( "preSetCarNum = ",len(presetAnswerData) )
 
 
+		speedStep = []
+		carData.sort(key=lambda x:x[3],reverse=True)
 
+		for car in carData:
+			speed = car[3]
+			if speed in speedStep:
+				pass
+			else:
+				speedStep.append(speed)
+
+
+		carData.sort(key=lambda x:x[4],reverse=True)
+		print ("speedStep=",speedStep)
+
+		timeStep = []
+		for car in carData:
+			time = car[4]
+			if time in timeStep:
+				pass
+			else:
+				timeStep.append(time)
+
+		print ("carTakeOffTimeStep=",timeStep)
+
+		print ( "cross number =" , len(crossData))
+		print ( "road number =" , len(roadData))
+		print ("car num = ", len(carData))

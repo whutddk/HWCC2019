@@ -73,11 +73,11 @@ def main():
 	pP.dealData(fS.carData,fS.roadData,fS.crossData,fS.presetAnswerData)
 
 
-	roadLine = CNW.createNetwork()
+	# roadLine = CNW.createNetwork()
 
-	fS.finalAnswer = roadLine
+	# fS.finalAnswer = roadLine
 	# print (roadLine)
-	fS.save_answer(answer_path)
+	# fS.save_answer(answer_path)
 ##########################################
 
 
