@@ -53,7 +53,7 @@ class crossNetwork():
 
 
 		self.RDV = ol_roadValueRisk.roadValue()
-
+		self.group = 0
 
 		pass
 
@@ -348,64 +348,135 @@ class crossNetwork():
 
 			additionalTime = additionalTime + 1
 			
+			if ( group == 0 ):
+				if ( schTime < 755 ):
+					ansUsed = ansUsed + 1
+					if ( additionalTime == 20 ):
+						additionalTime = 0
+						offset = offset + 5
+					 
+				else:	
+					ansLeft = len(crossLine) - ansUsed		
+					if ( ans < ansUsed + 1 * ansLeft / 10 ):
+						if( additionalTime == 72 ):
+							additionalTime = 0
+							offset = offset + 3 
+							
+					elif ( ans < ansUsed + 2 * ansLeft / 10 ):
+						if( additionalTime == 72 ):
+							additionalTime = 0
+							offset = offset + 3 
 
-			if ( schTime < 755 ):
-				ansUsed = ansUsed + 1
-				if ( additionalTime == 20 ):
-					additionalTime = 0
-					offset = offset + 5
-				 
-			else:	
-				ansLeft = len(crossLine) - ansUsed		
-				if ( ans < ansUsed + 1 * ansLeft / 10 ):
-					if( additionalTime == 72 ):
-						additionalTime = 0
-						offset = offset + 3 
-						
-				elif ( ans < ansUsed + 2 * ansLeft / 10 ):
-					if( additionalTime == 72 ):
-						additionalTime = 0
-						offset = offset + 3 
+					elif ( ans < ansUsed + 3 * ansLeft / 10 ):
+						if( additionalTime == 72 ):
+							additionalTime = 0
+							offset = offset + 3 
 
-				elif ( ans < ansUsed + 3 * ansLeft / 10 ):
-					if( additionalTime == 72 ):
-						additionalTime = 0
-						offset = offset + 3 
+					elif ( ans < ansUsed + 4 * ansLeft / 10 ):
+						if( additionalTime == 80 ):
+							additionalTime = 0
+							offset = offset + 3 
 
-				elif ( ans < ansUsed + 4 * ansLeft / 10 ):
-					if( additionalTime == 80 ):
-						additionalTime = 0
-						offset = offset + 3 
+					elif ( ans < ansUsed + 5 * ansLeft / 10 ):
+						if( additionalTime == 80 ):
+							additionalTime = 0
+							offset = offset + 3 
 
-				elif ( ans < ansUsed + 5 * ansLeft / 10 ):
-					if( additionalTime == 80 ):
-						additionalTime = 0
-						offset = offset + 3 
+					elif ( ans < ansUsed + 6 * ansLeft / 10 ):
+						if( additionalTime == 80 ):
+							additionalTime = 0
+							offset = offset + 3 
 
-				elif ( ans < ansUsed + 6 * ansLeft / 10 ):
-					if( additionalTime == 80 ):
-						additionalTime = 0
-						offset = offset + 3 
+					elif ( ans < ansUsed + 7 * ansLeft / 10 ):
+						if( additionalTime == 80 ):
+							additionalTime = 0
+							offset = offset + 3 
 
-				elif ( ans < ansUsed + 7 * ansLeft / 10 ):
-					if( additionalTime == 80 ):
-						additionalTime = 0
-						offset = offset + 3 
+					elif ( ans < ansUsed + 8 * ansLeft / 10 ):
+						if( additionalTime == 85 ):
+							additionalTime = 0
+							offset = offset + 3 
 
-				elif ( ans < ansUsed + 8 * ansLeft / 10 ):
-					if( additionalTime == 85 ):
-						additionalTime = 0
-						offset = offset + 3 
+					elif ( ans < ansUsed + 9 * ansLeft / 10 ):
+						if( additionalTime == 80 ):
+							additionalTime = 0
+							offset = offset + 3 
 
-				elif ( ans < ansUsed + 9 * ansLeft / 10 ):
-					if( additionalTime == 80 ):
+					else: #( ans < ansLeft / 10 )
+						if( additionalTime == 90 ):
+							additionalTime = 0
+							offset = offset + 3 
+				else:
+									if ( schTime < 755 ):
+					ansUsed = ansUsed + 1
+					if ( additionalTime == 20 ):
 						additionalTime = 0
-						offset = offset + 3 
+						offset = offset + 5
+					 
 
-				else: #( ans < ansLeft / 10 )
-					if( additionalTime == 90 ):
-						additionalTime = 0
-						offset = offset + 3 
+
+
+
+
+
+
+
+
+
+
+
+					 
+				else:	
+					ansLeft = len(crossLine) - ansUsed		
+					if ( ans < ansUsed + 1 * ansLeft / 10 ):
+						if( additionalTime == 72 ):
+							additionalTime = 0
+							offset = offset + 3 
+							
+					elif ( ans < ansUsed + 2 * ansLeft / 10 ):
+						if( additionalTime == 72 ):
+							additionalTime = 0
+							offset = offset + 3 
+
+					elif ( ans < ansUsed + 3 * ansLeft / 10 ):
+						if( additionalTime == 72 ):
+							additionalTime = 0
+							offset = offset + 3 
+
+					elif ( ans < ansUsed + 4 * ansLeft / 10 ):
+						if( additionalTime == 80 ):
+							additionalTime = 0
+							offset = offset + 3 
+
+					elif ( ans < ansUsed + 5 * ansLeft / 10 ):
+						if( additionalTime == 80 ):
+							additionalTime = 0
+							offset = offset + 3 
+
+					elif ( ans < ansUsed + 6 * ansLeft / 10 ):
+						if( additionalTime == 80 ):
+							additionalTime = 0
+							offset = offset + 3 
+
+					elif ( ans < ansUsed + 7 * ansLeft / 10 ):
+						if( additionalTime == 80 ):
+							additionalTime = 0
+							offset = offset + 3 
+
+					elif ( ans < ansUsed + 8 * ansLeft / 10 ):
+						if( additionalTime == 85 ):
+							additionalTime = 0
+							offset = offset + 3 
+
+					elif ( ans < ansUsed + 9 * ansLeft / 10 ):
+						if( additionalTime == 80 ):
+							additionalTime = 0
+							offset = offset + 3 
+
+					else: #( ans < ansLeft / 10 )
+						if( additionalTime == 90 ):
+							additionalTime = 0
+							offset = offset + 3 
 
 
 
@@ -431,11 +502,11 @@ class crossNetwork():
 		return roadLine
 
 
-	def crossNetwork_init(self,carData,roadData,crossData,presetAnswerData):
+	def crossNetwork_init(self,carData,roadData,crossData,presetAnswerData,group):
 		self.carData = carData
 		self.roadData = roadData
 		self.crossData = crossData
 		self.presetAnswerData = presetAnswerData
-
+		self.group = group
 
 

@@ -67,7 +67,9 @@ def main():
 	# fileSystem init
 	fS.load_data(car_path,road_path,cross_path,preset_answer_path)
 
-	CNW.crossNetwork_init(fS.carData,fS.roadData,fS.crossData,fS.presetAnswerData)
+	group = 0
+
+	CNW.crossNetwork_init(fS.carData,fS.roadData,fS.crossData,fS.presetAnswerData,group)
 	pP.dealData(fS.carData,fS.roadData,fS.crossData,fS.presetAnswerData)
 
 
