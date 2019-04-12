@@ -333,57 +333,38 @@ class crossNetwork():
 
 		# 先出发在前
 		crossLine.sort(key=lambda x:x[2])
-		
-
 		# 高速在前
-		#crossLine.sort(key=lambda x:x[0],reverse=True)
-		# low speed在前
-		crossLine.sort(key=lambda x:x[0])
+		crossLine.sort(key=lambda x:x[0],reverse=True)
 
-		newCrossLine = []
 
 		offset = 1
 		additionalTime = 0
-		schTime = 0
-
-
-		while( schTime < 755 ):
-			schTime =  offset
-			if ( crossLine[0][2] < schTime ):
-				crossLine[0][2] = schTime
-
-			additionalTime = additionalTime + 1
-			newCrossLine.append(crossLine[0])
-			crossLine.remove(crossLine[0])
-
-			
-			if ( additionalTime == 20 ):
-				additionalTime = 0
-				offset = offset + 5
-			
-		# 高速在前
-		crossLine.sort(key=lambda x:x[0],reverse=True)	
-
+		
 		for ans in range(0,len(crossLine)):
 			schTime =  offset
 			if ( crossLine[ans][2] < schTime ):
 				crossLine[ans][2] = schTime
 
 			additionalTime = additionalTime + 1
-			newCrossLine.append(crossLine[ans])
+			
 
-			if ( additionalTime == 75 ):
-				additionalTime = 0
-				offset = offset + 3 
+			if ( schTime < 755 ):
+				if ( additionalTime == 20 ):
+					additionalTime = 0
+					offset = offset + 5
+				 
+			else:			
+				if ( additionalTime == 72 ):
+					additionalTime = 0
+					offset = offset + 3 
 
 
 
 
 
 
-
-		for i in range(0,len(newCrossLine)):
-			newCrossLine[i].remove(newCrossLine[i][0])
+		for i in range(0,len(crossLine)):
+			crossLine[i].remove(crossLine[i][0])
 			# print ( crossLine[i] )
 		
 
@@ -392,7 +373,7 @@ class crossNetwork():
 		
 
 		roadLine = []
-		for car in newCrossLine:
+		for car in crossLine:
 			roadLine.append(self.cross2road(car))
 			# print ( car )
 
