@@ -348,7 +348,7 @@ class crossNetwork():
 
 			additionalTime = additionalTime + 1
 			
-			if ( group == 0 ):
+			if ( self.group == 0 ):
 				if ( schTime < 755 ):
 					ansUsed = ansUsed + 1
 					if ( additionalTime == 20 ):
@@ -393,7 +393,7 @@ class crossNetwork():
 							offset = offset + 3 
 
 					elif ( ans < ansUsed + 8 * ansLeft / 10 ):
-						if( additionalTime == 85 ):
+						if( additionalTime == 80 ):
 							additionalTime = 0
 							offset = offset + 3 
 
@@ -406,8 +406,8 @@ class crossNetwork():
 						if( additionalTime == 90 ):
 							additionalTime = 0
 							offset = offset + 3 
-				else:
-									if ( schTime < 755 ):
+			else:
+				if ( schTime < 755 ):
 					ansUsed = ansUsed + 1
 					if ( additionalTime == 20 ):
 						additionalTime = 0
@@ -415,17 +415,6 @@ class crossNetwork():
 					 
 
 
-
-
-
-
-
-
-
-
-
-
-					 
 				else:	
 					ansLeft = len(crossLine) - ansUsed		
 					if ( ans < ansUsed + 1 * ansLeft / 10 ):
