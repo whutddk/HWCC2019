@@ -337,7 +337,7 @@ class crossNetwork():
 		crossLine.sort(key=lambda x:x[0],reverse=True)
 
 
-		offset = 1
+		offset = 330
 		additionalTime = 0
 		
 		for ans in range(0,len(crossLine)):
@@ -348,8 +348,8 @@ class crossNetwork():
 			additionalTime = additionalTime + 1
 			
 
-			if ( schTime < 755 ):
-				if ( additionalTime == 20 ):
+			if ( schTime < 330 ):
+				if ( additionalTime == 10 ):
 					additionalTime = 0
 					offset = offset + 5
 				 
