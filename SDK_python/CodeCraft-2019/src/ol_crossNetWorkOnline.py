@@ -384,12 +384,12 @@ class crossNetwork():
 					offset = offset + 3 
 
 			elif ( ans <  3 * ansLeft / 10 ):
-				if( additionalTime == 80 ):
+				if( additionalTime == 90 ):
 					additionalTime = 0
 					offset = offset + 3 
 
 			elif ( ans <  4 * ansLeft / 10 ):
-				if( additionalTime == 80 ):
+				if( additionalTime == 90 ):
 					additionalTime = 0
 					offset = offset + 3 
 
