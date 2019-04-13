@@ -26,18 +26,16 @@ import sys
 class roadValue():
 
 	def __init__(self):
-		self.value = 0
+
 
 		pass
 
 
 	def RD_Value(self,rdLength,rdSpeed,rdChnNum):
 		# 默认长度是速度2~5倍
-		self.value = 0
 
-		self.value = rdSpeed*(0) - (rdLength*0) + (rdChnNum*1)
 
-		return self.value
+		return rdChnNum
 
 
 
