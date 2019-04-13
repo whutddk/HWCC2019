@@ -369,52 +369,52 @@ class crossNetwork():
 			# else:	
 			ansLeft = len(crossLine) - ansUsed		
 			if ( ans < ansUsed + 1 * ansLeft / 10 ):
-				if( additionalTime == 90 ):
+				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 					
 			elif ( ans < ansUsed + 2 * ansLeft / 10 ):
-				if( additionalTime == 90 ):
+				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 
 			elif ( ans < ansUsed + 3 * ansLeft / 10 ):
-				if( additionalTime == 90 ):
+				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 
 			elif ( ans < ansUsed + 4 * ansLeft / 10 ):
-				if( additionalTime == 90 ):
+				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 
 			elif ( ans < ansUsed + 5 * ansLeft / 10 ):
-				if( additionalTime == 90 ):
+				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 
 			elif ( ans < ansUsed + 6 * ansLeft / 10 ):
-				if( additionalTime == 90 ):
+				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 
 			elif ( ans < ansUsed + 7 * ansLeft / 10 ):
-				if( additionalTime == 90 ):
+				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 
 			elif ( ans < ansUsed + 8 * ansLeft / 10 ):
-				if( additionalTime == 90 ):
+				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 
 			elif ( ans < ansUsed + 9 * ansLeft / 10 ):
-				if( additionalTime == 90 ):
+				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 
 			else: #( ans < ansLeft / 10 )
-				if( additionalTime == 90 ):
+				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 
