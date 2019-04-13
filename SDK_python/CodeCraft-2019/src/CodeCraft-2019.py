@@ -68,13 +68,13 @@ def main():
 	fS.load_data(car_path,road_path,cross_path,preset_answer_path)
 
 	CNW.crossNetwork_init(fS.carData,fS.roadData,fS.crossData,fS.presetAnswerData)
-	pP.dealData(fS.carData,fS.roadData,fS.crossData,fS.presetAnswerData)
+	# pP.dealData(fS.carData,fS.roadData,fS.crossData,fS.presetAnswerData)
 
 
-	roadLine = CNW.createNetwork()
+	# roadLine = 
 
-	fS.finalAnswer = roadLine
-	# print (roadLine)
+	fS.finalAnswer = CNW.createNetwork()
+	# print (fS.finalAnswer)
 	fS.save_answer(answer_path)
 ##########################################
 

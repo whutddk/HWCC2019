@@ -350,8 +350,8 @@ class crossNetwork():
 
 		offset = 330
 		additionalTime = 0
-		ansUsed = 0
-		
+		# ansUsed = 0
+		ansLeft = len(crossLine)	
 		for ans in range(0,len(crossLine)):
 			schTime =  offset
 			if ( crossLine[ans][2] < schTime  ):
@@ -367,48 +367,48 @@ class crossNetwork():
 			# 		offset = offset + 5
 				 
 			# else:	
-			ansLeft = len(crossLine) - ansUsed		
-			if ( ans < ansUsed + 1 * ansLeft / 10 ):
-				if( additionalTime == 80 ):
+	
+			if ( ans <  1 * ansLeft / 10 ):
+				if( additionalTime == 85 ):
 					additionalTime = 0
 					offset = offset + 3 
 					
-			elif ( ans < ansUsed + 2 * ansLeft / 10 ):
+			elif ( ans <  2 * ansLeft / 10 ):
 				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 
-			elif ( ans < ansUsed + 3 * ansLeft / 10 ):
+			elif ( ans <  3 * ansLeft / 10 ):
 				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 
-			elif ( ans < ansUsed + 4 * ansLeft / 10 ):
+			elif ( ans <  4 * ansLeft / 10 ):
 				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 
-			elif ( ans < ansUsed + 5 * ansLeft / 10 ):
+			elif ( ans <  5 * ansLeft / 10 ):
 				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 
-			elif ( ans < ansUsed + 6 * ansLeft / 10 ):
+			elif ( ans <  6 * ansLeft / 10 ):
 				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 
-			elif ( ans < ansUsed + 7 * ansLeft / 10 ):
+			elif ( ans <  7 * ansLeft / 10 ):
 				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 
-			elif ( ans < ansUsed + 8 * ansLeft / 10 ):
+			elif ( ans <  8 * ansLeft / 10 ):
 				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
 
-			elif ( ans < ansUsed + 9 * ansLeft / 10 ):
+			elif ( ans <  9 * ansLeft / 10 ):
 				if( additionalTime == 80 ):
 					additionalTime = 0
 					offset = offset + 3 
