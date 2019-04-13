@@ -53,8 +53,8 @@ class crossNetwork():
 
 
 		self.RDV = ol_roadValueRisk.roadValue()
-
-
+		self.reSetCar = 0
+		self.newCrossLine = []
 		pass
 
 
@@ -194,10 +194,17 @@ class crossNetwork():
 		oneCrossCarGroup = []
 
 		for car in self.carData:
-			if ( car[1] == crossID ):
+			# avoid preset car
+			if ( car[1] == crossID and car[6] == 0):
 				oneCrossCarGroup.append(car)
 
-
+			#if ( (car[1] == crossID ):
+				# if ( car[6] == 0 ):
+					# oneCrossCarGroup.append(car)
+				#else: # car[6] == 1 preset car
+					# if ( car[3] == 16 and self.reSetCar < 320 ):
+						# oneCrossCarGroup.append(car)
+						# self.reSetCar = self.reSetCar + 1
 
 		self.crossCollection = self.crossData.copy()
 		crossTree = []
@@ -263,10 +270,14 @@ class crossNetwork():
 							crossLine.append( endCross )
 
 							# 先带入最高速度为第一项，起飞时间为第二项，方便后排序
+							# if ( car[6] == 0 )
 							carSch = [car[3],car[0],car[4]]
 							carSch.extend(crossLine)
-
 							oneCrossLineGroup.append(carSch)
+							# else
+							# carSch = [car[0],car[4]]
+							#carSch.extend(crossLine)
+							#self.newCrossLine.append(carSch)
 
 					# 本路口级增加一个枝干组
 					OneCrossLever.append(leavesCheck)
@@ -337,75 +348,75 @@ class crossNetwork():
 		crossLine.sort(key=lambda x:x[0],reverse=True)
 
 
-		offset = 1
+		offset = 330
 		additionalTime = 0
 		ansUsed = 0
 		
 		for ans in range(0,len(crossLine)):
 			schTime =  offset
-			if ( crossLine[ans][2] < schTime ):
+			if ( crossLine[ans][2] < schTime  ):
 				crossLine[ans][2] = schTime
 
 			additionalTime = additionalTime + 1
 			
 
-			if ( schTime < 755 ):
-				ansUsed = ansUsed + 1
-				if ( additionalTime == 20 ):
-					additionalTime = 0
-					offset = offset + 5
+			# if ( schTime < 330 ):
+			# 	ansUsed = ansUsed + 1
+			# 	if ( additionalTime == 20 ):
+			# 		additionalTime = 0
+			# 		offset = offset + 5
 				 
-			else:	
-				ansLeft = len(crossLine) - ansUsed		
-				if ( ans < ansUsed + 1 * ansLeft / 10 ):
-					if( additionalTime == 72 ):
-						additionalTime = 0
-						offset = offset + 3 
-						
-				elif ( ans < ansUsed + 2 * ansLeft / 10 ):
-					if( additionalTime == 72 ):
-						additionalTime = 0
-						offset = offset + 3 
+			# else:	
+			ansLeft = len(crossLine) - ansUsed		
+			if ( ans < ansUsed + 1 * ansLeft / 10 ):
+				if( additionalTime == 90 ):
+					additionalTime = 0
+					offset = offset + 3 
+					
+			elif ( ans < ansUsed + 2 * ansLeft / 10 ):
+				if( additionalTime == 90 ):
+					additionalTime = 0
+					offset = offset + 3 
 
-				elif ( ans < ansUsed + 3 * ansLeft / 10 ):
-					if( additionalTime == 72 ):
-						additionalTime = 0
-						offset = offset + 3 
+			elif ( ans < ansUsed + 3 * ansLeft / 10 ):
+				if( additionalTime == 90 ):
+					additionalTime = 0
+					offset = offset + 3 
 
-				elif ( ans < ansUsed + 4 * ansLeft / 10 ):
-					if( additionalTime == 80 ):
-						additionalTime = 0
-						offset = offset + 3 
+			elif ( ans < ansUsed + 4 * ansLeft / 10 ):
+				if( additionalTime == 90 ):
+					additionalTime = 0
+					offset = offset + 3 
 
-				elif ( ans < ansUsed + 5 * ansLeft / 10 ):
-					if( additionalTime == 80 ):
-						additionalTime = 0
-						offset = offset + 3 
+			elif ( ans < ansUsed + 5 * ansLeft / 10 ):
+				if( additionalTime == 90 ):
+					additionalTime = 0
+					offset = offset + 3 
 
-				elif ( ans < ansUsed + 6 * ansLeft / 10 ):
-					if( additionalTime == 80 ):
-						additionalTime = 0
-						offset = offset + 3 
+			elif ( ans < ansUsed + 6 * ansLeft / 10 ):
+				if( additionalTime == 90 ):
+					additionalTime = 0
+					offset = offset + 3 
 
-				elif ( ans < ansUsed + 7 * ansLeft / 10 ):
-					if( additionalTime == 80 ):
-						additionalTime = 0
-						offset = offset + 3 
+			elif ( ans < ansUsed + 7 * ansLeft / 10 ):
+				if( additionalTime == 90 ):
+					additionalTime = 0
+					offset = offset + 3 
 
-				elif ( ans < ansUsed + 8 * ansLeft / 10 ):
-					if( additionalTime == 85 ):
-						additionalTime = 0
-						offset = offset + 3 
+			elif ( ans < ansUsed + 8 * ansLeft / 10 ):
+				if( additionalTime == 90 ):
+					additionalTime = 0
+					offset = offset + 3 
 
-				elif ( ans < ansUsed + 9 * ansLeft / 10 ):
-					if( additionalTime == 80 ):
-						additionalTime = 0
-						offset = offset + 3 
+			elif ( ans < ansUsed + 9 * ansLeft / 10 ):
+				if( additionalTime == 90 ):
+					additionalTime = 0
+					offset = offset + 3 
 
-				else: #( ans < ansLeft / 10 )
-					if( additionalTime == 90 ):
-						additionalTime = 0
-						offset = offset + 3 
+			else: #( ans < ansLeft / 10 )
+				if( additionalTime == 90 ):
+					additionalTime = 0
+					offset = offset + 3 
 
 
 
@@ -416,7 +427,7 @@ class crossNetwork():
 		for i in range(0,len(crossLine)):
 			crossLine[i].remove(crossLine[i][0])
 			# print ( crossLine[i] )
-		
+			#self.newCrossLine.append(crossLine[i])
 
 
 ################################################################################
@@ -424,6 +435,7 @@ class crossNetwork():
 
 		roadLine = []
 		for car in crossLine:
+		# for car in self,newCrossLine
 			roadLine.append(self.cross2road(car))
 			# print ( car )
 
