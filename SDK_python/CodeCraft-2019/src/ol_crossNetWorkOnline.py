@@ -347,8 +347,11 @@ class crossNetwork():
 		# 高速在前
 		crossLine.sort(key=lambda x:x[0],reverse=True)
 
+		self.presetAnswerData.sort(key=lambda x:x[1],reverse=True)
+		offset = self.presetAnswerData[0][1] + 1
 
-		offset = 330
+
+		# offset = 330
 		additionalTime = 0
 		# ansUsed = 0
 		ansLeft = len(crossLine)	
@@ -369,7 +372,7 @@ class crossNetwork():
 			# else:	
 	
 			if ( ans <  1 * ansLeft / 10 ):
-				if( additionalTime == 85 ):
+				if( additionalTime == 90 ):
 					additionalTime = 0
 					offset = offset + 3 
 					
