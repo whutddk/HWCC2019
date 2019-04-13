@@ -41,14 +41,23 @@ class preProduce():
 		# print ( "totalCarNum = ",len(carData) )
 
 
-		preSetTakeoffTime = []
-		# print ("presetAnswerData=",presetAnswerData)
-		for car in presetAnswerData:
-			startTime = car[1]
-			if  startTime in preSetTakeoffTime:
-				pass
-			else:
-				preSetTakeoffTime.append(startTime)
+		# preSetSpeed = []
+		# speed16 = 0
+		# speed4 = 0
+		# # print ("presetAnswerData=",presetAnswerData)
+		# for car in carData:
+		# 	if ( car[3] == 16 and car[6] == 1 ):
+		# 		speed16 = speed16 + 1
+
+		# 	if ( car[3] == 4 and car[6] == 1 ):
+		# 		speed4 = speed4 + 1
+		# 	# if  startTime in preSetTakeoffTime:
+		# 	# 	pass
+		# 	# else:
+		# 	# 	preSetTakeoffTime.append(startTime)
+
+		# print ( "speed16=",speed16 )
+		# print ( "speed4=",speed4 )
 
 		# print( "preSetTakeoffTime=",preSetTakeoffTime )
 		# print( "preSetCarNum = ",len(presetAnswerData) )
