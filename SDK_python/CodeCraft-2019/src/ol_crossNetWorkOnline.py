@@ -195,16 +195,16 @@ class crossNetwork():
 
 		for car in self.carData:
 			# avoid preset car
-			if ( car[1] == crossID and car[6] == 0):
-				oneCrossCarGroup.append(car)
+			# if ( car[1] == crossID and car[6] == 0):
+			# 	oneCrossCarGroup.append(car)
 
-			#if ( (car[1] == crossID ):
-				# if ( car[6] == 0 ):
-					# oneCrossCarGroup.append(car)
-				#else: # car[6] == 1 preset car
-					# if ( car[3] == 16 and self.reSetCar < 320 ):
-						# oneCrossCarGroup.append(car)
-						# self.reSetCar = self.reSetCar + 1
+			if ( (car[1] == crossID )):
+				if ( car[6] == 0 ):
+					oneCrossCarGroup.append(car)
+				else: # car[6] == 1 preset car
+					if ( car[3] == 4 and self.reSetCar < 320 ):
+						oneCrossCarGroup.append(car)
+						self.reSetCar = self.reSetCar + 1
 
 		self.crossCollection = self.crossData.copy()
 		crossTree = []
@@ -270,14 +270,14 @@ class crossNetwork():
 							crossLine.append( endCross )
 
 							# 先带入最高速度为第一项，起飞时间为第二项，方便后排序
-							# if ( car[6] == 0 )
-							carSch = [car[3],car[0],car[4]]
-							carSch.extend(crossLine)
-							oneCrossLineGroup.append(carSch)
-							# else
-							# carSch = [car[0],car[4]]
-							#carSch.extend(crossLine)
-							#self.newCrossLine.append(carSch)
+							if ( car[6] == 0 ):
+								carSch = [car[3],car[0],car[4]]
+								carSch.extend(crossLine)
+								oneCrossLineGroup.append(carSch)
+							else:
+								carSch = [car[0],car[4]]
+								carSch.extend(crossLine)
+								self.newCrossLine.append(carSch)
 
 					# 本路口级增加一个枝干组
 					OneCrossLever.append(leavesCheck)
@@ -427,15 +427,15 @@ class crossNetwork():
 		for i in range(0,len(crossLine)):
 			crossLine[i].remove(crossLine[i][0])
 			# print ( crossLine[i] )
-			#self.newCrossLine.append(crossLine[i])
+			self.newCrossLine.append(crossLine[i])
 
 
 ################################################################################
 		
 
 		roadLine = []
-		for car in crossLine:
-		# for car in self,newCrossLine
+		# for car in crossLine:
+		for car in self.newCrossLine:
 			roadLine.append(self.cross2road(car))
 			# print ( car )
 
