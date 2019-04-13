@@ -205,6 +205,7 @@ class crossNetwork():
 					if ( car[3] == 4 and self.reSetCar < 320 ):
 						oneCrossCarGroup.append(car)
 						self.reSetCar = self.reSetCar + 1
+						# print (car)
 
 		self.crossCollection = self.crossData.copy()
 		crossTree = []
@@ -264,7 +265,7 @@ class crossNetwork():
 					# 提前生成该起点车的cross路线
 					for car in oneCrossCarGroup:
 						endCross = car[2]
-						if ( ( car[6] == 0 ) and ((cross1 == endCross) or (cross2 == endCross) or (cross3 == endCross) or (cross4 == endCross)) ):
+						if ((cross1 == endCross) or (cross2 == endCross) or (cross3 == endCross) or (cross4 == endCross)) :
 							crossLine = self.bw_SortCross(crossTree,eleCnt)
 							crossLine.append( crossId )
 							crossLine.append( endCross )
@@ -278,6 +279,7 @@ class crossNetwork():
 								carSch = [car[0],car[4]]
 								carSch.extend(crossLine)
 								self.newCrossLine.append(carSch)
+								print (carSch)
 
 					# 本路口级增加一个枝干组
 					OneCrossLever.append(leavesCheck)
