@@ -351,6 +351,8 @@ class crossNetwork():
 		offset = self.presetAnswerData[0][1] + 1
 
 
+
+
 		# offset = 330
 		additionalTime = 0
 		# ansUsed = 0
